@@ -20,11 +20,20 @@ Kratko opisati cilj Vašeg projekta. Vaša motivacija?  (Napomena: odgovor nije 
 
 
 # Tehnologije
+> Backend: Spring boot
+> Frontend: React
+> DB: PostgreSql, Redis
 
 #Instalcija
 # Članovi tima 
 > Popis članova tima/linkovi/ glavni doprinos
->
+> Sebastijan Kopsejak - Team Lead, devops
+> Tin Jovanović - Backend
+> Filip Polenus - Backend
+> Antonio Gospodnetić - Database
+> Vedran Delić - Frontend, Design
+> Leona Marijanović - Frontend 
+> Karlo Klauški - Frotend
 
 # Kontribucije
 >Pravila ovise o organizaciji tima i su često izdvojena u CONTRIBUTING.md
