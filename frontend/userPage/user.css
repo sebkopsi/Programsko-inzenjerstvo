@@ -1,0 +1,227 @@
+* {
+        box-sizing: border-box;
+}
+
+body {
+        padding: 0;
+        margin: 0;
+}
+
+.header {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        height: 150px;
+        background-color: #004C22;
+        margin-bottom: 50px;
+}
+.header > h1 {
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 3rem;
+        font-weight: 400;
+        color: white;
+        margin: 45px 50px;
+}
+
+.user-data {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        height: 150px;
+        padding-left: 50px;
+        margin-bottom: 50px;
+}
+
+.border {
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        padding: 20px;
+        margin-right: 50px;
+}
+.border > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+}
+
+.user-data > span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 130px;
+}
+.user-data > span > h2 {
+        margin: 0;
+        padding-left: 10px;
+}
+.user-data > span > .email {
+        display: flex;
+        align-items: center;
+}
+.user-data > span > .email > img {
+        width: 40px;
+}
+.user-data > span > .email > a {
+        text-decoration: none;
+        color: #ACACAC;
+}
+
+form {
+        margin-top: 70px;
+}
+
+.filters-skill {
+        font-family: "Londrina Solid", sans-serif;
+        padding-left: 50px;
+        color: #00421E;
+}
+.filters-skill > label {
+        margin-right: 50px;
+        font-size: 1.2rem;
+        font-weight: 400;
+}
+.filters-skill > select {
+        font-family: "Londrina Solid", sans-serif;
+        background-color: #d9d9d9;
+        color: #004C22;
+        border: #004C22 solid;
+        width: 200px;
+        height: 40px;
+        margin-top: 10px;
+}
+
+
+.filters-form, .past-courses {
+        padding-left: 50px;
+}
+
+.filters-form > h2 , .past-courses > h2 {
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #00421E;
+}
+
+.filters{
+        font-family: "Cambo";
+        margin-right: 50px;
+        font-size: 0.9rem;
+        font-weight: 300;
+        background-color: #d9d9d9;
+        border-radius: 20px;
+        border-color: #004C22;
+        border-width: 1px;
+        border-style: solid;
+        color: black;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 60px;
+}
+
+.filters:active {
+        background-color: rgb(196, 201, 201);
+}
+
+.green-plus {
+        color: #004C22;
+        padding-left: 50px;
+        padding-right: 10px;
+        color: #004C22;
+}
+
+input[type="checkbox"]  {
+        display: none;
+}
+
+.past-courses {
+        display: grid;
+        grid-template-columns: repeat(5, 200px);
+        grid-template-rows: 70px 150px;
+        column-gap: 50px;
+        padding: 0;
+        margin-left: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+}
+
+.past-courses > h2 {
+        grid-area: 1 / 1;
+}
+.mediteranian {
+        grid-area: 2 / 1 / 3 / 2;
+}
+.mediteranian img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+.chinese {
+        grid-area: 2 / 2 / 3 / 3;
+}
+.chinese img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+.past-courses a {
+        text-decoration: none;
+        color: black;
+}
+.past-courses img {
+        border-style: solid;
+        border-color: black;
+        border-radius: 15px;
+}
+.past-courses p {
+        font-family: "Cambo";
+        justify-self: center;
+}
+
+.notes {
+        margin-top: 100px;
+        margin-left: 50px;
+        padding-left: 90px;
+        background-image: url("./images/notes.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 500px;
+        width: 500px;
+        box-shadow: 10px 10px 7px 5px rgb(222, 222, 222);
+}
+.notes > h3 {
+        padding-top: 25px;
+        font-family: "Londrina Solid";
+        font-size: 2rem;
+        font-weight: 500;
+        color: #00421E;
+}
+
+.notes-list {
+        padding-left: 30px;
+        width: 440px;
+}
+
+.notes-list > li {
+        font-family: "Cambo";
+        font-size: 1.2rem;
+        margin-bottom: 0.2em;
+}
+
+.footer {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+        margin-top: 20px;
+}
+.footer > img {
+        width: 80px;
+}
