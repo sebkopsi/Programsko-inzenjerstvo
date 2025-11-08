@@ -371,9 +371,8 @@ CREATE TABLE public.review (
 	contents text NOT NULL,
 	"userId" int4 NOT NULL,
 	CONSTRAINT recenzije_pkey PRIMARY KEY ("reviewId"),
-	CONSTRAINT score_range CHECK ((((score)::numeric >= (1)::numeric) AND ((score)::numeric <= (5)::numeric)))
-    CONSTRAINT review_target_xor CHECK (("courseId" IS NOT NULL) <> ("lectureId" IS NOT NULL)
-);
+	CONSTRAINT score_range CHECK ((((score)::numeric >= (1)::numeric) AND ((score)::numeric <= (5)::numeric))),
+    CONSTRAINT review_target_xor CHECK (("courseId" IS NOT NULL) <> ("lectureId" IS NOT NULL))
 );
 
 -- public.review foreign keys
