@@ -1,71 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-
-<head>
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prijava</title>
-    <link rel="stylesheet" href="styles/login.css">
-    <link rel="icon" href="images/cf_logo_pink.png">
-</head>
-<body>
-<header>
-    <div class="login-text">PRIJAVA</div>
-    </div>
-</header>
-<main>
-    <div class="oAuth-options">
-        <button class="oAuth-button">
-            <img class="oAuth-icon" src="images/google_icon.png">
-            <span>Prijava putem Google računa</span>
-        </button>
-        <button class="oAuth-button">
-            <img class="oAuth-icon" src="images/microsoft_icon.png">
-            <span>Prijava putem Microsoft računa</span>
-        </button>
-        <button class="oAuth-button">
-            <img class="oAuth-icon" src="images/apple_icon.png">
-            <span>Prijava putem Apple računa</span>
-        </button>
-    </div>
-
-    <hr class="dashed-line">
-
-    <div class="CF-login-form">
-     <form class="login-form" method="POST">
-        <div class="form-text-and-input">
+    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="icon" href="images/cf_logo_pink.png" />
+  </head>
+  <body>
+    <main>
+      <div class="CF-login-form">
+        <form class="login-form" method="POST">
+          <div class="form-text-and-input">
             <span>email adresa</span>
-    <input type="email" name="email" required>
-    </div>
-     <div class="form-text-and-input">
-     <span>lozinka</span>
-    <input type="password" name="password" required>
-    </div>
-    <button class="submit-button" type="submit">Nastavi
-        <div class="arrow-icon">&#8594;</div>
-    </button>
-    </div>
-  </form>
-    </div>
-</main>
-<footer>
-    <img class="footer-logo" src="images/cf_logo_green.png">
-</footer>
-</body>
+            <input type="email" name="email" required />
+          </div>
+          <div class="form-text-and-input">
+            <span>lozinka</span>
+            <input type="password" name="password" required />
+          </div>
+          <button class="submit-button" type="submit">
+            Prijava
+            <div class="arrow-icon">&#8594;</div>
+          </button>
+        </form>
+      </div>
 
+      <hr class="dashed-line" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <div class="oAuth-options">
+        <button class="oAuth-button">
+          <img class="oAuth-icon" src="images/google_icon.png" />
+          <span>Prijava putem Google računa</span>
+        </button>
+        <button class="oAuth-button">
+          <img class="oAuth-icon" src="images/microsoft_icon.png" />
+          <span>Prijava putem Microsoft računa</span>
+        </button>
+        <button class="oAuth-button">
+          <img class="oAuth-icon" src="images/apple_icon.png" />
+          <span>Prijava putem Apple računa</span>
+        </button>
+      </div>
+    </main>
+    <footer>
+      <img class="footer-logo" src="images/cf_logo_green.png" />
+    </footer>
+  </body>
+</html>

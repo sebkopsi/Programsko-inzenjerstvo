@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cambo&family=Londrina+Solid:wght@100;300;400;900&display=swap');
 
 
 body {
     margin: 0;
+    padding: 2rem;
 }
 
 header {
-
-    height: 146.8px;
+    height: 3rem;
     width: 100%;
     box-sizing: border-box;
     background-color: #004C22;
 
-
 }
 
 .login-text {
-    font-family: "Londrina Solid", sans-serif;
+    font-family: "Catamaran", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size:50px;
@@ -49,6 +48,8 @@ header {
    align-items: center;
    gap:5px;
    padding:10px;
+   width: 20rem;
+   height: 3rem;
 
    font-size: 17px;
    font-family: "Arial", serif;
@@ -68,6 +69,7 @@ header {
 
 .dashed-line {
     width: 35%;
+    border: none;
     border-top: 2px dashed #004C22;
     margin: 60px auto 60px auto;
 }
@@ -92,10 +94,10 @@ header {
     flex-direction: column;
     gap: 10px;
 
-   font-family: "Londrina Solid", sans-serif;
-    font-weight: 400;
+   font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
     font-style: normal;
-    font-size:30px;
+    font-size:1.5rem;
     color:#004C22;
     text-decoration: none;
 
@@ -106,6 +108,9 @@ input{
     height:35px;
     border: #004C22 3px solid;
     background-color:rgb(241, 238, 238) ;
+    border-radius: 15px;
+    font-size: 1rem;
+    padding: 0.5rem;
 }
 
 .submit-button {
@@ -115,13 +120,14 @@ input{
     align-items: center;
     gap:10px;
 
+    border-radius: 15px;
     width:170px;
     height:60px;
     margin-top: 20px;
 
     font-size: 30px;
-    font-family: "Londrina Solid", sans-serif;
-    font-weight: 400;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
     font-style: normal;
     color: white;
 
