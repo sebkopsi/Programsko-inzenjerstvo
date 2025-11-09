@@ -9,5 +9,4 @@ public interface EnrolleeProfileRepository
 
     EnrolleeProfile findByUsername(String username);
 
-
 }
