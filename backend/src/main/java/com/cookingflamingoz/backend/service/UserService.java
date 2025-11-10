@@ -52,7 +52,7 @@ public class UserService{
         if (!java.util.regex.Pattern.matches(emailRegex, email)){
             return UserCreationResult.failure("Email format not valid!");
         }
-        User user = userRepository.findByEmail(dto.getEmail());
+        User user = userRepository.findByEmail(dto.getEmail()); // TODO trebs samo bit String "email" (linija 51)
 
         if(user == null){ // non existing email
 
