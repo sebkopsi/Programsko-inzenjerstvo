@@ -2,9 +2,9 @@ import { Module } from "./Module";
 
 export function Modules() {
   return (
-    <table id="modules">
+    <table className="cambo-regular" id="modules">
       <tr>
-        <th>MODULI</th>
+        <th id="lessons">MODULI</th>
       </tr>
       <Module />
       <Module />

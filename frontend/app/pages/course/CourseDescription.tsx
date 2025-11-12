@@ -1,6 +1,6 @@
 export function CourseDescription() {
     return(
-        <div id="courseDesc">
+        <div className="cambo-regular" id="courseDesc">
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. 
                 Quisque faucibus ex sapien vitae pellentesque sem placerat. 
                 In id cursus mi pretium tellus duis convallis. 

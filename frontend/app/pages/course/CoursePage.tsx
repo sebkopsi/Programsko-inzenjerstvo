@@ -7,7 +7,7 @@ export function CoursePage() {
   return(
     <>
       <Header />
-      <div className="cambo-regular" id="site">
+      <div className="cambo-regular main">
         <Subheader />
         <h1 className="londrina-solid-regular" id="courseTitle">Mediteranska kuhinja</h1>
         <CourseDescription />

@@ -3,9 +3,13 @@ import { LectureDropdown } from "./LectureDropdown";
 export function Module() {
   return (
     <tr>
-      <td>
+      <td className="lesson-name">
         <span>Dalmatinska kuhinja</span>
-        <button className="dropbtn">dropbtn</button>
+        <div className="dropbtn">
+          <button>
+            <img src="images/dropdown_icon.png" alt="dropdown icon" />
+          </button>
+        </div>
         <LectureDropdown />
       </td>
     </tr>
