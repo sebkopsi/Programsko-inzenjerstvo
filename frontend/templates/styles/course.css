@@ -1,0 +1,53 @@
+#site {
+    display: flex;
+    gap: 20px;
+    padding: 40px 30px;
+}
+#subheader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    color: #7A7A7A;
+}
+#autor {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#subheader img {
+    width: 15px;
+    border: 1px solid #909090;
+    padding: 4px 7px;
+    border-radius: 25px;
+}
+#courseTitle {
+    align-self: center;
+    font-size: 3rem;
+}
+#courseDesc>p {
+    padding-right: 10%;
+    font-size: 1.4rem;
+}
+
+#modules {
+    text-align: center;
+    width: 30%;
+    min-width: 500px;
+    font-size: 1.4rem;
+    border-collapse: collapse;
+    margin-bottom: 700px;
+}
+#modules, #modules > * > th, #modules > * > td {
+    border: 5px solid #004C22;
+}
+#modules th {
+    color: white;
+    padding: 10px 0px;
+    background-color: #004C22;
+}
+#modules td {
+    color: #004C22;
+    padding: 10px 0px;
+}
+
+#modules td:hover .lectures {display: block;}
