@@ -1,0 +1,106 @@
+* {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+}
+
+.header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 6rem;
+        background-color: #004C22;
+        color: white;
+        font-family: "Londrina Solid", sans-serif;
+}
+.header > h1 {
+        font-weight: 400;
+        font-size: 2rem;
+}
+
+.signUp-container {
+        padding-top: 30px;
+        padding-left: 50px;
+        row-gap: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+}
+
+.signUp-form {
+        padding-bottom: 20px;
+        width: 30vw;
+        border-bottom-style: dashed;
+        border-bottom-color: gray;
+}
+
+.signUp-label {
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 1.3rem;
+        color: #00421E;
+}
+
+.input {
+        margin-top: 15px;
+        margin-bottom: 30px;
+        padding: 5px;
+        height: 40px;
+        font-size: 1rem;
+        border-style: solid;
+        border-width: 3px;
+        border-color: #004C22;
+        background-color: #D9D9D9A3;
+}
+
+.message {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 400;
+        color: rgba(255, 0, 0, 0.813);
+}
+
+.signUp-submit-btn {
+        margin: 20px 0px;
+        height: 50px;
+        width: 300px;
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 1.7rem;
+        font-weight: 400;
+        border-style: double;
+        background-color: #004C22;
+        color: white;
+        border-color: white;
+        border-width: 5px;
+}
+
+.goToLogIn {
+        padding-top: 20px;
+        font-family: "Cambo", sans-serif;
+        font-size: 1.2rem;
+        color: #00421E;
+}
+
+.goToLogIn-btn {
+        margin: 20px 0px;
+        height: 50px;
+        width: 300px;
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 1.7rem;
+        font-weight: 400;
+        border-style: double;
+        background-color: #004C22;
+        color: white;
+        border-color: white;
+        border-width: 5px;
+}
+
+.footer {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+        margin-top: 20px;
+}
+.footer > img {
+        width: 80px;
+}
