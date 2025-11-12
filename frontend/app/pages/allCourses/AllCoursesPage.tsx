@@ -7,7 +7,7 @@ export function AllCoursesPage() {
   return(
     <>
       <Header />
-      <div className="cambo-regular">
+      <div className="cambo-regular main">
         <Search />
         <Courses />
         <Footer />

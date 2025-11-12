@@ -33,6 +33,10 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "/styles/allCourses.css"
   },
+  {
+    rel: "icon",
+    href: "/images/cf_logo_ping.png"
+  }
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
