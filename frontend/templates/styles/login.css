@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cambo&family=Londrina+Solid:wght@100;300;400;900&display=swap');
+
+
+body {
+    margin: 0;
+}
+
+
+.login-text {
+    font-family: "Catamaran", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3.125rem;
+    color:white;
+    text-decoration: none;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+.oAuth-options{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.875rem;
+    margin-top: 3.75rem;
+
+}
+
+.oAuth-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+    padding: 0.625rem;
+    width: 20rem;
+    height: 3rem;
+
+    font-size: 1.0625rem;
+    font-family: "Arial", serif;
+
+    background-color: rgb(241, 238, 238);
+    border-radius: 0.9375rem;
+    border: none;
+    box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.3);
+
+    cursor: pointer;
+}
+.oAuth-icon {
+    width: 1.875rem;
+    height: auto;
+    margin-right: 0.625rem;
+}
+
+.dashed-line {
+    width: 35%;
+    border: none;
+    border-top: 0.125rem dashed #004C22;
+    margin: 3.75rem auto 3.75rem auto;
+}
+
+.CF-login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    margin-top: 2rem;
+}
+
+.form-text-and-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+   font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    font-size:1.5rem;
+    color:#004C22;
+    text-decoration: none;
+
+}
+
+input{
+    width: 18.75rem;
+    height: 2.1875rem;
+    border: #004C22 0.1875rem solid;
+    background-color:rgb(241, 238, 238) ;
+    border-radius: 0.9375rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.submit-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 0.9375rem;
+    width: 10.625rem;
+    height: 3.75rem;
+    margin-top: 1.25rem;
+
+    font-size: 1.875rem;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: white;
+
+    background-color: #004C22;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 14.375rem;
+}
+footer>img {
+    width: 5rem;
+    height: auto;
+    margin-top: 5rem;
+    margin-bottom: -2rem;
+}
