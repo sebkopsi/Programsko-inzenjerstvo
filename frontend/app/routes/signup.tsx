@@ -1,4 +1,4 @@
-import { SignUpPage } from "~/pages/signUp/SignupPage";
+import { SignUpPage } from "~/pages/signUp/SignUpPage";
 
 export function meta({}: { title: string; description: string }) {
   return [
@@ -9,4 +9,5 @@ export function meta({}: { title: string; description: string }) {
 
 export default function SignUp() {
   return <SignUpPage />;
+
 }
