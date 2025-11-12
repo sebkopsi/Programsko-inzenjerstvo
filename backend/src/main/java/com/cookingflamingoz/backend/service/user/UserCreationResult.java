@@ -1,16 +1,18 @@
-package com.cookingflamingoz.backend.model;
+package com.cookingflamingoz.backend.service.user;
+
+import com.cookingflamingoz.backend.model.User;
 
 public class UserCreationResult {
     private boolean success;
     private String message;
-    private User user;
+    private int userID;
     // TODO: add some integer status to easily identify error types ?
 
     // Constructors
-    public UserCreationResult(boolean success, String message, User user) {
+    public UserCreationResult(boolean success, String message, int userID) {
         this.success = success;
         this.message = message;
-        this.user = user;
+        this.userID = userID;
     }
 
     //getters and setters
@@ -30,20 +32,20 @@ public class UserCreationResult {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     // some methods for readability
     public static UserCreationResult success(User user) {
-        return new UserCreationResult(true, "User created successfully", user);
+        return new UserCreationResult(true, "User created successfully", user.getId());
     }
 
     public static UserCreationResult failure(String message) {
-        return new UserCreationResult(false, message, null);
+        return new UserCreationResult(false, message, 0);
     }
 }

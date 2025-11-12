@@ -1,10 +1,8 @@
-package com.cookingflamingoz.backend.controller;
+package com.cookingflamingoz.backend.controller.user;
 
-import com.cookingflamingoz.backend.model.LoginRequest;
 import com.cookingflamingoz.backend.model.User;
-import com.cookingflamingoz.backend.model.UserCreationResult;
-import com.cookingflamingoz.backend.model.UserEnrolleeDTO;
-import com.cookingflamingoz.backend.service.UserService;
+import com.cookingflamingoz.backend.service.user.UserCreationResult;
+import com.cookingflamingoz.backend.service.user.UserService;
 import com.cookingflamingoz.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +31,7 @@ public class UserController {
 
     //register
     @PostMapping
-    public UserCreationResult createUser(@RequestBody UserEnrolleeDTO userEnrolleeDTO) {
-        System.out.println("Creating user: ");
-        System.out.println(userEnrolleeDTO);
-
+    public UserCreationResult createUser(@RequestBody SignUpRequest userEnrolleeDTO) {
         return userService.saveUser(userEnrolleeDTO);
     }
 
@@ -44,8 +39,8 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
-        UserCreationResult a = userService.getUserByUsernameOrEmail(loginRequest.getEmail(),loginRequest.getPassword());
-        if (a.getUser() == null){
+        UserCreationResult a = userService.Login(loginRequest.getEmail(),loginRequest.getPassword());
+        if (!a.isSuccess()){
             // error logging in -> ask for password reset
             // -> TODO: check error type -> see UserCreationResult
             return ResponseEntity.status(401).body(a.getMessage());
@@ -53,7 +48,7 @@ public class UserController {
 
         // TODO: generate token or session here
         //logged in -> now redirect properly
-        String token = jwtUtil.generateToken(a.getUser().getId().toString());
+        String token = jwtUtil.generateToken(a.getUserID());
         return ResponseEntity.ok(Map.of("token", token)); //NOTE: using map just becouse that will convert automatically to json -> consider making a model for this
 
     }

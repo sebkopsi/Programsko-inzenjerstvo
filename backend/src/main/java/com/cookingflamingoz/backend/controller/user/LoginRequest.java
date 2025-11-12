@@ -1,4 +1,4 @@
-package com.cookingflamingoz.backend.model;
+package com.cookingflamingoz.backend.controller.user;
 
 public class LoginRequest {
     private String email; // NOTE: email or username

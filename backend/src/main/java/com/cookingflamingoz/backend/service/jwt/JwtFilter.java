@@ -1,7 +1,6 @@
-package com.cookingflamingoz.backend.filter;
+package com.cookingflamingoz.backend.service.jwt;
 
 import com.cookingflamingoz.backend.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,8 +15,6 @@ import java.util.Collections;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-    //NOTE: should this folder be MVN instead of filter?
-
     private final JwtUtil jwtUtil;
 
     public JwtFilter(JwtUtil jwtUtil) {

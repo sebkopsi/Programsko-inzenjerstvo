@@ -1,7 +1,6 @@
-package com.cookingflamingoz.backend.model;
+package com.cookingflamingoz.backend.controller.user;
 
-// DTO = data transfer object (used to transfer data mix form different models)
-public class UserEnrolleeDTO {
+public class SignUpRequest {
 
     private String username;
     private String firstname;
@@ -9,9 +8,9 @@ public class UserEnrolleeDTO {
     private String password;
     private String email;
 
-    public UserEnrolleeDTO() {
+    public SignUpRequest() {
     }
-    public UserEnrolleeDTO(String username, String firstname, String surname, String password, String email) {
+    public SignUpRequest(String username, String firstname, String surname, String password, String email) {
         this.username = username;
         this.firstname = firstname;
         this.surname = surname;

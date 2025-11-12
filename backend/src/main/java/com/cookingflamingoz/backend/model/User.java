@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date; // or import from java.sql??
 
 @Entity
-@Table(name = "\"user\"", schema = "public") // keep quotes since table name is "user"
+@Table(name = "user", schema = "public") // keep quotes since table name is "user"
 public class User {
 
     @Id

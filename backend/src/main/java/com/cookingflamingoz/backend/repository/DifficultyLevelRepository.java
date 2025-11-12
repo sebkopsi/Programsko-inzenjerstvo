@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DifficultyLevelRepository
         extends JpaRepository<DifficultyLevel, Integer>{
 
-    DifficultyLevel getByName(String beginner);
+    DifficultyLevel getByName(String name);
 }
 
 

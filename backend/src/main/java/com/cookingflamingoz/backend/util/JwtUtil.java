@@ -15,9 +15,9 @@ public class JwtUtil {
     // TODO: use environment variable in real app
     private final Key key = Keys.hmacShaKeyFor("SuperSecretKeyThatIsAtLeast32Chars!".getBytes());
 
-    public String generateToken(String userId) {
+    public String generateToken(int userId) {
         return Jwts.builder()
-                .setSubject(userId)
+                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
