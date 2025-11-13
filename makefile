@@ -3,3 +3,6 @@ run-backend-dev:
 
 run-frontend-dev:
 	cd frontend; npm run dev
+
+update-types:
+	cd frontend; npm install --save-dev @types/react-router

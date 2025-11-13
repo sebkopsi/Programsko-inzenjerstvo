@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cambo&family=Londrina+Solid:wght@100;300;400;900&display=swap');
+
+        * {
+        box-sizing: border-box;
+}
+
+body {
+        padding: 0;
+        margin: 0;
+}
+
+.header {
+        display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 7rem; 
+    width: 100%;
+    box-sizing: border-box;
+    background-color:#004C22;
+        margin-bottom: 3.125rem;
+}
+.header > h1 {
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 3rem;
+        font-weight: 400;
+        color: white;
+        margin: 2.8125rem 3.125rem;
+}
+
+.user-data {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        height: 9.375rem;
+        padding-left: 3.125rem;
+}
+
+.border {
+        border-style: solid;
+        border-width: 0.125rem;
+        border-color: black;
+        width: 11rem;
+        height: 11rem;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        padding: 1.25rem;
+        margin-right: 3.125rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.border > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        margin-left: 0.35rem;
+}
+
+.user-data > span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 8.125rem;
+        margin-top: 1rem;
+
+}
+.user-data > span > h2 {
+        margin: 0;
+        padding-left: 10px;
+        
+        font-family: "Cambo", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 2rem;
+
+}
+.user-data > span > .email {
+        display: flex;
+        align-items: center;
+
+        font-family: "Cambo", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 1rem;
+}
+.user-data > span > .email > img {
+        width: 2.5rem;
+        opacity: 0.5;
+}
+.user-data > span > .email > a {
+        text-decoration: none;
+        color: #ACACAC;
+}
+
+form {
+        margin-top: 4.375rem;
+  
+}
+
+.filters-skill {
+        font-family: "Londrina Solid", sans-serif;
+        padding-left: 3.125rem;
+        color: #00421E;
+        margin-bottom: -1.5rem;
+        position:relative;
+}
+.filters-skill > label {
+        margin-right: 3.125rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+}
+
+#kvacica-icon-vjestine-label {
+    position: absolute;
+    width: 0.5rem;
+    height: auto;
+    top:0.22rem;
+    left:8.75rem;
+
+}
+
+
+.filters-skill > select {
+        font-family: "Cambo", serif;
+        font-size: 1rem;
+        background-color: #d9d9d9;
+        color: #000000;
+        border: #004C22 solid;
+        width: 12.5rem;
+        height: 2.5rem;
+        margin-top: 0.625rem;
+        border-radius: 0.625rem;
+        position: relative;
+}
+
+
+
+.filters-form, .past-courses {
+        padding-left: 3.125rem;
+}
+
+.filters-form > h2 , .past-courses > h2 {
+        font-family: "Londrina Solid", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #00421E;
+}
+
+.filters{
+        font-family: "Cambo";
+        margin-right: 3.125rem;
+        font-size: 0.9rem;
+        font-weight: 300;
+        background-color: #d9d9d9;
+        border-radius: 1.25rem;
+        border-color: #004C22;
+        border-width: 0.0625rem;
+        border-style: solid;
+        color: black;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1.5rem;
+}
+
+.filters:active {
+        background-color: rgb(196, 201, 201);
+}
+
+.green-plus {
+        color: #004C22;
+        padding-left: 0.5rem;
+        padding-right: 0.625rem;
+        color: #004C22;
+}
+
+input[type="checkbox"]  {
+        display: none;
+}
+
+.past-courses {
+        display: grid;
+        grid-template-columns: repeat(5, 12.5rem);
+        grid-template-rows: 4.375rem 9.375rem;
+        column-gap: 3.125rem;
+        padding: 0;
+        margin-left: 3.125rem;
+        margin-top: 3.125rem;
+        margin-bottom: 3.125rem;
+        position: relative;
+
+}
+
+.past-courses > h2 {
+        grid-area: 1 / 1;
+}
+
+
+
+.mediteranian {
+        grid-area: 2 / 1 / 3 / 2;
+}
+.mediteranian img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+.chinese {
+        grid-area: 2 / 2 / 3 / 3;
+}
+.chinese img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+.past-courses a {
+        text-decoration: none;
+        color: black;
+}
+
+#course-thumbnail{
+        border-style: solid;
+        border-color: black;
+        border-radius: 0.9375rem;
+}
+
+#kvacica-icon-course-history {
+    position: absolute;
+    width: 0.5rem;
+    height: auto;
+    top:1.47rem;
+    left:6.15rem;
+
+}
+.past-courses p {
+        font-family: "Cambo";
+        justify-self: center;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+}
+
+.notes {
+        margin-top: 6.25rem;
+        margin-left: 3.125rem;
+        padding-left: 5.625rem;
+        background-image: url("../images/notes.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 31.25rem;
+        width: 31.25rem;
+        box-shadow: 0.625rem 0.625rem 0.4375rem 0.3125rem rgb(222, 222, 222);
+        position: relative;
+        
+}
+
+#kvacica-icon-notes {
+    position: absolute;
+    width: 0.6rem;
+    height: auto;
+    top:1.95rem;
+    left:8.85rem;
+
+}
+.notes > h3 {
+        padding-top: 1.5625rem;
+        font-family: "Londrina Solid";
+        font-size: 2rem;
+        font-weight: 500;
+        color: #00421E;
+}
+
+.notes-list {
+        padding-left: 1.875rem;
+        width: 27.5rem;
+}
+
+.notes-list > li {
+        font-family: "Cambo";
+        font-size: 1.2rem;
+        margin-bottom: 0.2em;
+}
+
+footer {
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 14.375rem;
+}
+footer>img {
+    width: 5rem;
+    height: auto;
+    margin-top: 5rem;
+    margin-bottom: -2rem;
+}

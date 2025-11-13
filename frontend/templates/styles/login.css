@@ -137,9 +137,11 @@ footer {
     align-items: center;
     height: 14.375rem;
 }
-footer>img {
-    width: 5rem;
-    height: auto;
+
+
+.footer-logo{
+    width:5rem;
+    height:auto;
     margin-top: 5rem;
     margin-bottom: -2rem;
 }
