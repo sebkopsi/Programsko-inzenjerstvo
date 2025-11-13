@@ -17,7 +17,7 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 - Frontend: React, JS, HTML, CSS
 - Database: PostgreSql, Redis
 
-#Instalacija
+# Instalacija
 >/
 
 # Članovi tima 
