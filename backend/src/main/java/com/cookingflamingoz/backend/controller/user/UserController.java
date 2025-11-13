@@ -29,6 +29,11 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("{id}")
+    public  User getUser(@PathVariable int id) {
+        return userService.getUserById(id);
+    }
+
     //register
     @PostMapping
     public UserCreationResult createUser(@RequestBody SignUpRequest userEnrolleeDTO) {

@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import './home.css'
 
 export function HomePage() {
+  console.log()
  return (
     <main>
       <header>
@@ -12,6 +13,12 @@ export function HomePage() {
         </div>
         <div className="right-section">
           <div className="menu">
+            <Link className="profile-link" to="/login">
+              login
+            </Link>
+            <Link className="profile-link" to="/signup">
+              signup
+            </Link>
             <Link className="profile-link" to="/login">
               <img className="profile-icon" src="/images/profile_icon.png" alt="Profile icon" />
             </Link>

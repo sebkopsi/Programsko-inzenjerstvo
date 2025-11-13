@@ -41,10 +41,6 @@ export function LoginPage() {
             <img className="oAuth-icon" src="/images/microsoft_icon.png" alt="Microsoft" />
             <span>Prijava putem Microsoft računa</span>
           </button>
-          <button className="oAuth-button">
-            <img className="oAuth-icon" src="/images/apple_icon.png" alt="Apple" />
-            <span>Prijava putem Apple računa</span>
-          </button>
         </div>
       </main>
 

@@ -31,8 +31,14 @@ public class UserService {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
+    public UserProfileResult GetProfile(int id){
+        User user = entityManager.find(User.class, id);
+        if(user == null){
+            return UserProfileResult.UserProfileResultFailure(String.format("User not found with id %d", id));
+        }
+        return  UserProfileResult.UserProfileResultSuccess(user);
+    }
 
-    // Constructor-based dependency injection (recommended)
     public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.enrolleeProfileRepository = enrolleeProfileRepository;
