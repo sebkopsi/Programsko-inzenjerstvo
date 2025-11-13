@@ -1,5 +1,5 @@
 import {Form, useActionData, useFetcher, useLoaderData} from 'react-router'
-import "./LoginPage.css"
+import "./login.css"
 
 export function LoginPage() {
   const actionData = useLoaderData()
@@ -9,7 +9,7 @@ export function LoginPage() {
     <div>
       <main>
         {fetcher.data?.ok == false && (
-          <div>
+          <div id='error'>
             {fetcher.data.errors.message}
           </div>
         )}
