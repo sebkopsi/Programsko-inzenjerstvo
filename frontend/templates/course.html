@@ -7,21 +7,25 @@
     <link rel="stylesheet" href="styles/allCourses.css">
     <link rel="stylesheet" href="styles/course.css">
     <link rel="stylesheet" href="styles/lecturesDropdown.css">
+     <link rel="icon" href="images/cf_logo_pink.png">
 </head>
 <body>
     <div id="header">
-        <h1 class="londrina-solid-regular">TEČAJEVI</h1>
+        <h1 class="londrina-solid-regular">TECAJEVI</h1>
+        <img id="kvacica-icon" src="images/kvacica_white.png"></img>
     </div>
-    <div class="cambo-regular" id="site">
+    <div class="main" >
         <div id="subheader">
             <div id="autor">
                 <span>Autor:</span>
+                <div id="profilePic">
                 <img src="images/profile_icon.png" alt="profile picture">
+                </div>
                 <span>Pero Perica</span>
             </div>
             <span>Objavljeno 6.9.2025.</span>
         </div>
-        <h1 class="londrina-solid-regular" id="courseTitle">Mediteranska kuhinja</h1>
+        <h1 id="courseTitle">Mediteranska kuhinja</h1>
         <div id="courseDesc">
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. 
                 Quisque faucibus ex sapien vitae pellentesque sem placerat. 
@@ -42,12 +46,15 @@
         </div>
         <table id="modules">
             <tr>
-                <th>MODULI</th>
+                <th id="lessons">MODULI</th>
             </tr>
             <tr>
-                <td>
+                <td class="lesson-name">
                     <span>Dalmatinska kuhinja</span>
-                    <button class="dropbtn">dropbtn</button> 
+                    <div class="dropbtn">
+                    <button>
+                        <img src="images/dropdown_icon.png" alt="dropdown icon">
+                    </button> 
                     <div class="lectures" id="dalmatinska">
                         <h3>LEKCIJE</h3>
                         <div class="lectureList">
@@ -58,25 +65,25 @@
                                 </td></tr>
                             </table></a>
                             <a href="#"><table class="lectureTile">
-                                <tr><th>Crni rizot</th></tr>
+                                <tr><th>Crni rižot</th></tr>
                                 <tr><td>
                                     <img src="images/thumbnail_crni_rizot.jpg" alt="crni rizot">
                                 </td></tr>
                             </table></a>
                             <a href="#"><table class="lectureTile">
-                                <tr><th>Crni rizot</th></tr>
+                                <tr><th>Crni rižot</th></tr>
                                 <tr><td>
                                     <img src="images/thumbnail_crni_rizot.jpg" alt="crni rizot">
                                 </td></tr>
                             </table></a>                            
                             <a href="#"><table class="lectureTile">
-                                <tr><th>Crni rizot</th></tr>
+                                <tr><th>Crni rižot</th></tr>
                                 <tr><td>
                                     <img src="images/thumbnail_crni_rizot.jpg" alt="crni rizot">
                                 </td></tr>
                             </table></a>                            
                             <a href="#"><table class="lectureTile">
-                                <tr><th>Crni rizot</th></tr>
+                                <tr><th>Crni rižot</th></tr>
                                 <tr><td>
                                     <img src="images/thumbnail_crni_rizot.jpg" alt="crni rizot">
                                 </td></tr>
@@ -86,24 +93,41 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <span>Dalmatinska kuhinja</span>
-                    <button>dropdwn</button>
+                <td class="lesson-name">
+                    <span>Talijanska kuhinja</span>
+                    <div class="dropbtn">
+                    <button>
+                        <img src="images/dropdown_icon.png" alt="dropdown icon">
+                    </button> 
                 </td>
             </tr>
             <tr>
-                <td>
-                    <span>Dalmatinska kuhinja</span>
-                    <button>dropdwn</button>
+                <td class="lesson-name">
+                    <span>Egipatska kuhinja</span>
+                    <div class="dropbtn">
+                    <button>
+                        <img src="images/dropdown_icon.png" alt="dropdown icon">
+                    </button> 
                 </td>
             </tr>
             <tr>
-                <td>
-                    <span>Dalmatinska kuhinja</span>
-                    <button>dropdwn</button>
+                <td class="lesson-name">
+                    <span>Albanska kuhinja</span>
+                    <div class="dropbtn">
+                    <button>
+                        <img src="images/dropdown_icon.png" alt="dropdown icon">
+                    </button> 
                 </td>
             </tr>
         </table>
+       
     </div>
+     <footer>
+        <img
+          src="images/cf_logo_green.png"
+          alt="green Cooking flamingoz logo"
+        />
+      </footer>
+    
 </body>
 </html>

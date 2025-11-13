@@ -19,7 +19,7 @@ header {
     font-family: "Catamaran", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size:50px;
+    font-size: 3.125rem;
     color:white;
     text-decoration: none;
 
@@ -37,41 +37,41 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:30px;
-    margin-top: 60px;
+    gap: 1.875rem;
+    margin-top: 3.75rem;
 
 }
 
 .oAuth-button {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap:5px;
-   padding:10px;
-   width: 20rem;
-   height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+    padding: 0.625rem;
+    width: 20rem;
+    height: 3rem;
 
-   font-size: 17px;
-   font-family: "Arial", serif;
+    font-size: 1.0625rem;
+    font-family: "Arial", serif;
 
-   background-color: rgb(241, 238, 238);
-   border-radius: 15px;
-   border: none;
-   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    background-color: rgb(241, 238, 238);
+    border-radius: 0.9375rem;
+    border: none;
+    box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.3);
 
-   cursor: pointer;
+    cursor: pointer;
 }
 .oAuth-icon {
-    width: 30px;
+    width: 1.875rem;
     height: auto;
-    margin-right: 10px;
+    margin-right: 0.625rem;
 }
 
 .dashed-line {
     width: 35%;
     border: none;
-    border-top: 2px dashed #004C22;
-    margin: 60px auto 60px auto;
+    border-top: 0.125rem dashed #004C22;
+    margin: 3.75rem auto 3.75rem auto;
 }
 
 .CF-login-form{
@@ -104,11 +104,11 @@ header {
 }
 
 input{
-    width:300px;
-    height:35px;
-    border: #004C22 3px solid;
+    width: 18.75rem;
+    height: 2.1875rem;
+    border: #004C22 0.1875rem solid;
     background-color:rgb(241, 238, 238) ;
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     font-size: 1rem;
     padding: 0.5rem;
 }
@@ -118,14 +118,14 @@ input{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap:10px;
+    gap: 0.625rem;
 
-    border-radius: 15px;
-    width:170px;
-    height:60px;
-    margin-top: 20px;
+    border-radius: 0.9375rem;
+    width: 10.625rem;
+    height: 3.75rem;
+    margin-top: 1.25rem;
 
-    font-size: 30px;
+    font-size: 1.875rem;
     font-family: "Catamaran", sans-serif;
     font-weight: bolder;
     font-style: normal;
@@ -140,12 +140,13 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 230px;
+    height: 14.375rem;
 }
 
 
 .footer-logo{
-    width:80px;
+    width:5rem;
     height:auto;
-    margin-top: 80px;
+    margin-top: 5rem;
+    margin-bottom: -2rem;
 }

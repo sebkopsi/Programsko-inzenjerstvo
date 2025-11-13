@@ -1,53 +1,104 @@
-#site {
+.main {
     display: flex;
-    gap: 20px;
-    padding: 40px 30px;
+    gap: 1.25rem;
+    padding: 2.5rem 1.875rem;
+    height:70rem;
 }
 #subheader {
     display: flex;
     justify-content: space-between;
     font-size: 1.5rem;
     color: #7A7A7A;
+    font-family: "Cambo", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 #autor {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
 }
+#profilePic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border:#7A7A7A 0.01rem solid;
+}
 #subheader img {
-    width: 15px;
-    border: 1px solid #909090;
-    padding: 4px 7px;
-    border-radius: 25px;
+    width: 0.9rem;
 }
 #courseTitle {
     align-self: center;
     font-size: 3rem;
+     font-family: "Londrina Solid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0);
 }
 #courseDesc>p {
     padding-right: 10%;
-    font-size: 1.4rem;
+    font-size: 1.4rem; 
+     font-family: "Cambo", serif;
+    font-weight: 400;
+    font-style: normal; 
 }
 
 #modules {
     text-align: center;
     width: 30%;
-    min-width: 500px;
+    min-width: 31.25rem;
     font-size: 1.4rem;
+     font-family: "Cambo", serif;
+    font-weight: 400;
+    font-style: normal;
     border-collapse: collapse;
-    margin-bottom: 700px;
-}
-#modules, #modules > * > th, #modules > * > td {
-    border: 5px solid #004C22;
-}
-#modules th {
-    color: white;
-    padding: 10px 0px;
-    background-color: #004C22;
-}
-#modules td {
-    color: #004C22;
-    padding: 10px 0px;
+    margin-bottom: 43.75rem;
+    border-radius: 50%;
 }
 
-#modules td:hover .lectures {display: block;}
+.module-table{
+    border-radius: 0.625rem;
+}
+
+#modules{
+    border: 0.3rem solid #004C22;
+}
+#modules #lessons {
+    color: white;
+    padding: 0.625rem 0rem;
+    background-color: #004C22;
+}
+#modules .lesson-name {
+    color: #000000;
+    padding: 0.625rem 0rem;
+    border: 0.3rem solid #004C22;
+    text-align: center;
+}
+
+.dropbtn {
+    position: relative;
+    
+}
+
+.dropbtn button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;;
+
+    position: absolute;
+    right:1.5rem;
+    bottom:0.001rem
+
+    
+}
+
+.dropbtn img{
+    width: 2rem;
+}
+
+.dropbtn:hover .lectures {display: block;}
+

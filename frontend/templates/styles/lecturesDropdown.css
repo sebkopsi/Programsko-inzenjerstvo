@@ -1,41 +1,75 @@
 .lectures {
     background-color: #D9D9D9;
-    padding: 0 40px 30px 20px;
+    padding: 0 2.5rem 1.875rem 1.25rem;
     display: none;
     position: absolute;
-    min-width: 160px;
-    max-width: 60%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 20rem;
+    max-width: 80vw;
+    box-shadow: 0rem 0.5rem 1rem 0rem rgba(0,0,0,0.2);
     z-index: 1;
 }
-.lectureList {
-    padding-left: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 70px;
+
+.lectures h3 {
+    font-size: 1.4rem; 
+     font-family: "Cambo", serif;
+    font-weight: 600;
+    font-style: normal; 
+    color:black;
+    text-align: left;
 }
-.lectureList a {
+.lectureList {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4.375rem;
+    overflow-x: auto;
+}
+.lectureList a {    
+    display: block;
+    flex: 0 0 16.9375rem;
+    box-sizing: border-box;
+    margin-bottom: 0.75rem;
     text-decoration: none;
-    display: block; 
 }
 .lectureTile {
-    width: 271px;
+    width: 16.9375rem;
     color: white;
     border-collapse: collapse;
     text-align: left;
+
+    table-layout: fixed; 
+    width: 100%;
+    height: 14rem; 
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
 .lectureTile th {
     background-color: #004C22;
     color: white;
+    font-family: "Cambo", serif;
     font-weight: 200;
-    /* padding: 7px 15px; */
+    font-style: normal;
+    font-size: 1.1rem; 
+    text-align: center;
+    height: 2.25rem;
 }
-.lectureTile td {
+.lectures td {
     background-color: white;
     text-align: center;
-    padding: 15px 0;
+    border: none;
+
+     height: calc(100% - 3rem);
+    padding: 0.9375rem 0;
 }
 .lectureTile img {
+    border-radius: 1.5625rem;
     width: 70%;
-    border-radius: 25px;
+    height: 8rem;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
+
+

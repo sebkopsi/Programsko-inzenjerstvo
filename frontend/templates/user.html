@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profil</title>
+        <link rel="icon" href="images/cf_logo_pink.png">
+        <link rel="stylesheet" href="styles/user.css">
+</head>
+<body>
+        <div class="header">
+                <h1>POLAZNIK</h1>
+        </div>
+        <div class="user-data">
+                <div class="border">
+                        <img src="images/profile_icon.png" alt="profile-icon">
+                </div>
+                <span>
+                        <h2>Ivan Horvat</h2>
+                        <div class="email">
+                                <img src="images/mail_icon.png" alt="mail-icon">
+                                <a href="mailto:ivan.horvat@gmail.com">ivan.horvat@gmail.com</a>
+                        </div>
+                </span>
+        </div>
+        <form class="filters-skill">
+                <label for="skill-level">razina vjestine:</label><br>
+                <img id="kvacica-icon-vjestine-label" src="images/kvacica_green.png"></img>
+                <select id="skill-level" name="skill-level">
+                        <option disabled selected></option>
+                        <option value="beginner">pocetnik</option>
+                        <option value="intermediate">srednji</option>
+                        <option value="advanced">napredni</option>
+                </select>
+        </form>
+        <form class="filters-form">
+                <h2 class="preference">prehrambene preferencije:</h2><br>
+                <label class="filters">
+                        <input type="checkbox" id="pref1" value="vegansko">
+                        vegansko <span class="green-plus">&#128933;</span>
+                </label>
+                <label class="filters">
+                        <input type="checkbox" id="pref2" value="vegeterijansko">
+                        vegeterijansko <span class="green-plus">&#128933;</span>
+                </label>
+                <label class="filters">
+                        <input type="checkbox" id="pref3" value="peskaterijansko">
+                        peskaterijansko <span class="green-plus">&#128933;</span>
+                </label>
+        </form>
+        <form class="filters-form">
+                <h2 class="allergies">alergeni/intolerancije:</h2><br>
+                <label class="filters">
+                        <input type="checkbox" id="alerg1" value="gluten">
+                        gluten <span class="green-plus">&#128933;</span>
+                </label>
+                <label class="filters">
+                        <input type="checkbox" id="alerg2" value="laktoza">
+                        laktoza <span class="green-plus">&#128933;</span>
+                </label>
+                <label class="filters">
+                        <input type="checkbox" id="alerg3" value="orasasti-plodovi">
+                        orasasti plodovi <span class="green-plus">&#128933;</span>
+                </label>
+        </form>
+        <form class="filters-form">
+                <h2 class="fav-cuisines">omiljene kuhinje:</h2><br>
+                <label class="filters">
+                        <input type="checkbox" id="cuisine1" value="kontinentalna">
+                        kontinentalna <span class="green-plus">&#128933;</span>
+                </label>
+                <label class="filters">
+                        <input type="checkbox" id="cuisine2" value="talijanska">
+                        talijanska <span class="green-plus">&#128933;</span>
+                </label>
+        </form>
+        <div class="past-courses">
+                <h2>povijest tecajeva:</h2>
+                <img id="kvacica-icon-course-history" src="images/kvacica_green.png"></img>
+                <div class="mediteranian">
+                        <a href="#">
+                                <img class="course-thumbnail" src="images/mediteranska_kuhinja.jpg" alt="mediteranska kuhinja">
+                                <p>Mediteranska kuhinja</p>
+                        </a>
+                </div>
+                <div class="chinese">
+                        <a href="#">
+                                <img class="course-thumbnail" src="images/kineska_kuhinja.jpg" alt="kineska kuhinja">
+                                <p>Kineska kuhinja</p>
+                        </a>
+                </div>
+        </div>
+        <div class="notes">
+                <h3>biljeske:</h3>
+                <img id="kvacica-icon-notes" src="images/kvacica_green.png"></img>
+                <ul class="notes-list">
+                        <li>za meko kuhana jaja treba mi 3-5 minuta</li>
+                        <li>...</li>
+                </ul>
+        </div>
+
+
+        <footer>
+                <img src="images/cf_logo_green.png" alt="logo" />
+        </footer>
+        
+</body>
+</html>
