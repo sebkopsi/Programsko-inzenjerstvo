@@ -12,15 +12,6 @@ export function HomePage() {
         </div>
         <div className="right-section">
           <div className="menu">
-            <Link id="kvacica-allCourses-link" to="/allCourses">
-              <img className="kvacica-icon" src="/images/kvacica_green.png" alt="Checkmark icon" />
-            </Link>
-            <Link id="allCourses-link" to="/allCourses">TECAJEVI</Link>
-          </div>
-          <div className="menu">
-            <Link id="about-us-link" to="/about_us">O NAMA</Link>
-          </div>
-          <div className="menu">
             <Link className="profile-link" to="/login">
               <img className="profile-icon" src="/images/profile_icon.png" alt="Profile icon" />
             </Link>
