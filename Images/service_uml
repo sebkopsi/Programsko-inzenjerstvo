@@ -1,0 +1,86 @@
+@startuml
+Class UserService {
+  + GetAll()
+  + FindByAttribute()
+  + Login()
+  + SignUp()
+  + UploadFile()
+}
+
+Class CourseService {
+  + GetAll()
+  + FindByAttribute()
+  + Create()
+  + Search()
+  + AddModule()
+}
+
+Class ModuleService{
+  + GetAll()
+  + FindByAttribute()
+  + Search()
+  + AddLectureToModule()
+}
+
+Class LectureService {
+  + GetByID()
+  + FindByAttribute()
+  + Search()
+  + UploadMaterial()
+}
+
+Class ReviewService {
+  + GetByID()
+  + FindByAttribute()
+  + AddReview()
+}
+
+Class CommentService {
+  + GetByID()
+  + FindByAttribute()
+  + New()
+  + Respond()
+}
+
+Class QAndAService {
+  + GetByID()
+  + FindByAttribute()
+  + NewQuestion()
+  + Answer()
+}
+Class AuthService {
+  Hash()
+  Verify()
+}
+
+Class ShoppingListService {
+  + GetByID() 
+  + GetByOwnerID()
+  + AddLectureItemsToList()
+  + ExportList()
+}
+
+class PreferenceService {
+  + GetByID()
+  + GetByUserID()
+  + UpdatePreference()
+}
+
+class NotesService {
+  + GetByID()
+  + GetNotesByUserID()
+  + AddNote()
+}
+
+class MaterialService{
+  + GetByPath()
+  + GetAllByUserID()
+  + GetAllByLectureID()
+  + Upload()
+  + Delete()
+}
+
+UserService --> AuthService : uses to verify and encrypt sensitive data
+ReviewService --> CourseService : can leave review to
+ReviewService --> LectureService :  can leave review to
+@enduml
