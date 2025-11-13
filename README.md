@@ -21,8 +21,14 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 - Frontend: React, JS, HTML, CSS
 - Database: PostgreSql, Redis
 
-# Instalacija
->/
+# Instalacija - DEV
+> Osigurati tocne verzije NodeJS
+> Pokrenuti PostgreSQL servis i pokrenuti sve migracije sa `make migrations`
+> Pokrenuti backend sa `make run-backend-dev`
+> Pokrenuti frontend sa `make run-frontend-dev`
+>
+> API je dostupan na localhost:8080
+> Frontend preko URL prikazan u terminalu
 
 # Članovi tima 
 > - Sebastijan Kopsejak - Team Lead, devops
