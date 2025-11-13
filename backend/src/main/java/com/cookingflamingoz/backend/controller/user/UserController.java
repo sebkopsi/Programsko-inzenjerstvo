@@ -2,6 +2,7 @@ package com.cookingflamingoz.backend.controller.user;
 
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.service.user.UserCreationResult;
+import com.cookingflamingoz.backend.service.user.UserProfileResult;
 import com.cookingflamingoz.backend.service.user.UserService;
 import com.cookingflamingoz.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers() {
-        return userService.findAll();
-    }
 
-    @GetMapping("{id}")
-    public  User getUser(@PathVariable int id) {
-        return userService.getUserById(id);
+    @GetMapping("my")
+    public UserProfileResult getProfile() {
+        return userService.GetProfile();
     }
 
     //register

@@ -31,10 +31,10 @@ public class UserService {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    public UserProfileResult GetProfile(int id){
-        User user = entityManager.find(User.class, id);
+    public UserProfileResult GetProfile(){
+        User user = entityManager.find(User.class, 1);
         if(user == null){
-            return UserProfileResult.UserProfileResultFailure(String.format("User not found with id %d", id));
+            return UserProfileResult.UserProfileResultFailure(String.format("User not found with id %d", 1));
         }
         return  UserProfileResult.UserProfileResultSuccess(user);
     }
