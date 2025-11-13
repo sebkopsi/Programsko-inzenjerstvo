@@ -4,6 +4,10 @@ Projektna aplikacija za online tečajeve kuhanja kroz video-lekcije na zahtjev i
 # Opis projekta
 Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. Naš zadatak je izraditi u potpunosti funkcionalnu aplikaciju unutar koje će korisnici moći pohađati razne kulinarske tečajeve internetskim putem te koji će biti popraćeni detaljnim receptima, zadacima i slično. Nadamo se da će aplikacija spojiti ljude s raznih lokacija u zajedničkoj želji za kulinarskim znanjem ili da će biti od pomoći ljudima sa strašću za kuhanjem, ali s nedostatkom vremena za pohađanje tečajeva uživo. Također se nadamo da ćemo pritom obogatiti naše znanje o programskom inženjerstvu i steći ideju o provođenju tog procesa u stvarnoj situaciji.
 
+# Ostvarene Funckije
+- Korisnik se moze registrirati u sustav preko email-a
+- Korisnik se moze prijaviti u sustav i dobiti JWT session
+
 # Funkcijski zahtjevi
 - Korisnik ima mogućnost prijave na pohađanje tečaja
 - Korisnik ima mogućnost prijave/registracije u sustav
