@@ -21,13 +21,13 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 >/
 
 # Članovi tima 
-> Sebastijan Kopsejak - Team Lead, devops
-> Tin Jovanović - Backend
-> Filip Polenus - Backend
-> Antonio Gospodnetić - Database
-> Vedran Delić - Frontend, Design
-> Leona Marijanović - Frontend 
-> Karlo Klauški - Frotend
+> - Sebastijan Kopsejak - Team Lead, devops
+> - Tin Jovanović - Backend
+> - Filip Polenus - Backend
+> - Antonio Gospodnetić - Database
+> - Vedran Delić - Frontend, Design
+> - Leona Marijanović - Frontend 
+> - Karlo Klauški - Frotend
 
 # 📝 Kodeks ponašanja [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 Kao studenti sigurno ste upoznati s minimumom prihvatljivog ponašanja definiran u [KODEKS PONAŠANJA STUDENATA FAKULTETA ELEKTROTEHNIKE I RAČUNARSTVA SVEUČILIŠTA U ZAGREBU](https://www.fer.hr/_download/repository/Kodeks_ponasanja_studenata_FER-a_procisceni_tekst_2016%5B1%5D.pdf), te dodatnim naputcima za timski rad na predmetu [Programsko inženjerstvo](https://wwww.fer.hr).
