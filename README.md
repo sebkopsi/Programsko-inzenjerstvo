@@ -15,7 +15,7 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 # Tehnologije
 - Backend: Spring boot
 - Frontend: React, JS, HTML, CSS
-- DB: PostgreSql, Redis
+- Database: PostgreSql, Redis
 
 #Instalacija
 >/
