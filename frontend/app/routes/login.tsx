@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import { LoginPage } from "~/pages/login/login";
-import { useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import type assert from "assert";
 
 function assertReqIsLoginReq(data: any): asserts data is loginReq{
@@ -27,29 +27,41 @@ type loginReq = {
 export async function action({request}: Route.ActionArgs) {
   const formData = await request.formData();
 
-  const req = await fetch("http://localhost:8080/user/login", {
+  const resp = await fetch("http://localhost:8080/user/login", {
     method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
     body: JSON.stringify({
       email: formData.get("email"),
       password: formData.get("password")
     })
   })
   
-  if(req.status != 200){
+  if(resp.status != 200){
     return {
       ok: false,
       errors: {
-        message: await req.text()
+        message: "Login failed... response status: " + resp.status
       }
     }
   }
 
-  return {
-    ok: true,
-    data: {
-      token: "test"
+  const loginInfo =  await resp.json()
+  if(!loginInfo?.token){
+    return {
+      ok: false,
+      errors: {
+        message: "Login failed to get JWT token..."
+      }
     }
   }
+
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": `jwt=${loginInfo.token}; Path=/; HttpOnly; Secure; SameSite=Strict`
+    }
+  })
 }
 
 export default function Login() {
