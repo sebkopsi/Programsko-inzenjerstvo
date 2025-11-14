@@ -1,20 +1,19 @@
-import {Form, useActionData, useFetcher, useLoaderData} from 'react-router'
-import "./login.css"
+import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
+import "./login.css";
 
 export function LoginPage() {
-  const actionData = useLoaderData()
-  const fetcher = useFetcher()
-  let busy = fetcher.state !== "idle"
+  const actionData = useLoaderData();
+  const fetcher = useFetcher();
+  const app_url = import.meta.env.PROD ? "cooking.planine.hr" : "localhost:5173"
+  let busy = fetcher.state !== "idle";
   return (
     <div>
       <main>
         {fetcher.data?.ok == false && (
-          <div id='error'>
-            {fetcher.data.errors.message}
-          </div>
+          <div id="error">{fetcher.data.errors.message}</div>
         )}
         <div className="CF-login-form">
-          <fetcher.Form className="login-form" method="POST" action='/login'>
+          <fetcher.Form className="login-form" method="POST" action="/login">
             <div className="form-text-and-input">
               <span>email adresa</span>
               <input type="email" name="email" required />
@@ -33,22 +32,46 @@ export function LoginPage() {
         <hr className="dashed-line" />
 
         <div className="oAuth-options">
-          <button className="oAuth-button">
-            <img className="oAuth-icon" src="/images/google_icon.png" alt="Google" />
+          <button
+            className="oAuth-button"
+            onClick={() => {
+              const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
+              const options = {
+                redirect_uri: 'http://'+ app_url + '/oauth',
+                client_id: "816590313634-7ov4cqdk97laihjvmrmre4pjt2j6dhkc.apps.googleusercontent.com",
+                access_type: "offline",
+                response_type: "code",
+                prompt: "consent",
+                scope: [
+                  "https://www.googleapis.com/auth/userinfo.profile",
+                  "https://www.googleapis.com/auth/userinfo.email",
+                ].join(" "),
+              };
+
+              const qs = new URLSearchParams(options);
+
+              window.location.href = `${rootUrl}?${qs.toString()}`;
+            }}
+          >
+            <img
+              className="oAuth-icon"
+              src="/images/google_icon.png"
+              alt="Google"
+            />
             <span>Prijava putem Google računa</span>
-          </button>
-          <button className="oAuth-button">
-            <img className="oAuth-icon" src="/images/microsoft_icon.png" alt="Microsoft" />
-            <span>Prijava putem Microsoft računa</span>
           </button>
         </div>
       </main>
 
       <div id="login-footer">
-        <img className="footer-logo" src="/images/cf_logo_green.png" alt="Footer Logo" />
+        <img
+          className="footer-logo"
+          src="/images/cf_logo_green.png"
+          alt="Footer Logo"
+        />
       </div>
     </div>
   );
-};
+}
 
 export default LoginPage;
