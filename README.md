@@ -1,3 +1,6 @@
+# Deployment
+https://cooking.planine.hr/
+
 # Cooking Flamingoz
 Projektna aplikacija za online tečajeve kuhanja kroz video-lekcije na zahtjev i live radionice
 
@@ -22,13 +25,13 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 - Database: PostgreSql, Redis
 
 # Instalacija - DEV
-> Osigurati tocne verzije NodeJS
-> Pokrenuti PostgreSQL servis i pokrenuti sve migracije sa `make migrations`
-> Pokrenuti backend sa `make run-backend-dev`
-> Pokrenuti frontend sa `make run-frontend-dev`
->
-> API je dostupan na localhost:8080
-> Frontend preko URL prikazan u terminalu
+ Osigurati tocne verzije NodeJS
+ Pokrenuti PostgreSQL servis i pokrenuti sve migracije sa `make migrations`
+ Pokrenuti backend sa `make run-backend-dev`
+ Pokrenuti frontend sa `make run-frontend-dev`
+
+ API je dostupan na localhost:8890
+ Frontend je dostupan na localhost:5173
 
 # Članovi tima 
 > - Sebastijan Kopsejak - Team Lead, devops
