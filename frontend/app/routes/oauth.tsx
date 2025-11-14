@@ -57,7 +57,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const body = await resp.json()
 
-  const loginCredResp = await fetch("http://localhost:8080/user/oauth", {
+  const loginCredResp = await fetch("http://localhost:8890/user/oauth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
