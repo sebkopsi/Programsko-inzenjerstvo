@@ -5,7 +5,7 @@ export function SignUpPage() {
   const actionData = useLoaderData();
   const fetcher = useFetcher();
   let busy = fetcher.state !== "idle";
-  const app_url = import.meta.env.PROD ? "cooking.planine.hr" : "localhost:5173"
+  const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
   return (
     <div>
       <main>
@@ -51,7 +51,7 @@ export function SignUpPage() {
             onClick={() => {
               const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
               const options = {
-                redirect_uri: "http://" + app_url +"/oauth",
+                redirect_uri: app_url +"/oauth",
                 client_id:
                   "816590313634-7ov4cqdk97laihjvmrmre4pjt2j6dhkc.apps.googleusercontent.com",
                 access_type: "offline",

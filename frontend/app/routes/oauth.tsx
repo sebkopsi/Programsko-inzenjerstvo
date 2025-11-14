@@ -35,12 +35,12 @@ export async function loader({ request }: Route.LoaderArgs) {
     return redirect("/login")
   }
   const formData = new URLSearchParams();
-  const app_url = import.meta.env.PROD ? "cooking.planine.hr" : "localhost:5173"
+  const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
 
   formData.append("code" ,code)
   formData.append("client_id", client);
   formData.append("client_secret", secret);
-  formData.append("redirect_uri", "http://" + app_url + "/oauth");
+  formData.append("redirect_uri", app_url + "/oauth");
   formData.append("grant_type", "authorization_code");
   
   const resp = await fetch("https://oauth2.googleapis.com/token", {
