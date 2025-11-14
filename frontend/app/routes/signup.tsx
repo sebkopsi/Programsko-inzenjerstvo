@@ -38,7 +38,7 @@ export async function action({request}: Route.ActionArgs) {
     }
   }
 
-  const resp = await fetch("http://localhost:8080/user", {
+  const resp = await fetch("http://localhost:8890/user", {
     method: "POST",
     headers: {
       "content-type": "application/json"
