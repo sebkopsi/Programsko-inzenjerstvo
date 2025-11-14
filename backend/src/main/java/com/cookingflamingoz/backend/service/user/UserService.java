@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.service.user;
 
+import com.cookingflamingoz.backend.controller.user.OauthRequest;
 import com.cookingflamingoz.backend.controller.user.SignUpRequest;
 import com.cookingflamingoz.backend.model.*;
 import com.cookingflamingoz.backend.repository.DifficultyLevelRepository;
@@ -22,6 +23,7 @@ public class UserService {
     private final EnrolleeProfileRepository enrolleeProfileRepository;
     private final DifficultyLevelRepository difficultyLevelRepository;
     private final PasswordEncoder passwordEncoder;
+    private final OauthService oauthService;
 
     public User findById(int id) {
         return entityManager.find(User.class, id);
@@ -39,11 +41,12 @@ public class UserService {
         return  UserProfileResult.UserProfileResultSuccess(user);
     }
 
-    public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder, OauthService oauthService) {
         this.userRepository = userRepository;
         this.enrolleeProfileRepository = enrolleeProfileRepository;
         this.difficultyLevelRepository = difficultyLevelRepository;
         this.passwordEncoder = passwordEncoder;
+        this.oauthService = oauthService;
     }
 
     // Create a user - here uses argon2 hashing
@@ -165,6 +168,33 @@ public class UserService {
             return UserCreationResult.failure("Invalid credentials");
         }
 
+    }
+
+    public UserCreationResult Oauth(OauthRequest req) {
+        if(req.getToken() == null || req.getToken().isEmpty()) {
+            return UserCreationResult.failure("Missing token!");
+        }
+
+        OauthResult res = oauthService.GoogleOauth(req.getToken());
+        if (res == null || !res.success) {
+            return UserCreationResult.failure("Failed to generate oauth token");
+        }
+
+        User user = getUserByEmail(res.email);
+        if (user == null) {
+            DifficultyLevel dl = difficultyLevelRepository.getByName("beginner");
+            EnrolleeProfile enrolleeProfile = new EnrolleeProfile(null,
+                    res.username,
+                    dl.getDiffidultyId());
+            enrolleeProfile = enrolleeProfileRepository.save(enrolleeProfile);
+
+            user = new User(null, res.firstname, res.lastname, "", res.email, new Date(), enrolleeProfile.getEnrolleeId(), null);
+            user = userRepository.save(user);
+            if (user.getEmail() != null) {
+                return UserCreationResult.success(user);
+            }
+        }
+        return UserCreationResult.success(user);
     }
 }
 

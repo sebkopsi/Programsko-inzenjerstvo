@@ -55,6 +55,18 @@ public class UserController {
 
     }
 
+    @PostMapping("/oauth")
+    public ResponseEntity<?>  oauth(@RequestBody OauthRequest oauthRequest) {
+        UserCreationResult a = userService.Oauth(oauthRequest);
+
+        if (!a.isSuccess()){
+            return ResponseEntity.status(401).body(a.getMessage());
+        }
+        String token = jwtUtil.generateToken(a.getUserID());
+        return  ResponseEntity.ok(Map.of("token", token));
+    }
+
+
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id)
