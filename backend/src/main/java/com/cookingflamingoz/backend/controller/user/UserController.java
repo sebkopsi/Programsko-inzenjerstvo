@@ -81,18 +81,11 @@ public class UserController {
     }
 
 
-    @GetMapping("/tag/preferred")
-    public Set<Tag> getuserTagsPreferred() {
+    @GetMapping("/tag")
+    public Set<Tag> getuserTags(@RequestParam boolean preferred) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
-        return userService.getTags(userID, true);
-    }
-
-    @GetMapping("/tag/notpreferred")
-    public Set<Tag> getuserTags() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int userID = Integer.parseInt(authentication.getPrincipal().toString());
-        return userService.getTags(userID, false);
+        return userService.getTags(userID, preferred);
     }
 
     @PostMapping("/tag")

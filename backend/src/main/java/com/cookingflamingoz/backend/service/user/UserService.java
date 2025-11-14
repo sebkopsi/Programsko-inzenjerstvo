@@ -155,7 +155,7 @@ public class UserService {
             return new HashSet<>();
         }
 
-        Stream<UserTag> userTags =  userTagRepository.findByPreferred(preferred).stream().filter(UserTag::isPreferred);
+        Stream<UserTag> userTags =  userTagRepository.findByPreferred(preferred).stream().filter(userTag -> userTag.isPreferred() == preferred);
         Set<Tag> tags  = userTags.map(UserTag::getTag).collect(Collectors.toSet());
         return tags;
     }

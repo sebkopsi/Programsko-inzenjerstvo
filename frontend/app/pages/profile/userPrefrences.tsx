@@ -21,7 +21,7 @@ export default function UserPrefernces() {
               Lectures, modules and courses containing these tags will be given
               priority in searches and recommendations.
             </span>
-            <fetcher.Form className="login-form" method="POST" action="/profile">
+            <fetcher.Form className="login-form" method="POST" action="/profile?preferred">
               <div className="form-text-and-input">
                 <input type="text" name="name" required />
               </div>
@@ -46,6 +46,14 @@ export default function UserPrefernces() {
               Lectures, modules and courses containing these tags will be
               discarded in searches and recommendation.
             </span>
+                   <fetcher.Form className="login-form" method="POST" action="/profile">
+              <div className="form-text-and-input">
+                <input type="text" name="name" required />
+              </div>
+              <button className="submit-button" type="submit">
+                Add
+              </button>
+            </fetcher.Form>
           </section>
           <section class="box">
             {notpreferred.map((tag) => (
