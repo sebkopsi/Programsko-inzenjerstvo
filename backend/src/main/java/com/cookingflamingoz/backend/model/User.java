@@ -3,11 +3,15 @@ package com.cookingflamingoz.backend.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date; // or import from java.sql??
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public") // keep quotes since table name is "user"
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +42,9 @@ public class User {
 
     @Column(name = "\"isVerified\"", nullable = false)
     private Boolean isVerified = false; // match DB default
+
+    @OneToMany(mappedBy = "primaryKey.user")
+    private Set<UserTag> tags = new  HashSet<>();
 
 
     //constructors
@@ -135,4 +142,15 @@ public class User {
     }
 
 
+    public Set<UserTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<UserTag> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(UserTag tag) {
+        this.tags.add(tag);
+    }
 }

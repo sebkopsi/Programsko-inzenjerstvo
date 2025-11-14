@@ -3,20 +3,21 @@ package com.cookingflamingoz.backend.service.user;
 import com.cookingflamingoz.backend.controller.user.OauthRequest;
 import com.cookingflamingoz.backend.controller.user.SignUpRequest;
 import com.cookingflamingoz.backend.model.*;
-import com.cookingflamingoz.backend.repository.DifficultyLevelRepository;
-import com.cookingflamingoz.backend.repository.EnrolleeProfileRepository;
-import com.cookingflamingoz.backend.repository.UserRepository;
+import com.cookingflamingoz.backend.repository.*;
+import com.cookingflamingoz.backend.util.GenericResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserService {
+    private final UserTagRepository userTagRepository;
     @PersistenceContext
     private EntityManager entityManager;
     private final UserRepository userRepository;
@@ -24,6 +25,7 @@ public class UserService {
     private final DifficultyLevelRepository difficultyLevelRepository;
     private final PasswordEncoder passwordEncoder;
     private final OauthService oauthService;
+    private final TagRepository  tagRepository;
 
     public User findById(int id) {
         return entityManager.find(User.class, id);
@@ -41,12 +43,14 @@ public class UserService {
         return  UserProfileResult.UserProfileResultSuccess(user);
     }
 
-    public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder, OauthService oauthService) {
+    public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder, OauthService oauthService, TagRepository tagRepository, UserTagRepository userTagRepository) {
         this.userRepository = userRepository;
         this.enrolleeProfileRepository = enrolleeProfileRepository;
         this.difficultyLevelRepository = difficultyLevelRepository;
         this.passwordEncoder = passwordEncoder;
         this.oauthService = oauthService;
+        this.tagRepository = tagRepository;
+        this.userTagRepository = userTagRepository;
     }
 
     // Create a user - here uses argon2 hashing
@@ -131,6 +135,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+
     // Get user by email
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -139,6 +144,20 @@ public class UserService {
     // Delete user by ID
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    public Set<Tag> getTags(Integer userId, boolean preferred) {
+        if(!userRepository.existsById(userId)){
+            return new HashSet<>();
+        }
+        User user =  userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
+        if (user == null) {
+            return new HashSet<>();
+        }
+
+        Stream<UserTag> userTags =  userTagRepository.findByPreferred(preferred).stream().filter(UserTag::isPreferred);
+        Set<Tag> tags  = userTags.map(UserTag::getTag).collect(Collectors.toSet());
+        return tags;
     }
 
     public UserCreationResult Login(String emailInput, String password) {
@@ -195,6 +214,38 @@ public class UserService {
             }
         }
         return UserCreationResult.success(user);
+    }
+
+    public GenericResult AddTag(int userID, String name, String category, boolean preferred, boolean createNew){
+
+        if(!userRepository.existsById(userID)){
+            return  GenericResult.Failure("User does not exist");
+        }
+
+        Tag tag = tagRepository.findByNameAndCategory(name, category);
+        if (tag == null) {
+            if(!createNew){
+                return GenericResult.Failure("Tag does not exist");
+            }
+            tag = new Tag(name, category);
+
+            tag = tagRepository.save(tag);
+        }
+
+        User user =  userRepository.findById(userID).isPresent() ? userRepository.findById(userID).get() : null;
+        if (user == null) {
+            return GenericResult.Failure("User not fetched");
+        }
+
+        Tag finalTag = tag;
+        if(user.getTags().stream().anyMatch(uTag -> uTag.equals(finalTag) )){
+            return GenericResult.Failure("User already has tag");
+        }
+
+        UserTag userTag = new UserTag(preferred, user, finalTag);
+        userTagRepository.save(userTag);
+
+        return GenericResult.Success("Added tag");
     }
 }
 

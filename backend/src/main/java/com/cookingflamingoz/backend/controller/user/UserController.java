@@ -1,16 +1,23 @@
 package com.cookingflamingoz.backend.controller.user;
 
+import com.cookingflamingoz.backend.model.Tag;
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.service.user.UserCreationResult;
 import com.cookingflamingoz.backend.service.user.UserProfileResult;
 import com.cookingflamingoz.backend.service.user.UserService;
+import com.cookingflamingoz.backend.util.GenericResult;
 import com.cookingflamingoz.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -71,5 +78,30 @@ public class UserController {
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
+    @GetMapping("/tag/preferred")
+    public Set<Tag> getuserTagsPreferred() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return userService.getTags(userID, true);
+    }
+
+    @GetMapping("/tag/notpreferred")
+    public Set<Tag> getuserTags() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return userService.getTags(userID, false);
+    }
+
+    @PostMapping("/tag")
+    public GenericResult addTag(@RequestBody TagRequest tagRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        if(ObjectUtils.isEmpty(tagRequest.name) || ObjectUtils.isEmpty(tagRequest.category)) {
+            return GenericResult.Failure("missing parameters");
+        }
+        return userService.AddTag(userID, tagRequest.name, tagRequest.category, tagRequest.preferred, true);
     }
 }

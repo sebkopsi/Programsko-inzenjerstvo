@@ -1,0 +1,57 @@
+:root {
+  --big-font: "Catamaran", sans-serif;
+  --text-font: "Londrina", sans-serif;
+}
+
+h2,
+h3 {
+  font-family: var(--big-font);
+}
+
+.section {
+  font-family: var(--text-font);
+  display: flex;
+  border-top: 1px solid #a0a0a0;
+  padding: 2rem 0 2rem 0;
+  gap: 1rem;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    h3 {
+      margin: 0;
+      display: flex;
+    }
+    span {
+      color: #505050;
+    }
+  }
+
+  button{
+    height: 2rem;
+  }
+}
+
+.box {
+  background-color: #fafafa;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #a0a0a0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  height: initial;
+  .tag {
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    background-color: #a0a0a0;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    width: max-content;
+    height: max-content;
+  }
+  
+}
