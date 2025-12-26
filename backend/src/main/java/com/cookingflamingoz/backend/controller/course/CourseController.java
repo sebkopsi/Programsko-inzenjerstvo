@@ -1,13 +1,17 @@
 package com.cookingflamingoz.backend.controller.course;
 
-import org.junit.jupiter.api.Test;
+/*
 import org.springframework.boot.test.context.SpringBootTest;
+*/
 
-@SpringBootTest
-class BackendApplicationTests {
+@RestController
+@RequestMapping("/course")
+public class CourseController {
 
-    @Test
-    void contextLoads() {
+    @GetMapping("/{id}")
+    public Course getCourseById(@PathVariable Integer id) {
+        return courseService.getCourseById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
 }
