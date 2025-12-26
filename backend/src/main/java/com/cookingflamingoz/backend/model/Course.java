@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.model;
 
+
 import java.io.Serializable;
 
 @Entity
