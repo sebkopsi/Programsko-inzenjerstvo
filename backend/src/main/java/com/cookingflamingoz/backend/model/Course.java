@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.model;
 
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
@@ -25,7 +26,7 @@ public class Course implements Serializable {
     private Integer difficultyId;
 
     @Column(name = "\"avgRating\"", nullable = false)
-    private Float avgRating = 0.00; // match DB default;
+    private double avgRating = 0.00; // match DB default;
 
 
     //constructors
@@ -61,9 +62,9 @@ public class Course implements Serializable {
 
     public void setDifficultyId(Integer difficultyId) { this.difficultyId = difficultyId; }
 
-    public Float getAvgRating() { return avgRating; }
+    public double getAvgRating() { return avgRating; }
 
-    public void setAvgRating(Float avgRating) { this.avgRating = avgRating; }
+    public void setAvgRating(double avgRating) { this.avgRating = avgRating; }
 
     //toString method
     @Override

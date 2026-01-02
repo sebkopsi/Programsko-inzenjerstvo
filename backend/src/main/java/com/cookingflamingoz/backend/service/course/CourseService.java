@@ -8,19 +8,19 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class CourseService {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private final CourseRepository CourseRepository;
+    private final CourseRepository courseRepository;
 
-    public Course findById(int id) {
-        return entityManager.find(Course.class, id);
+    public CourseService(CourseRepository courseRepository) { this.courseRepository = courseRepository; }
+
+    // Get course by ID
+    public Optional<Course> getCourseById(Integer id) {
+        return courseRepository.findById(id);
     }
 
 }
