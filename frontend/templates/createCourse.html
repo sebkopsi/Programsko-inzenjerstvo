@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/createCourse.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <form>
+    <label for="name">Course name</label><br/>
+    <input type="text" id="name" name="name" /><br/><br/>
+
+    <label for="desc">Course description</label><br/>
+    <textarea id="desc" name="description"></textarea><br/>
+    
+    <p>Choose course difficulty:</p>
+    <div>
+      <input type="radio" id="easy" name="difficulty" value="easy"/>
+      <label for="easy">easy</label><br/>
+      <input type="radio" id="medium" name="difficulty" value="medium"/>
+      <label for="medium">medium</label><br/>
+      <input type="radio" id="hard" name="difficulty" value="hard"/>
+      <label for="hard">hard</label><br/><br/>
+    </div>
+
+    <input class="submit-button" type="submit" value="Submit"/>
+  </form>
+</body>
+
+</html>
