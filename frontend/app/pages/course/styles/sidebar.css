@@ -1,0 +1,39 @@
+#sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+
+    #options{
+        margin-top: auto;
+    }
+    ul {
+        padding: 0;
+        li {
+            color: #303030;
+            height: 1.51rem;
+            margin: 0.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-family: var(--big-font);
+           
+            svg{
+                height: 100%;
+                margin-right: 1rem;
+            }
+            transition: border 0.1s linear;
+        }
+
+        li:hover{
+            background-color: white;
+        }
+    }
+}
