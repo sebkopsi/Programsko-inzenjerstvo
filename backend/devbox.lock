@@ -1,0 +1,176 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "binutils@latest": {
+      "last_modified": "2025-11-23T21:50:36Z",
+      "resolved": "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#binutils",
+      "source": "devbox-search",
+      "version": "2.44",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0hz32dza8cmfq4i823mcz4kqpk54bils-binutils-wrapper-2.44",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/16cprzg9s7bw501rppw2bcmf3wpwsxw8-binutils-wrapper-2.44-man",
+              "default": true
+            },
+            {
+              "name": "info",
+              "path": "/nix/store/y9kanlp4jzfzwjriga6jplw8jk9hx5dk-binutils-wrapper-2.44-info"
+            }
+          ],
+          "store_path": "/nix/store/0hz32dza8cmfq4i823mcz4kqpk54bils-binutils-wrapper-2.44"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fhmb82a3q7nbsz3w9yj28nyscykrj87p-binutils-wrapper-2.44",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/136rg4hbbzzgfk9fzpih43wnsb7k04q5-binutils-wrapper-2.44-man",
+              "default": true
+            },
+            {
+              "name": "info",
+              "path": "/nix/store/glmqwm69w9b7wdil3iqncr1ach6py0zh-binutils-wrapper-2.44-info"
+            }
+          ],
+          "store_path": "/nix/store/fhmb82a3q7nbsz3w9yj28nyscykrj87p-binutils-wrapper-2.44"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/jprgd6iai892g6dhajv9k9izxwin5g74-binutils-wrapper-2.44",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/g4xhkh8nh9c61xfd428a96c5j97gzyd1-binutils-wrapper-2.44-man",
+              "default": true
+            },
+            {
+              "name": "info",
+              "path": "/nix/store/75plj78svg9ala98s5cvk8dma4bd7syn-binutils-wrapper-2.44-info"
+            }
+          ],
+          "store_path": "/nix/store/jprgd6iai892g6dhajv9k9izxwin5g74-binutils-wrapper-2.44"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/xwydcyvlsa3cvssk0y5llgdhlhjvmqdm-binutils-wrapper-2.44",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/2gjcdfkx83vgaszic2vn2cnsfl5n1mzk-binutils-wrapper-2.44-man",
+              "default": true
+            },
+            {
+              "name": "info",
+              "path": "/nix/store/5c4dylia9lsg6qbp3a9rdvv9nr0xp3jz-binutils-wrapper-2.44-info"
+            }
+          ],
+          "store_path": "/nix/store/xwydcyvlsa3cvssk0y5llgdhlhjvmqdm-binutils-wrapper-2.44"
+        }
+      }
+    },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "resolved": "github:NixOS/nixpkgs/16c7794d0a28b5a37904d55bcca36003b9109aaa?lastModified=1767364772&narHash=sha256-fFUnEYMla8b7UKjijLnMe%2BoVFOz6HjijGGNS1l7dYaQ%3D"
+    },
+    "jdk@22": {
+      "last_modified": "2024-06-12T20:55:33Z",
+      "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#jdk22",
+      "source": "devbox-search",
+      "version": "22-ga",
+      "systems": {
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/axzs3dcjxf4xb5r4rh0j08nmya00vbwz-openjdk-22-ga",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/3z268s0kxln2h03fcp9kc063mp2vx5ib-openjdk-22-ga-debug"
+            }
+          ],
+          "store_path": "/nix/store/axzs3dcjxf4xb5r4rh0j08nmya00vbwz-openjdk-22-ga"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kls4wg8vhm452miqppmsmwc9gbfdsvis-openjdk-22-ga",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/s0mgmqgdra3lh0gbpcljhxrsz5vxpksj-openjdk-22-ga-debug"
+            }
+          ],
+          "store_path": "/nix/store/kls4wg8vhm452miqppmsmwc9gbfdsvis-openjdk-22-ga"
+        }
+      }
+    },
+    "maven@latest": {
+      "last_modified": "2025-12-27T03:48:10Z",
+      "resolved": "github:NixOS/nixpkgs/4eec65df50d796a8fd9c146a09b5007916ce376b#maven",
+      "source": "devbox-search",
+      "version": "3.9.12",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nxsvd6ygdvnm2pv7r1j9rs5mjpqf8mqi-maven-3.9.12",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nxsvd6ygdvnm2pv7r1j9rs5mjpqf8mqi-maven-3.9.12"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/lb69ikb6nx4jpa7pisnqxsxdmnlw49wk-maven-3.9.12",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/lb69ikb6nx4jpa7pisnqxsxdmnlw49wk-maven-3.9.12"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/g5lw3jxrzap880i9cxdqgwpykcrawkml-maven-3.9.12",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/g5lw3jxrzap880i9cxdqgwpykcrawkml-maven-3.9.12"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/jm3ihlw2f2bcbg5adlh5n83ix0q2029d-maven-3.9.12",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/jm3ihlw2f2bcbg5adlh5n83ix0q2029d-maven-3.9.12"
+        }
+      }
+    }
+  }
+}
