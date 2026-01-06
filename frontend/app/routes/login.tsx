@@ -57,7 +57,7 @@ export async function action({request}: Route.ActionArgs) {
     }
   }
 
-  return redirect("/profile", {
+  return redirect("/course", {
     headers: {
       "Set-Cookie": `jwt=${loginInfo.token}; Path=/; HttpOnly; Secure; SameSite=Strict`
     }
