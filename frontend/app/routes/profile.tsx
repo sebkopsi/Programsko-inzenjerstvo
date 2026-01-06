@@ -1,20 +1,10 @@
 import { ProfilePage } from "~/pages/profile/profile";
 import type { Route } from "./+types/profile";
 import { redirect } from "react-router";
+import { GetJwtToken } from "~/util/cookie";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const cookieHeader = request.headers.get("Cookie");
-  const cookies: Record<string, string> = {};
-
-  cookieHeader?.split(";").forEach((cookie) => {
-    const [name, value] = cookie.trim().split("=");
-    if (name && value) {
-      cookies[name] = decodeURIComponent(value);
-    }
-  });
-
-  // Check if JWT exists
-  const jwt = cookies["jwt"];
+  const jwt = GetJwtToken(request)
   if (!jwt) {
     return redirect("/login");
   }
@@ -26,6 +16,7 @@ export async function loader({ request }: Route.LoaderArgs) {
         "Authorization": "Bearer " + jwt
       }
     });
+
 
     const tagsNotPreferred = await fetch("http://localhost:8890/user/tag?preferred=false", {
       method: "GET",
@@ -46,28 +37,15 @@ export async function loader({ request }: Route.LoaderArgs) {
       preferred,
       notpreferred
     };
-  } catch (error) {
-    console.error("Loader error:", error);
-    return {
-      preferred: [],
-      notpreferred: []
-    };
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 }
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
-  const cookieHeader = request.headers.get("Cookie");
-  const cookies: Record<string, string> = {};
 
-  cookieHeader?.split(";").forEach((cookie) => {
-    const [name, value] = cookie.trim().split("=");
-    if (name && value) {
-      cookies[name] = decodeURIComponent(value);
-    }
-  });
-
-  const jwt = cookies["jwt"];
+  const jwt = GetJwtToken(request);
   if (!jwt) {
     return redirect("/login");
   }
@@ -83,7 +61,7 @@ export async function action({ request }: Route.ActionArgs) {
       },
       body: JSON.stringify({
         name: formData.get("name"),
-        category: "general", 
+        category: "general",
         preferred: preferred
       })
     });
