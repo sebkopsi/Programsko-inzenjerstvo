@@ -4,7 +4,7 @@ import './home.css'
 export function HomePage() {
   console.log()
  return (
-    <main>
+    <section id="content">
       <header>
         <div className="left-section">
           <Link to="/">
@@ -84,6 +84,6 @@ export function HomePage() {
       <div id="home-footer">
         <span>Copyright © Cooking Flamingoz 2025</span>
       </div>
-    </main>
+    </section>
   );
 }

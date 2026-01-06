@@ -1,0 +1,13 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button{
+    width: 100%;
+}
+}

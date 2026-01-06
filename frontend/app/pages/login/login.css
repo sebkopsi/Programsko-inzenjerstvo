@@ -144,13 +144,3 @@ input{
     margin-bottom: -2rem;
 }
 
-#error {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    background-color: #D93D3D;
-    border-radius: 8px;
-    color: white;
-    padding: 1rem;
-    font-family: "Catamaran", sans-serif;
-}
