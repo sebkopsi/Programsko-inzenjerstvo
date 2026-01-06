@@ -7,8 +7,8 @@ export function SignUpPage() {
   let busy = fetcher.state !== "idle";
   const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
   return (
-    <div>
-      <main>
+    <section id="content">
+      <section>
         {fetcher.data?.ok == false && <div>{fetcher.data.errors.message}</div>}
         <div className="CF-login-form">
           <fetcher.Form className="login-form" method="POST" action="/signup">
@@ -76,7 +76,7 @@ export function SignUpPage() {
             <span>Prijava putem Google računa</span>
           </button>
         </div>
-      </main>
+      </section>
 
       <div id="login-footer">
         <img
@@ -85,7 +85,7 @@ export function SignUpPage() {
           alt="Footer Logo"
         />
       </div>
-    </div>
+    </section>
   );
 }
 

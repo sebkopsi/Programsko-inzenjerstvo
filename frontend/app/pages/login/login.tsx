@@ -7,8 +7,8 @@ export function LoginPage() {
   const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
   let busy = fetcher.state !== "idle";
   return (
-    <div>
-      <main>
+    <section id="content">
+      <section id="form">
         {fetcher.data?.ok == false && (
           <div id="error">{fetcher.data.errors.message}</div>
         )}
@@ -61,7 +61,7 @@ export function LoginPage() {
             <span>Prijava putem Google računa</span>
           </button>
         </div>
-      </main>
+      </section>
 
       <div id="login-footer">
         <img
@@ -70,7 +70,7 @@ export function LoginPage() {
           alt="Footer Logo"
         />
       </div>
-    </div>
+    </section>
   );
 }
 

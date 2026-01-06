@@ -1,0 +1,47 @@
+#stats {
+    align-items: center;
+
+    .info {
+        flex: 2;
+
+        h2,
+        span {
+            margin: 0;
+        }
+
+        max-width: fit-content !important;
+    }
+
+    .options {
+        flex: 1;
+    }
+
+    .progress {
+        padding: 0rem 5rem;
+        height: 15rem;
+
+        svg {}
+
+        path {
+            stroke-linecap: round;
+            stroke-width: 10;
+            fill: none;
+        }
+
+        path.grey {
+            stroke: lightgrey;
+        }
+
+        path.purple {
+            stroke: #70d86e;
+            stroke-dasharray: 232.508;
+            stroke-dashoffset: 100;
+        }
+
+        text {
+            font-family: var(--big-font);
+            font-weight: bold;
+        }
+    }
+
+}

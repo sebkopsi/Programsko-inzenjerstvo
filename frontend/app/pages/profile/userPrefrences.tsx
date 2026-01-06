@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData } from "react-router";
-import "./preferences.css";
+import "../styles/preferences.css";
 
 interface Tag {
   id: string;
