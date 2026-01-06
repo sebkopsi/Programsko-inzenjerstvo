@@ -4,7 +4,7 @@ public class GenericResult {
     public boolean success;
     public String message;
 
-    private GenericResult(boolean success, String message) {
+    public GenericResult(boolean success, String message) {
         this.success = success;
         this.message = message;
     }

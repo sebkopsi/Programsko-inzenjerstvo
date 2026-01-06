@@ -1,7 +1,6 @@
 import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
 
 import "../styles/courses.css"
-import { allCourses } from "./allCourses";
 import { allModules } from "./allModules";
 import { courseStats } from "./courseStats";
 

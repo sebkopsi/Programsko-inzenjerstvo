@@ -17,8 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 
 public class SecurityConfig {
-
-
+    private static final String[] PUBLIC = {
+            "/user/login",
+            "/user/oauth",
+            "/user"
+    };
     @Autowired
     private JwtFilter jwtFilter;
 
@@ -27,7 +30,7 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/user/login","/user", "/user/oauth").permitAll()
+                        .requestMatchers(PUBLIC).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
@@ -35,7 +38,6 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

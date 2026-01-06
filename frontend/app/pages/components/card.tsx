@@ -1,18 +1,16 @@
 import { NavLink } from "react-router";
 
-export function Card({ link }) {
+export function Card({ link, name, desc, tags}) {
     return (
-        <NavLink className="card" to={link} viewTransition>
+        <NavLink className="card" to={"" + link} viewTransition>
             <section className="info">
-                <h2 className="title">Name Lorem Ipsum</h2>
+                <h2 className="title">{"" + name}</h2>
                 <span className="desc">
-                    {Array.from({ length: Math.floor(Math.random() * 20) + 1 }, (_, i) => (
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                    ))}
+                    {"" + desc}
                 </span>
                 <section className="tags">
-                    {[...Array(10)].map((x, i) =>
-                        <div className="tag">tag #{i}</div>
+                    {tags?.map((tag) =>
+                        <div className="tag">{tag['name']}</div>
                     )}
                 </section>
 
