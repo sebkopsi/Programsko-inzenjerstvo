@@ -1,3 +1,5 @@
+import { redirect } from "react-router";
+
 const parseJwt = (token: string) => {
     try {
         return JSON.parse(atob(token.split(".")[1]));
@@ -17,5 +19,10 @@ export function GetJwtToken(request: any): String {
         }
     });
 
+    if(cookies["jwt"] === "") return "";
+
+    const parsed = parseJwt(cookies["jwt"])
+    console.debug(parsed, Math.floor(Date.now()/1000))
+    if(parsed.exp < Math.floor(Date.now()/1000)) return "";
     return cookies["jwt"];
 }
