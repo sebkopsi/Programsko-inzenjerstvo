@@ -14,14 +14,14 @@ export default function UserPrefernces() {
     <section>
       <section id="tags">
         <h2>Tags</h2>
-        <section class="section">
-          <section class="info">
+        <section className="section">
+          <section className="info">
             <h3>Preffered</h3>
             <span>
               Lectures, modules and courses containing these tags will be given
               priority in searches and recommendations.
             </span>
-            <fetcher.Form className="login-form" method="POST" action="/profile?preferred">
+            <fetcher.Form className="form" method="POST" action="/profile?preferred">
               <div className="form-text-and-input">
                 <input type="text" name="name" required />
               </div>
@@ -46,7 +46,7 @@ export default function UserPrefernces() {
               Lectures, modules and courses containing these tags will be
               discarded in searches and recommendation.
             </span>
-                   <fetcher.Form className="login-form" method="POST" action="/profile">
+                   <fetcher.Form className="form" method="POST" action="/profile">
               <div className="form-text-and-input">
                 <input type="text" name="name" required />
               </div>
