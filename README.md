@@ -25,12 +25,52 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 - Database: PostgreSql, Redis
 
 # Instalacija - DEV
+Osigurati tocne verzije NodeJS, Java JDK 17, Maven, PostgreSQL, psql
+Lokalno napravite bazu podataka, i zapamtite njezin naziv, naziv korisnika koji ga moze otvoriti te lozinku za tog korisnika.
+VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta.
+
+## Migracije
+Za ovaj dio je potrebno postaviti psql na PATH u enviorment variables.
+Ovisno o terminalu koji koristite ucinite sljedece:
+### Powershell
+1. Otvori powershell u .\migration i pokreni `.\run_all_migrations.ps1`
+2. Ako je sve ispravno napravljeno, pojavi se obavijest napravljenih promjena ili error da su te promjene vec napravljene
+### Bash (GitBash)
+1. Otvori gitbash u .\migration i pokreni `.\run_all_migrations.sh`
+2. Ako je sve ispravno napravljeno, pojavi se obavijest napravljenih promjena ili error da su te promjene vec napravljene
+### U terminal bez skripte
+1. Otvorite terminal u .\migrations, zamijenite s informacijom vase lokalne baze i pokrenite sljedece:
+  1. `$env:PGPASSWORD="<DATABASE_PASSWORD>"`
+  2. Za svaku `.sql` datoteku pokreni:
+     `psql -h localhost -p 5432 -U <DATABASE_USERNAME> -d <DATABASE_NAME> -f .\<IME_DATOTEKE>.sql`
+### psql nije postavljen na PATH
+Treba rucno kopirati sql svake datoteke u migrations i pokrenuti u skripti u lokalnoj bazi podataka
+
+## Pokretanje backend-a
+Za ovaj dio je potreno imati `.env` ispunjen sa informacijom vase lokalne baze podataka
+1. Otvorit terminal u ./backend i pokrenut sljedece:
+  `mvn spring-boot:run`
+>> Ako se nije pojavio Build failure/success, onda je backend API uspjesno pokrenut
+
+>> Ako je ovo prvi put da pokrecete backend, mozda ce trebat prvo pokrenut `mvn clean install` prvo
+
+## Pokretanje frontend-a
+Za ovaj dio je potreno imati NodeJS ispravno uspostavljen
+1. Otvorit drugi terminal u .frontend/ i pokrenut sljedece:
+  1.  `npm install`
+>> Sad imate node_modules instalirane
+  2.  `npm run dev`
+>> Ako se pojavi link za stranicu, onda je frontend uspjesno pokrenut
+
+## Linux
  Osigurati tocne verzije NodeJS
  Pokrenuti PostgreSQL servis i pokrenuti sve migracije sa `make migrations`
  Pokrenuti backend sa `make run-backend-dev`
  Pokrenuti frontend sa `make run-frontend-dev`
 
- API je dostupan na localhost:8890
+## Otvaranje lokalno
+ Backend API je dostupan na localhost:8890
+ 
  Frontend je dostupan na localhost:5173
 
 # Članovi tima 
