@@ -1,6 +1,7 @@
 package com.cookingflamingoz.backend.util;
 
-public class GenericResult {
+public class GenericResult{
+
     public boolean success;
     public String message;
 
@@ -9,9 +10,10 @@ public class GenericResult {
         this.message = message;
     }
 
-    public static GenericResult Success(String message) {
+    public static <T> GenericResult Success(String message) {
         return new GenericResult(true, message);
     }
+
     public static GenericResult Failure(String message) {
         return new GenericResult(false, message);
     }

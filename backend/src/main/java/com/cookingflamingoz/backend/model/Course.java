@@ -36,5 +36,11 @@ public class Course {
     public Set<Tag> getTags(){
         return tags.stream().map(CourseTag::getTag).collect(Collectors.toSet());
     }
+
+    @OneToMany(
+            mappedBy = "course",
+            cascade = CascadeType.ALL
+    )
+    private Set<Module> modules;
 }
 

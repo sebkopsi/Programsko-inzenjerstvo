@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,17 @@ public class CourseService {
         this.userRepository = userRepository;
     }
 
+    public CourseResults.GetByIdResult getById(int id){
+        Optional<Course> course =  courseRepository.findById(id);
+        return course.map(value -> new CourseResults.GetByIdResult(true, "", value)).orElseGet(() -> new CourseResults.GetByIdResult(false, "course not found", null));
+    }
+
     public CourseResults.SearchResult search(CourseRequests.SearchRequest request) {
-        Set<Course> data = new HashSet<>(courseRepository.search(request.term));
+        Set<Course> data = switch (request.scope) {
+            case "my" ->  new HashSet<>(courseRepository.search(request.term)).stream().filter(course -> course.getCreator().getId().equals(request.userId)).collect(Collectors.toSet());
+            default -> new HashSet<>(courseRepository.search(request.term));
+        };
+
         return new CourseResults.SearchResult(true, request.term, data);
     }
 

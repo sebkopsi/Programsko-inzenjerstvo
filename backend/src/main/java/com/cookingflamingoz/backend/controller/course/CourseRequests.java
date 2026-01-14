@@ -5,7 +5,8 @@ import java.util.Set;
 public class CourseRequests {
     public static class SearchRequest {
         public String term;
-        public String scope;
+        public String scope = "";
+        public Integer userId;
     }
 
     public static class CreateRequest {

@@ -1,11 +1,11 @@
 import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
 
 import "../styles/courses.css"
+import { courseStats } from "../components/courseStats";
 import { allModules } from "./allModules";
-import { courseStats } from "./courseStats";
 
 export function CoursePage() {
-  
+  const { courseInfo, modulesData} = useLoaderData();
   return (
       <section id="content">
         <section id="path">
@@ -14,11 +14,11 @@ export function CoursePage() {
             <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z" />
             <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
           </svg>
-            Courses</h4>
-          <h2>Course Name</h2>
+            All Courses</h4>
+          <h2>{courseInfo?.data?.name}</h2>
         </section>
-        {courseStats(1)}
-        {allModules()}
+        {courseStats(courseInfo?.data)}
+        {allModules(modulesData?.data)}
       </section>
   );
 }

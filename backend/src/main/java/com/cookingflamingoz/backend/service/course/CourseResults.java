@@ -33,6 +33,23 @@ public class CourseResults {
             this.name = name;
         }
     }
+    public static class GetByIdResult extends GenericResult {
+        public CourseInfo data;
+
+        public GetByIdResult(boolean success, String message, Course course) {
+            super(success, message);
+            if(course != null ){
+                Set<TagInfo> tags = course.getTags().stream().map(tag -> {return new TagInfo(tag.getName(), tag.getCategory());}).collect(Collectors.toSet());
+               this.data =  new CourseInfo(
+                        course.getName(),
+                        course.getDescription(),
+                        course.getCreator().getId(),
+                        course.getCourseId(),
+                        tags
+                );
+            }
+        }
+    }
 
     public static class SearchResult extends GenericResult {
         public Set<CourseInfo> data;
@@ -49,6 +66,7 @@ public class CourseResults {
                        tags
                 );}).collect(Collectors.toSet());
             }
+
         }
     }
 

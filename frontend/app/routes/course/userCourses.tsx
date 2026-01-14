@@ -9,18 +9,16 @@ export async function loader({ request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  
+
   const allCoursesReq = await fetch("http://localhost:8890/course/search", {
     method: "POST",
     headers: {
       "Authorization": "Bearer " + jwt,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ term: "test" })
+    body: JSON.stringify({ term: "test", scope: "" })
   });
 
-
-  // Check if responses are OK
   if (!allCoursesReq.ok) {
     throw new Error("Failed to fetch all courses");
   }
@@ -28,10 +26,29 @@ export async function loader({ request }: Route.LoaderArgs) {
   const allCoursesData = await allCoursesReq.json();
 
 
+  const myCoursesReq = await fetch("http://localhost:8890/course/search", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + jwt,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ term: "test", scope: "my" })
+  });
+
+
+  if (!myCoursesReq.ok) {
+    throw new Error("Failed to fetch all courses");
+  }
+  const myCoursesData = await myCoursesReq.json();
+
+
   return {
-    allCoursesData
+    allCoursesData,
+    myCoursesData
   }
 }
+
+
 export default function userCourses() {
   return <UserCoursesPage />
 }

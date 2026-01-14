@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.controller.course;
 
+import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.service.course.CourseResults;
 import com.cookingflamingoz.backend.service.course.CourseService;
 import com.cookingflamingoz.backend.util.JwtUtil;
@@ -25,6 +26,12 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    @GetMapping("/{id}")
+    public CourseResults.GetByIdResult getById(@PathVariable Integer id) {
+        return courseService.getById(id);
+    }
+
+
     @PostMapping("")
     public CourseResults.CreateResult create(@RequestBody CourseRequests.CreateRequest request){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,6 +41,9 @@ public class CourseController {
 
     @PostMapping("/search")
     public CourseResults.SearchResult findAll(@RequestBody CourseRequests.SearchRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        request.userId=userID;
         return courseService.search(request);
     }
 }

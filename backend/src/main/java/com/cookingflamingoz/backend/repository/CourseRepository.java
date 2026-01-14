@@ -19,6 +19,7 @@ public interface CourseRepository
     @Query("""
         select distinct c from Course c
         where  (lower(c.name) || lower(c.description)) like lower(concat('%', :term, '%'))
+        order by  c.courseId asc
     """)
     List<Course> search(@Param("term") String term);
 }
