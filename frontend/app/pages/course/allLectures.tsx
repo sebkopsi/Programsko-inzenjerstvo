@@ -1,14 +1,22 @@
 import { Card } from "../components/card";
 
-
-export function allLectures() {
-    return (
-        <section id="all-lectures" class="cardTable section">
-            <ul>
-            {[...Array(50)].map((x, i) =>
-                <Card link="lectureid"/>
-            )}
-            </ul>
-        </section>
-    )
+export function allLectures(lectures: any[]) {
+  return (
+    <section id="all-lectures" className="cardTable section">
+      <ul>
+        {lectures.map((lecture) => (
+          <Card
+            key={lecture.id}
+            link={lecture.id}
+            name={lecture.name}
+            desc={lecture.desc} // optional, just description
+            prepTime={lecture.prepTime}
+            cookTime={lecture.cookTime}
+            difficulty={lecture.difficulty}
+            type="lecture"
+          />
+        ))}
+      </ul>
+    </section>
+  );
 }

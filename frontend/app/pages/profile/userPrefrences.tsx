@@ -13,9 +13,9 @@ export default function UserPrefernces() {
   return (
     <section>
       <section id="tags">
-        <h2>Tags</h2>
-        <section class="section">
-          <section class="info">
+        <h2 className="preferences-big-text">Tags</h2>
+        <section className="section">
+          <section className="info">
             <h3>Preffered</h3>
             <span>
               Lectures, modules and courses containing these tags will be given
@@ -30,17 +30,17 @@ export default function UserPrefernces() {
               </button>
             </fetcher.Form>
           </section>
-          <section class="box">
+          <section className="box">
             {preferred.map((tag) => (
-              <div key={tag.id} class="tag">
+              <div key={tag.id} className="tag">
                 {tag.name}
               </div>
             ))}
           </section>
         </section>
 
-        <section class="section">
-          <section class="info">
+        <section className="section">
+          <section className="info">
             <h3>Don't show</h3>
             <span>
               Lectures, modules and courses containing these tags will be
@@ -55,9 +55,9 @@ export default function UserPrefernces() {
               </button>
             </fetcher.Form>
           </section>
-          <section class="box">
+          <section className="box">
             {notpreferred.map((tag) => (
-              <div key={tag.id} class="tag">
+              <div key={tag.id} className="tag">
                 {tag.name}
               </div>
             ))}

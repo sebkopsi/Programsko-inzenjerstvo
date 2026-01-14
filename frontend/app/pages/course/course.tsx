@@ -4,6 +4,41 @@ import "../styles/courses.css"
 import { allModules } from "./allModules";
 import { courseStats } from "./courseStats";
 
+
+
+ const dummyModules = [
+  {
+    id: "module1",
+    name: "Introduction to Mediterranean Cuisine",
+    desc: "Learn the basics of Mediterranean cooking, including olive oil, herbs, and fresh ingredients.",
+    lessons: 5
+  },
+  {
+    id: "module2",
+    name: "Advanced Sushi Techniques",
+    desc: "Master the art of sushi rolling and presentation in this hands-on module.",
+    lessons: 7
+  },
+  {
+    id: "module3",
+    name: "Indian Curry Essentials",
+    desc: "Understand the core spices and methods for authentic Indian curries.",
+    lessons: 6
+  },
+  {
+    id: "module4",
+    name: "French Pastry Basics",
+    desc: "Discover classic French pastries, from croissants to éclairs.",
+    lessons: 4
+  },
+  {
+    id: "module5",
+    name: "Vegetarian Comfort Foods",
+    desc: "Learn hearty vegetarian dishes that are full of flavor.",
+    lessons: 3
+  }
+];
+
 export function CoursePage() {
   
   return (
@@ -18,7 +53,7 @@ export function CoursePage() {
           <h2>Course Name</h2>
         </section>
         {courseStats(1)}
-        {allModules()}
+        {allModules(dummyModules)}
       </section>
   );
 }
