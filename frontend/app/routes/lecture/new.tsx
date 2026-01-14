@@ -1,8 +1,7 @@
-import { NewCoursePage } from "~/pages/course/forms/newCourse";
-import type { Route } from "./+types/course";
-import { CoursePage } from "~/pages/course/course";
+import type { Route } from "../+types/module";
 import { GetJwtToken } from "~/util/cookie";
 import { redirect } from "react-router";
+import { NewModulePage } from "~/pages/module/newModule";
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
@@ -40,7 +39,7 @@ export async function action({ request }: Route.ActionArgs) {
   }
 }
 
-export default function Newcourse() {
-  return <NewCoursePage />
+export default function NewModule() {
+  return <NewModulePage />
 }
 

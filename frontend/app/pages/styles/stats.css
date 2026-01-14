@@ -1,5 +1,5 @@
 #stats {
-    align-items: center;
+
 
     .info {
         flex: 2;
@@ -7,6 +7,10 @@
         h2,
         span {
             margin: 0;
+        }
+
+        .tags{
+            margin-top: 0;
         }
 
         max-width: fit-content !important;

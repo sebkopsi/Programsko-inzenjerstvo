@@ -1,13 +1,21 @@
 import { Card } from "../components/card";
 
+const info = () => {
+    return (
+        <section className="cardInfo">
+            <span className="">Number of Lectures: </span>
+        </section>
+    )
+}
 
-export function allModules() {
+
+export function allModules(modules: any) {
     return (
         <section id="all-modules" className="cardTable section">
             <ul>
-            {[...Array(50)].map((x, i) =>
-                <Card link="moduleid" />
-            )}
+                {modules?.map((module) =>
+                    <Card link={module.id} name={module.name} desc={info()} />
+                )}
             </ul>
         </section>
     )

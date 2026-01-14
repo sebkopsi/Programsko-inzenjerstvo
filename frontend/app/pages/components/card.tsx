@@ -6,7 +6,7 @@ export function Card({ link, name, desc, tags}) {
             <section className="info">
                 <h2 className="title">{"" + name}</h2>
                 <span className="desc">
-                    {"" + desc}
+                    { desc}
                 </span>
                 <section className="tags">
                     {tags?.map((tag) =>

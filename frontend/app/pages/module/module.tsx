@@ -1,10 +1,11 @@
 import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
 
 import "../styles/courses.css"
-import { courseStats } from "./courseStats";
+import { courseStats } from "../components/courseStats";
 import { allLectures } from "./allLectures";
 
 export function ModulePage() {
+    const { courseInfo, moduleInfo, lecturesData} = useLoaderData();
   return (
       
       <section id="content">
@@ -15,11 +16,11 @@ export function ModulePage() {
             <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
           </svg>
             All Courses</h4>
-          <h4>Course Name</h4>
-          <h2>Module Name</h2>
+          <h4>{courseInfo?.data.name}</h4>
+          <h2>{moduleInfo?.data.name}</h2>
         </section>
-        {courseStats(1)}
-        {allLectures()}
+        {courseStats(courseInfo?.data)}
+        {allLectures(lecturesData?.data)}
       </section>
   );
 }

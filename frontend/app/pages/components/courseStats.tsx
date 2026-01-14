@@ -1,12 +1,18 @@
 import "./../styles/stats.css"
-export function courseStats(id: any) {
+export function courseStats(courseInfo: any, additional: any) {
     return (
         <section id="stats" className="section ">
             <section className="info">
-                <span className="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi dignissimos, delectus provident debitis reprehenderit in praesentium consequatur saepe doloremque aliquid illo, nostrum autem tempora quisquam laboriosam labore itaque facere. Consequuntur!</span>
+                  <section className="tags">
+                    {additional?.tags?.map((tag) =>
+                        <div className="tag">{tag['name']}</div>
+                    )}
+                </section>
+                <h3>Course Information</h3>
+                <span className="desc">{courseInfo?.desc}</span>
             </section>
-            <section className="options">
 
+            <section className="options">
             </section>
             <section className="progress">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
