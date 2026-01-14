@@ -41,11 +41,18 @@ public class CourseService {
 
     public CourseResults.SearchResult search(CourseRequests.SearchRequest request) {
         Set<Course> data = switch (request.scope) {
-            case "my" ->  new HashSet<>(courseRepository.search(request.term)).stream().filter(course -> course.getCreator().getId().equals(request.userId)).collect(Collectors.toSet());
+            case "my" -> new HashSet<>(courseRepository.search(request.term))
+                    .stream()
+                    .filter(course -> course.getCreator().getId().equals(request.userId))
+                    .collect(Collectors.toSet());
             default -> new HashSet<>(courseRepository.search(request.term));
         };
 
-        return new CourseResults.SearchResult(true, request.term, data);
+        return new CourseResults.SearchResult(
+                true,
+                "Found " + data.size() + " courses for search " + request.term + ".",
+                data
+        );
     }
 
     public CourseResults.CreateResult create(Integer userId, CourseRequests.CreateRequest request){
