@@ -10,6 +10,7 @@ export default [
     route("course", "routes/userCourses.tsx"),
     route("course/new", "routes/newCourse.tsx"),
     route("course/:courseId", "routes/course.tsx"),
+    
     route("course/:courseId/:moduleId", "routes/module.tsx")
 
 
