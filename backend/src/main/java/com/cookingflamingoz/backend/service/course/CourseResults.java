@@ -3,10 +3,12 @@ package com.cookingflamingoz.backend.service.course;
 import com.cookingflamingoz.backend.model.Course;
 import com.cookingflamingoz.backend.util.GenericResult;
 import jakarta.annotation.Nullable;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class CourseResults {
     public static class CourseInfo {
         public String name;

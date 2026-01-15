@@ -43,6 +43,18 @@ public class ModuleService {
     }
 
     public com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult create(Integer userId, ModuleRequests.CreateRequest request){
+        if(userId == null){
+            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "userid is null", null);
+        }
+        if(request == null){
+            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "request is empty", null);
+        }
+        if(request.name.isEmpty()){
+            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "name is empty", null);
+        }
+        if(request.courseId == null){
+            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "courseId is empty", null);
+        }
 
         User user = userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
         if(user == null) {
@@ -55,9 +67,10 @@ public class ModuleService {
         }
         var course = courseR.get();
 
-        if(!userId.equals(course.getCreator().getUserId())){
-            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "user does not own course", null);
+        if(!course.getCreator().getUserId().equals(userId)){
+            return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "user is not owner of course", null);
         }
+
 
         Module newModule = new Module();
         newModule.setName(request.name);

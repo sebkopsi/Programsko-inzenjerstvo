@@ -62,6 +62,15 @@ public class CourseService {
     }
 
     public CourseResults.CreateResult create(Integer userId, CourseRequests.CreateRequest request){
+        if(userId == null || request == null){
+            return new CourseResults.CreateResult(false, "missing parameters", null);
+        }
+
+        if(request.desc.isEmpty() || request.name.isEmpty() ){
+            return new CourseResults.CreateResult(false, "missing name or description", null);
+        }
+
+
         User user = userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
         if(user == null) {
             return new CourseResults.CreateResult(false, "user does not exist", null);

@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.service.user;
 
+import com.cookingflamingoz.backend.controller.user.LoginRequest;
 import com.cookingflamingoz.backend.controller.user.OauthRequest;
 import com.cookingflamingoz.backend.controller.user.SignUpRequest;
 import com.cookingflamingoz.backend.model.*;
@@ -157,13 +158,13 @@ public class UserService {
         return tags;
     }
 
-    public UserCreationResult Login(String emailInput, String password) {
+    public UserCreationResult Login(LoginRequest request) {
         User user;
 
-        if (emailInput == null || password == null) {
+        if (request.getEmail() == null || request.getPassword() == null) {
             return UserCreationResult.failure("Missing credentials");
         }
-        String email = emailInput.trim();
+        String email = request.getEmail().trim();
         if (email.isEmpty() || email.length() > 254) {
             return UserCreationResult.failure("Missing email");
         }
@@ -178,7 +179,7 @@ public class UserService {
             return UserCreationResult.failure("Invalid credentials");
         }
 
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return UserCreationResult.success(user);
         } else {
             return UserCreationResult.failure("Invalid credentials");

@@ -1,6 +1,7 @@
 package com.cookingflamingoz.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Entity
 @Table(name = "\"course\"", schema = "public")
 public class Course {
@@ -31,6 +33,10 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CourseTag> tags;
+
+    public Course() {
+
+    }
 
     @Transient
     public Set<Tag> getTags(){

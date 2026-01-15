@@ -50,7 +50,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
-        UserCreationResult a = userService.Login(loginRequest.getEmail(),loginRequest.getPassword());
+        UserCreationResult a = userService.Login(loginRequest);
         if (!a.isSuccess()){
             // error logging in -> ask for password reset
             // -> TODO: check error type -> see UserCreationResult
