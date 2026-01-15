@@ -1,0 +1,16 @@
+processes:
+  database:
+    command: make database
+
+  frontend:
+    command: make frontend-local
+    depends_on:
+      database:
+        condition: process_started
+
+  backend:
+    command: make backend-local
+    depends_on:
+      database:
+        condition: process_started
+

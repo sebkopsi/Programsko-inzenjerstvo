@@ -28,7 +28,9 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public CourseResults.GetByIdResult getById(@PathVariable Integer id) {
-        return courseService.getById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return courseService.getById(id, userID);
     }
 
 

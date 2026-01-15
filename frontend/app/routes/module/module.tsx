@@ -58,8 +58,6 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 
   const lecturesData = await lecturesReq.json();
 
-  console.log(lecturesData)
-
   return {
     courseInfo,
     moduleInfo,

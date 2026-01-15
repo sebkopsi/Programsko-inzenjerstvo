@@ -9,7 +9,6 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  console.log(params)
   
   const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
     method: "GET",

@@ -35,7 +35,9 @@ public class UserController {
 
     @GetMapping("my")
     public UserProfileResult getProfile() {
-        return userService.GetProfile();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return userService.GetProfile(userID);
     }
 
     //register

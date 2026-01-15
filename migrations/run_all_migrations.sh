@@ -1,5 +1,6 @@
 # environment: bash
-set -a && source ../.env && set +a
+export $(grep -v '^#' ../.env | xargs)
+
 # running migrations
 for file in $(ls *.sql | sort); do
   echo "---------------     Running $file     ---------------"

@@ -9,6 +9,20 @@ export async function loader({ request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
+  const userInfoReq = await fetch("http://localhost:8890/user/my", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + jwt,
+    },
+  });
+
+
+  if (!userInfoReq.ok) {
+    throw new Error("Failed to fetch user information");
+  }
+  const userInfoData = await userInfoReq.json();
+
+
 
   const allCoursesReq = await fetch("http://localhost:8890/course/search", {
     method: "POST",
@@ -43,6 +57,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 
   return {
+    userInfoData,
     allCoursesData,
     myCoursesData
   }

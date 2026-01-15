@@ -35,12 +35,9 @@ public class UserService {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    public UserProfileResult GetProfile(){
-        User user = entityManager.find(User.class, 1);
-        if(user == null){
-            return UserProfileResult.UserProfileResultFailure(String.format("User not found with id %d", 1));
-        }
-        return  UserProfileResult.UserProfileResultSuccess(user);
+    public UserProfileResult GetProfile(Integer userId){
+        var user = userRepository.findById(userId);
+        return user.map(UserProfileResult::UserProfileResultSuccess).orElseGet(() -> UserProfileResult.UserProfileResultFailure(String.format("User not found with id %d", 1)));
     }
 
     public UserService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, PasswordEncoder passwordEncoder, OauthService oauthService, TagRepository tagRepository, UserTagRepository userTagRepository) {

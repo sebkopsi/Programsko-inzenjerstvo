@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import './home.css'
 
 export function HomePage() {
-  console.log()
  return (
     <section id="content">
       <header>

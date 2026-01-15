@@ -11,13 +11,7 @@ export async function action({ request }: Route.ActionArgs) {
     return redirect("/login");
   }
 
-  console.debug(formData)
-  console.debug(JSON.stringify({
-        "name": formData.get("name"),
-        "desc": formData.get("desc"),
-        "tags": formData.getAll("tags")
-      }))
-
+ 
  
   try {
     const resp = await fetch("http://localhost:8890/course", {

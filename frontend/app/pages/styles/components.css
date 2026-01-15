@@ -19,8 +19,8 @@
         flex-wrap: wrap;
         padding: 1rem;
 
-        .desc{
-            .cardInfo{
+        .desc {
+            .cardInfo {
                 display: flex;
                 flex-direction: column;
             }
@@ -86,6 +86,12 @@
         span {
             color: #505050;
         }
+
+        .label {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
     }
 
     button {
@@ -118,4 +124,56 @@
         height: max-content;
     }
 
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1000;
+    overflow: scroll;
+}
+
+.modal {
+    padding: 2rem;
+    max-width: 40vw;
+    margin: 10vh auto;
+    overflow: scroll;
+}
+
+
+#quiz-preview {
+    border: 1px solid #a0a0a0;
+    padding: 1rem;
+    border-radius: 8px;
+    opacity: 0.5;
+    pointer-events: none;
+
+    .quiz-question:first-child>.section {
+        border-top: none;
+    }
+}
+
+#quiz,
+#quiz-preview {
+    flex: 1;
+
+    .form {
+        flex: 1;
+    }
+
+    .options {
+        display: flex;
+        flex: 1;
+        gap: 0.5rem;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+
+        label {
+            text-wrap: nowrap;
+            display: flex;
+        }
+    }
 }

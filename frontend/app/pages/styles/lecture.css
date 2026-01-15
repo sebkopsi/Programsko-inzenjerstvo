@@ -2,23 +2,6 @@
     flex: 1;
 }
 
-#quiz {
-    .form {
-        flex: 1;
-    }
-
-    .options {
-        display: flex;
-        flex: 1;
-        gap: 0.5rem;
-        flex-direction: row !important;
-        flex-wrap: wrap;
-
-        label {
-            text-wrap: nowrap;
-        }
-    }
-}
 
 #image {
     overflow: clip;
