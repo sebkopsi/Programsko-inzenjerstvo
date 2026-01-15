@@ -1,7 +1,9 @@
 package com.cookingflamingoz.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "\"lecture\"", schema = "public")
 public class Lecture {
