@@ -42,7 +42,7 @@ public class UserCreationResult {
 
     // some methods for readability
     public static UserCreationResult success(User user) {
-        return new UserCreationResult(true, "User created successfully", user.getId());
+        return new UserCreationResult(true, "User created successfully", user.getUserId());
     }
 
     public static UserCreationResult failure(String message) {

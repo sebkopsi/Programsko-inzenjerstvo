@@ -58,3 +58,16 @@
         width: 100%;
     }
 }
+
+.instructor-options {
+    .button {
+        border-radius: 8px;
+        border: 1px solid #a0a0a0;
+        padding: 1rem;
+        background-color: #70d86e;
+        text-decoration: none;
+        color: white;
+        font-family: var(--big-font);
+        font-weight: bold;
+    }
+}

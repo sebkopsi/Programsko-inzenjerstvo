@@ -34,17 +34,23 @@ public class CourseService {
         this.userRepository = userRepository;
     }
 
-    public CourseResults.GetByIdResult getById(int id){
+    public CourseResults.GetByIdResult getById(int id, int userId){
         Optional<Course> course =  courseRepository.findById(id);
-        return course.map(value -> new CourseResults.GetByIdResult(true, "", value)).orElseGet(() -> new CourseResults.GetByIdResult(false, "course not found", null));
+        User user = userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
+        if(user == null) {
+            return new CourseResults.GetByIdResult(false, "user does not exist", null);
+        }
+        return  course.map(value -> {
+            var  response = new CourseResults.GetByIdResult(true, "", value);
+            response.data.isUserInstructor = value.getCreator().getUserId().equals(userId);
+            return response;
+        }).orElseGet(() -> new CourseResults.GetByIdResult(false, "course not found", null)
+        );
     }
 
     public CourseResults.SearchResult search(CourseRequests.SearchRequest request) {
         Set<Course> data = switch (request.scope) {
-            case "my" -> new HashSet<>(courseRepository.search(request.term))
-                    .stream()
-                    .filter(course -> course.getCreator().getId().equals(request.userId))
-                    .collect(Collectors.toSet());
+            case "my" ->  new HashSet<>(courseRepository.search(request.term)).stream().filter(course -> course.getCreator().getUserId().equals(request.userId)).collect(Collectors.toSet());
             default -> new HashSet<>(courseRepository.search(request.term));
         };
 

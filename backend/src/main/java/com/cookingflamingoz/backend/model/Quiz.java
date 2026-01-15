@@ -14,7 +14,8 @@ public class Quiz {
     }
 
     public static class Option {
-        public Integer questonId;
+        public Integer id;
+        public Integer questionId;
         public String value;
         public boolean correct;
     }

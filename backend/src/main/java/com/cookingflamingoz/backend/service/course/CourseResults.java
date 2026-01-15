@@ -14,6 +14,7 @@ public class CourseResults {
         public Integer creatorId;
         public Integer id;
         public Set<TagInfo> tags;
+        public boolean isUserInstructor = false;
 
         CourseInfo(String name, String desc, Integer creatorId, Integer id, Set<TagInfo> tags){
             this.creatorId = creatorId;
@@ -43,7 +44,7 @@ public class CourseResults {
                this.data =  new CourseInfo(
                         course.getName(),
                         course.getDescription(),
-                        course.getCreator().getId(),
+                        course.getCreator().getUserId(),
                         course.getCourseId(),
                         tags
                 );
@@ -61,7 +62,7 @@ public class CourseResults {
                     return new CourseInfo(
                         course.getName(),
                         course.getDescription(),
-                        course.getCreator().getId(),
+                        course.getCreator().getUserId(),
                        course.getCourseId(),
                        tags
                 );}).collect(Collectors.toSet());

@@ -69,6 +69,36 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   }
 }
 
+export async function action({params, request }: Route.ActionArgs) {
+  const formData = await request.formData();
+
+  const jwt = GetJwtToken(request);
+  if (!jwt) {
+    return redirect("/login");
+  }
+
+
+  console.debug(formData)
+
+  try {
+    const resp = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params.moduleId}/lecture/${params.lectureId}/submit`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + jwt
+      },
+      body: JSON.stringify({
+
+      })
+    });
+
+    
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+
 export default function userCourses() {
   return <LecturePage />
 }

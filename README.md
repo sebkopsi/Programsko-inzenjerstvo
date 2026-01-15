@@ -27,16 +27,14 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 # Instalacija - DEV
 Osigurati tocne verzije NodeJS, Java JDK 17, Maven, PostgreSQL, psql
 Lokalno napravite bazu podataka, i zapamtite njezin naziv, naziv korisnika koji ga moze otvoriti te lozinku za tog korisnika.
-VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta.
+VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta, i postavite kao ENVIRONEMT VARIABLES pomocu `dotenv` 
 
-## Namjestanje .env lokalno
-.env je datoteka koju ne mergate na projekt, ona je ignorirana u .gitignore.
-U njoj morate pohraniti podatke vase lokalne baze podataka koju koristite za pokretanje.
-1. Napravite .env na root na vasem lokalnom klonu
-2. Kopirajte sadrzaj iz .env.local i stavite u .env
-3. Promijenite <STVARI> sa vasom informacijom
+# Automatic Linux
+ Osigurati programe `process-compose` i `devbox`
+ Pokrenuti `devbox update` u svakom direktoriju (migrations, frontend, backend)
+ Pokrenuti `make localdev` 
 
-Ubuduce necete vise trebat mjenjat podatke da bi pokreniti backend. Sve sto trebate je imati .env na root.
+# Manual
 
 ## Migracije
 Za ovaj dio je potrebno postaviti psql na PATH u enviorment variables.
@@ -44,7 +42,7 @@ Ovisno o terminalu koji koristite ucinite sljedece:
 ### Powershell
 1. Otvori powershell u .\migration i pokreni `.\run_all_migrations.ps1`
 2. Ako je sve ispravno napravljeno, pojavi se obavijest napravljenih promjena ili error da su te promjene vec napravljene
-### Bash (GitBash)
+### Bash 
 1. Otvori gitbash u .\migration i pokreni `.\run_all_migrations.sh`
 2. Ako je sve ispravno napravljeno, pojavi se obavijest napravljenih promjena ili error da su te promjene vec napravljene
 ### U terminal bez skripte
@@ -70,12 +68,6 @@ Za ovaj dio je potreno imati NodeJS ispravno uspostavljen
 >> Sad imate node_modules instalirane
   2.  `npm run dev`
 >> Ako se pojavi link za stranicu, onda je frontend uspjesno pokrenut
-
-## Linux
- Osigurati tocne verzije NodeJS
- Pokrenuti PostgreSQL servis i pokrenuti sve migracije sa `make migrations`
- Pokrenuti backend sa `make run-backend-dev`
- Pokrenuti frontend sa `make run-frontend-dev`
 
 ## Otvaranje lokalno
  Backend API je dostupan na localhost:8890

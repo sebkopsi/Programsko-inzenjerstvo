@@ -6,6 +6,7 @@ import com.cookingflamingoz.backend.util.GenericResult;
 import jakarta.annotation.Nullable;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,7 @@ public class LectureResults {
     }
 
     public static class SearchResult extends GenericResult {
-        public Set<LectureInfo> data;
+        public List<LectureInfo> data;
         public SearchResult(boolean success, String message, @Nullable Set<Lecture> data) {
             super(success, message);
             if (data != null) {
@@ -72,7 +73,7 @@ public class LectureResults {
                     lecResult.writtenSteps = lecture.getWrittenSteps();
                     lecResult.difficulty = lecture.getDifficultyLevel().getName();
                 return lecResult;
-                }).collect(Collectors.toSet());
+                }).collect(Collectors.toList());
             }
 
         }

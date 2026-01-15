@@ -1,8 +1,14 @@
-run-backend-dev:
-	cd backend; mvn spring-boot:run
+database:
+	cd migrations; devbox services up postgresql
 
-run-frontend-dev:
-	cd frontend; npm run dev
+frontend-local:
+	cd frontend; devbox run local
 
+backend-local:
+	cd backend; devbox run local
+
+
+localdev:
+	process-compose up database frontend backend
 update-types:
 	cd frontend; npm install --save-dev @types/react-router

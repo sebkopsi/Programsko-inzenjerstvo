@@ -16,4 +16,7 @@ export default [
 
 
     route("course/:courseId/:moduleId/:lectureId", "routes/lecture/lecture.tsx"),
+    route("course/:courseId/:moduleId/new", "routes/lecture/new.tsx"),
+
+
 ] satisfies RouteConfig;

@@ -7,6 +7,7 @@ public class UserProfileResult extends GenericResult {
     private User user;
     public String firstname;
     public String surname;
+    public boolean isInstructor;
 
     UserProfileResult(boolean success, String message, User user) {
         super(success, message);
@@ -14,6 +15,7 @@ public class UserProfileResult extends GenericResult {
             this.user = user;
             this.firstname = user.getFirstname();
             this.surname = user.getSurname();
+            this.isInstructor = user.getInstructorId() != null;
         }
     }
 

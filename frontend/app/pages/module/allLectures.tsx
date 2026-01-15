@@ -2,7 +2,7 @@ import { Card } from "../components/card";
 
 
 const lecturePrepInfo = (data: any) => {
-    console.debug(data)
+
   return {
     tags: [
       {name: `prep time: ${data.prepTime}`},

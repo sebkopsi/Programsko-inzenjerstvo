@@ -2,6 +2,7 @@ package com.cookingflamingoz.backend.service.lecture;
 
 import com.cookingflamingoz.backend.controller.lecture.LectureRequests;
 import com.cookingflamingoz.backend.model.Lecture;
+import com.cookingflamingoz.backend.model.Quiz;
 import com.cookingflamingoz.backend.model.Tag;
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.repository.*;
@@ -67,17 +68,29 @@ public class LectureService {
             return new LectureResults.CreateResult(false, "user is not owner of course", null);
         }
 
+        var difficulty = difficultyLevelRepository.findByName(request.difficulty);
+        if(difficulty.isEmpty()){
+            return new LectureResults.CreateResult(false, "difficulty does not exist", null);
+        }
 
+
+        var cookTime = Duration.parse(request.cookTime);
+        var prepTime = Duration.parse(request.prepTime);
 
         Lecture newLecture = new Lecture();
         newLecture.setName(request.name);
-        newLecture.setCookingTime(Duration.ofMinutes(0));
-        newLecture.setPreparationTime(Duration.ofMinutes(0));
+        newLecture.setCookingTime(cookTime);
+        newLecture.setPreparationTime(prepTime);
         newLecture.setCreatorId(userId);
         newLecture.setModuleId(request.moduleId);
-        newLecture.setWrittenSteps("");
-        newLecture.setDifficultyLevel(difficultyLevelRepository.getByName("beginner"));
+        newLecture.setWrittenSteps(request.steps);
+        newLecture.setDifficultyLevel(difficulty.get());
+        newLecture.setQuizjson(request.quiz);
+        newLecture.setMinScore(request.minScore);
+
         newLecture = lectureRepository.save(newLecture);
+
+
         Lecture finalNewLecture = newLecture;
 //        Set<LectureTag> lectureTags = tags.stream().map(tag -> {
 //            LectureTag lectureTag = new LectureTag();

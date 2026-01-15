@@ -1,7 +1,8 @@
-import type { Route } from "../+types/module";
+import type { Route } from "./+types/lecture";
 import { GetJwtToken } from "~/util/cookie";
 import { redirect } from "react-router";
-import { NewModulePage } from "~/pages/module/newModule";
+import { NewLecturePage } from "~/pages/lecture/new";
+
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
@@ -11,35 +12,106 @@ export async function action({ request }: Route.ActionArgs) {
     return redirect("/login");
   }
 
-  console.debug(formData)
-  console.debug(JSON.stringify({
-        "name": formData.get("name"),
-        "desc": formData.get("desc"),
-        "tags": formData.getAll("tags")
-      }))
-
- 
   try {
-    const resp = await fetch("http://localhost:8890/course", {
+    const quizData = String(formData.get('quizJson'));
+    const data = {
+      name: formData.get('name'),
+      prepTime: `PT${formData.get('prepTime')}M`,
+      cookTime: `PT${formData.get('cookTime')}M`,
+      difficulty: formData.get('difficulty'),
+      steps: formData.get('steps'),
+      quiz: JSON.parse(quizData),
+      minScore: formData.get('minScore')
+    }
+ 
+    const createReq = await fetch(`http://localhost:8890/course/${formData.get("courseId")}/module/${formData.get("moduleId")}/lecture`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
         "Authorization": "Bearer " + jwt
       },
-      body: JSON.stringify({
-        "name": formData.get("name"),
-        "desc": formData.get("desc"),
-        "tags": formData.getAll("tags")
-      })
+      body: JSON.stringify(data)
     });
 
-    
+
+    if (!createReq.ok) {
+      throw new Error("Failed to send request");
+    }
+
+    const createResponse = await createReq.json();
+    if(!createResponse.success){
+      throw new Error("failed to create lecture: " + createResponse.message)
+    }
+
   } catch (error: any) {
-    throw new Error(error)
+    console.debug(new Error(error))
+  }
+}
+
+
+export async function loader({ params, request }: Route.LoaderArgs) {
+  const jwt = GetJwtToken(request)
+  if (!jwt) {
+    return redirect("/login");
+  }
+
+  const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + jwt,
+    }
+  });
+
+  if (!courseReq.ok) {
+    throw new Error("Failed to fetch courses");
+  }
+
+  const courseInfo = await courseReq.json();
+
+  if (!courseInfo.success) {
+    throw new Error("No course found :(")
+  }
+
+  const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + jwt,
+    }
+  });
+
+  if (!moduleReq.ok) {
+    throw new Error("Failed to fetch modules");
+  }
+
+  const moduleInfo = await moduleReq.json();
+
+  if (!moduleInfo.success) {
+    throw new Error("No module found :(")
+  }
+
+  const lecturesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/search`, {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + jwt,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ term: "", moduleId: params['moduleId'] })
+  });
+
+  if (!lecturesReq.ok) {
+    throw new Error("Failed to fetch lectures");
+  }
+
+  const lecturesData = await lecturesReq.json();
+
+  return {
+    courseInfo,
+    moduleInfo,
+    lecturesData
   }
 }
 
 export default function NewModule() {
-  return <NewModulePage />
+  return <NewLecturePage />
 }
 

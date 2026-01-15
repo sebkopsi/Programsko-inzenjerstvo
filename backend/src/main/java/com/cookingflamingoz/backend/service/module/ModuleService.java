@@ -55,7 +55,7 @@ public class ModuleService {
         }
         var course = courseR.get();
 
-        if(!userId.equals(course.getCreator().getId())){
+        if(!userId.equals(course.getCreator().getUserId())){
             return new com.cookingflamingoz.backend.service.module.ModuleResults.CreateResult(false, "user does not own course", null);
         }
 

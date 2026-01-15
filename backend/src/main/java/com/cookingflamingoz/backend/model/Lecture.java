@@ -50,6 +50,10 @@ public class Lecture {
     @Column(name = "\"creatorId\"", nullable = false)
     private Integer creatorId;
 
+    @Column(name = "\"minscore\"", nullable = true)
+    private Integer minScore;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"difficultyId\"", nullable = false)
     private DifficultyLevel difficultyLevel;

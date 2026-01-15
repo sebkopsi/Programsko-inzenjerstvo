@@ -2,6 +2,8 @@ package com.cookingflamingoz.backend.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date; // or import from java.sql??
@@ -9,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "user", schema = "public") // keep quotes since table name is "user"
 public class User implements Serializable {
@@ -37,7 +41,7 @@ public class User implements Serializable {
     @Column(name = "\"enrolleeId\"", nullable = false)
     private Integer enrolleeId;
 
-    @Column(name = "\"instructorId\"")
+    @Column(name = "\"instructorId\"", nullable = true)
     private Integer instructorId;
 
     @Column(name = "\"isVerified\"", nullable = false)
@@ -61,71 +65,7 @@ public class User implements Serializable {
         this.instructorId = instructorId;
     }
 
-    //getters and setters
 
-    public Integer getId() {
-        return userId;
-    }
-
-    public void setId(Integer id) {
-        this.userId = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Integer getEnrolleeId() {
-        return enrolleeId;
-    }
-
-    public void setEnrolleeId(Integer enrolleeId) {
-        this.enrolleeId = enrolleeId;
-    }
-
-    public Integer getInstructorId() {
-        return instructorId;
-    }
-
-    public void setInstructorId(Integer instructorId) {
-        this.instructorId = instructorId;
-    }
 
     //toString method
     @Override

@@ -34,6 +34,7 @@ public class LectureController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         request.moduleId=moduleId;
+        System.out.println(request.quiz);
         return lectureService.create(userID, request);
     }
 
