@@ -20,7 +20,7 @@ public class UserProfileResult extends GenericResult {
     }
 
     public static UserProfileResult UserProfileResultSuccess(User user){
-        return new UserProfileResult(true, null, user);
+        return new UserProfileResult(true, "User profile fetched successfully.", user);
     }
 
     public static UserProfileResult UserProfileResultFailure(String message){
