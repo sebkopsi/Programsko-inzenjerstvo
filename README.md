@@ -29,6 +29,15 @@ Osigurati tocne verzije NodeJS, Java JDK 17, Maven, PostgreSQL, psql
 Lokalno napravite bazu podataka, i zapamtite njezin naziv, naziv korisnika koji ga moze otvoriti te lozinku za tog korisnika.
 VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta.
 
+## Namjestanje .env lokalno
+.env je datoteka koju ne mergate na projekt, ona je ignorirana u .gitignore.
+U njoj morate pohraniti podatke vase lokalne baze podataka koju koristite za pokretanje.
+1. Napravite .env na root na vasem lokalnom klonu
+2. Kopirajte sadrzaj iz .env.local i stavite u .env
+3. Promijenite <STVARI> sa vasom informacijom
+
+Ubuduce necete vise trebat mjenjat podatke da bi pokreniti backend. Sve sto trebate je imati .env na root.
+
 ## Migracije
 Za ovaj dio je potrebno postaviti psql na PATH u enviorment variables.
 Ovisno o terminalu koji koristite ucinite sljedece:
