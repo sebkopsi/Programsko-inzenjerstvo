@@ -54,7 +54,11 @@ public class CourseService {
             default -> new HashSet<>(courseRepository.search(request.term));
         };
 
-        return new CourseResults.SearchResult(true, request.term, data);
+        return new CourseResults.SearchResult(
+                true,
+                "Found " + data.size() + " courses for search " + request.term + ".",
+                data
+        );
     }
 
     public CourseResults.CreateResult create(Integer userId, CourseRequests.CreateRequest request){

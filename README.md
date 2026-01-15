@@ -27,7 +27,7 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 # Instalacija - DEV
 Osigurati tocne verzije NodeJS, Java JDK 17, Maven, PostgreSQL, psql
 Lokalno napravite bazu podataka, i zapamtite njezin naziv, naziv korisnika koji ga moze otvoriti te lozinku za tog korisnika.
-VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta.
+VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta, i postavite kao ENVIRONEMT VARIABLES pomocu `dotenv` 
 
 # Automatic Linux
  Osigurati programe `process-compose` i `devbox`
