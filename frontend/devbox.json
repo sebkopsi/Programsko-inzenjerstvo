@@ -1,7 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/main/.schema/devbox.schema.json",
   "packages": [
-    "nodejs@24"
+    "nodejs@24",
+    "chromium",
+    "cypress@latest",
+    "gtk3",
+    "alsa-lib",
+    "xorg.xvfb",
+    "nss",
+    "libnotify",
+    "dbus",
+    "atk",
+    "pango",
+    "cairo",
+    "cups",
+    "libdrm",
+    "mesa",
+    "xorg.libX11",
+    "xorg.libXcomposite",
+    "xorg.libXdamage",
+    "xorg.libXrandr",
+    "glib@latest"
   ],
   "shell": {
     "init_hook": [

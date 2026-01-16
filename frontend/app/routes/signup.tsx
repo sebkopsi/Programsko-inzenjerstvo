@@ -53,10 +53,11 @@ export async function action({request}: Route.ActionArgs) {
   })
   
   if(resp.status != 200){
+    const info = await resp.text()
     return {
       ok: false,
       errors: {
-        message: "Signup failed... response status: " + resp.status
+        message: "Signup failed... response status: " + info
       }
     }
   }

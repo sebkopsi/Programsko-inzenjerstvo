@@ -4,10 +4,9 @@ import "../styles/courses.css"
 import { Card } from "../components/card";
 
 
-export function listCourses(data: any[], empty: any) {
-  console.debug(data)
+export function listCourses(data: any[], empty: any, id: String) {
   return (
-    <section id="all-courses" className="cardList section">
+    <section id={id} className="cardList section">
       <ul>
         {data.length > 0 ? data.map((course: any) =>
           <Card link={"" + course['id']} name={course['name']} desc={course['desc']} tags={course['tags']} />
@@ -22,6 +21,7 @@ export function listCourses(data: any[], empty: any) {
 export function UserCoursesPage() {
   const { userInfoData, allCoursesData, myCoursesData } = useLoaderData();
 
+  console.debug(allCoursesData)
   return (
     <section id="content">
       <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -30,13 +30,13 @@ export function UserCoursesPage() {
         <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
       </svg>
         Enrollled Courses</h2>
-      {listCourses([])}
+      {listCourses([], null, "enrolled-courses")}
 
       <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
         <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
       </svg>
         All Courses</h2>
-      {listCourses(allCoursesData.data)}
+      {listCourses(allCoursesData.data, null, "all-courses")}
 
       {userInfoData.isInstructor &&
         <h2><svg
@@ -49,7 +49,7 @@ export function UserCoursesPage() {
         </svg>Created Courses</h2>
       }
       {userInfoData.isInstructor &&
-        listCourses(myCoursesData.data, 'Create course in instructor profile')
+        listCourses(myCoursesData.data, 'Create course in instructor profile', "my-courses")
       }
 
 

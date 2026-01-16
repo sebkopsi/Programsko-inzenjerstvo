@@ -52,7 +52,7 @@ export default function LecturePage() {
       </section>
 
 
-      {quiz(lectureInfo?.data?.quiz)}
+      {quiz(lectureInfo?.data?.quiz, `/course/${courseInfo?.data?.id}/${moduleInfo?.data?.id}/new`)}
     </section>
   );
 }
