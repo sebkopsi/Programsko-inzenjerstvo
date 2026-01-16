@@ -20,7 +20,7 @@ export function ModulePage() {
         <h4>{courseInfo?.data.name}</h4>
         <h2>{moduleInfo?.data.name}</h2>
       </section>
-      {courseStats(courseInfo?.data)}
+      {courseStats(courseInfo?.data, null)}
 
       { courseInfo?.data?.isUserInstructor && 
         <section className="section instructor-options">

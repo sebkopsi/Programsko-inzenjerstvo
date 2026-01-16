@@ -1,3 +1,7 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+
 -- public."difficultyLevel" definition
 
 -- Drop table

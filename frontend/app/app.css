@@ -94,9 +94,15 @@ main {
 }
 
 #error {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    background-color: #cd5151;
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
 }

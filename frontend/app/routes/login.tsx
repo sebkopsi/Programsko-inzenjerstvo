@@ -37,22 +37,26 @@ export async function action({request}: Route.ActionArgs) {
       password: formData.get("password")
     })
   })
+
   
-  if(resp.status != 200){
+  
+  if(!resp.ok){
+    const loginInfo =  await resp.text()
     return {
       ok: false,
       errors: {
-        message: "Login failed... response status: " + resp.status
+        message: "Login failed: " + loginInfo
       }
     }
   }
 
   const loginInfo =  await resp.json()
+  
   if(!loginInfo?.token){
     return {
       ok: false,
       errors: {
-        message: "Login failed to get JWT token..."
+        message: "Login failed to get JWT token"
       }
     }
   }

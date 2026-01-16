@@ -5,7 +5,7 @@ frontend-local:
 	cd frontend; devbox run local
 
 backend-local:
-	cd backend; devbox run local
+	cd backend; devbox run local --env-file ../.env
 
 
 localdev:

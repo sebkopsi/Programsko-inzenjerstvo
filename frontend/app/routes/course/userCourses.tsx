@@ -30,7 +30,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       "Authorization": "Bearer " + jwt,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ term: "test", scope: "" })
+    body: JSON.stringify({ term: "", scope: "" })
   });
 
   if (!allCoursesReq.ok) {
@@ -46,7 +46,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       "Authorization": "Bearer " + jwt,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ term: "test", scope: "my" })
+    body: JSON.stringify({ term: "", scope: "my" })
   });
 
 
