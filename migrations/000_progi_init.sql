@@ -96,10 +96,10 @@ CREATE TABLE public."enrolleeProfile" (
 -- DROP TABLE public.material;
 
 CREATE TABLE public.material (
-	idmateriala int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	"materialId" int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
 	contents text NOT NULL,
 	"typeId" int4 NOT NULL,
-	CONSTRAINT materijali_pkey PRIMARY KEY (idmateriala),
+	CONSTRAINT materijali_pkey PRIMARY KEY ("materialId"),
 	CONSTRAINT materijali_idtipa_fkey FOREIGN KEY ("typeId") REFERENCES public."materialType"("typeId") ON DELETE RESTRICT
 );
 
@@ -152,7 +152,7 @@ CREATE TABLE public.usertag (
 CREATE TABLE public.course (
 	"courseId" int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
 	"name" text NOT NULL,
-	"creatorId" int4 DEFAULT 1 NOT NULL,
+	"creatorId" int4 DEFAULT 2 NOT NULL,
 	description text NULL,
 	"difficultyId" int4 NULL,
 	"avgRating" numeric(3, 2) DEFAULT 0 NULL,
@@ -175,7 +175,7 @@ CREATE TABLE public."enrolledCourse" (
 	"userId" int4 NOT NULL,
 	CONSTRAINT completion_range CHECK ((("completionPercentage" >= 0) AND ("completionPercentage" <= 100))),
 	CONSTRAINT upistecaj_pkey PRIMARY KEY ("courseId", "userId"),
-	CONSTRAINT upistecaj_idcertifikata_fkey FOREIGN KEY ("certificateId") REFERENCES public.material(idmateriala) ON DELETE SET NULL,
+	CONSTRAINT upistecaj_idcertifikata_fkey FOREIGN KEY ("certificateId") REFERENCES public.material("materialId") ON DELETE SET NULL,
 	CONSTRAINT upistecaj_idpolaz_fkey FOREIGN KEY ("userId") REFERENCES public."user"("userId") ON DELETE CASCADE,
 	CONSTRAINT upistecaj_idtecaj_fkey FOREIGN KEY ("courseId") REFERENCES public.course("courseId") ON DELETE CASCADE
 );
@@ -232,7 +232,7 @@ CREATE TABLE public.lecture (
 	CONSTRAINT lekcija_idinstr_fkey FOREIGN KEY ("creatorId") REFERENCES public."user"("userId") ON DELETE SET DEFAULT,
 	CONSTRAINT lekcija_idmodel_fkey FOREIGN KEY ("moduleId") REFERENCES public."module"("moduleId") ON DELETE CASCADE,
 	CONSTRAINT lekcija_idrazinetezine_fkey FOREIGN KEY ("difficultyId") REFERENCES public."difficultyLevel"("difficultyId") ON DELETE RESTRICT,
-	CONSTRAINT lekcija_idvideo_fkey FOREIGN KEY ("videoId") REFERENCES public.material(idmateriala) ON DELETE RESTRICT
+	CONSTRAINT lekcija_idvideo_fkey FOREIGN KEY ("videoId") REFERENCES public.material("materialId") ON DELETE RESTRICT
 );
 
 
@@ -293,7 +293,7 @@ CREATE TABLE public.review (
 	CONSTRAINT score_range CHECK ((((score)::numeric >= (1)::numeric) AND ((score)::numeric <= (5)::numeric))),
 	CONSTRAINT course_fk FOREIGN KEY ("courseId") REFERENCES public.course("courseId") ON DELETE CASCADE,
 	CONSTRAINT lecture_fk FOREIGN KEY ("lectureId") REFERENCES public.lecture("lectureId") ON DELETE CASCADE,
-	CONSTRAINT recenzije_idslikekoment_fkey FOREIGN KEY ("commentPhotoId") REFERENCES public.material(idmateriala) ON DELETE SET NULL,
+	CONSTRAINT recenzije_idslikekoment_fkey FOREIGN KEY ("commentPhotoId") REFERENCES public.material("materialId") ON DELETE SET NULL,
 	CONSTRAINT user_fk FOREIGN KEY ("userId") REFERENCES public."user"("userId") ON DELETE SET DEFAULT
 );
 
