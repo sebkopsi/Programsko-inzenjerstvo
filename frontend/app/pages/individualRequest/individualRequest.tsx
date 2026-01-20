@@ -9,23 +9,30 @@ export function IndividualRequest() {
       <div id="request">
         <div id="image">
           <img src={id} alt="identification card"/>
-          <span>Image text</span>
+          <span>Identifikacijski dokument</span>
         </div>
         <div id="text">
-          <span>
+          <h3>Diploma</h3>
+          <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <p>
+            Ut enim ad minim veniam, 
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+            cillum dolore eu fugiat nulla pariatur. 
+          </p>
+          <p>
+             Excepteur sint occaecat cupidatat 
             non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </span>
+          </p>
         </div>
       </div>
       <hr/>
       <div id="buttons">
-        <button>Approve</button>
-        <button>Deny</button>
+        <button id="approve">Approve</button>
+        <button id="deny">Deny</button>
       </div>
     </div>
   );
