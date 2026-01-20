@@ -120,6 +120,8 @@ CREATE TABLE public."user" (
 	"enrolleeId" int4 NOT NULL,
 	"instructorId" int4 NULL,
 	"isVerified" bool DEFAULT false NOT NULL,
+	"isAdmin" bool DEFAULT false NOT NULL,
+	"isModerator" bool DEFAULT false NOT NULL,
 	CONSTRAINT korisnik_emailkoris_key UNIQUE (email),
 	CONSTRAINT korisnik_pkey PRIMARY KEY ("userId"),
 	CONSTRAINT korisnik_idinstr_fkey FOREIGN KEY ("instructorId") REFERENCES public."instructorProfile"("instructorId") ON DELETE SET NULL,
