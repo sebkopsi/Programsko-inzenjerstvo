@@ -22,9 +22,8 @@
 
     .progress {
         padding: 0rem 5rem;
-        height: 15rem;
+        height: 10rem;
 
-        svg {}
 
         path {
             stroke-linecap: round;

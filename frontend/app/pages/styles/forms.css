@@ -2,35 +2,87 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    flex: 1;
-
-    .label {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    input, select {
-        width: 100%;
-        box-sizing: border-box;
-        flex:3;
-    }
-
-    button {
-        width: 100%;
-    }
-
 }
 
-.form-options {
+input#tag-name{
+    width: 18rem;
+    height: 1rem;
+    border: #004C22 0.1rem solid;
+    background-color:rgb(241, 238, 238) ;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.submit-button {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    width: 100%;
+    gap: 0.625rem;
 
-    button {
-        width: fit-content;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
 
-    }
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: white;
+
+    background-color: #004C22;
+    border: none;
+    cursor: pointer;
+
 }
 
+.submit-button:hover {
+    background-color: #004c2261;   
+    transform: translateY(-1px); 
+}
 
+.submit-button:active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}
+
+.create-section
+{ display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;}
+
+.create-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 1rem;
+    width: 6rem;
+    height: 4rem;
+
+    font-size: 20px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: white;
+
+    background-color: #004C22;
+    border: none;
+    cursor: pointer;
+
+ 
+}
+
+.create-button:hover {
+    background-color: #004c2261;   
+    transform: translateY(-1px); 
+}
+
+.create-button  :active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}

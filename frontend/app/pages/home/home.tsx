@@ -5,18 +5,13 @@ export function HomePage() {
  return (
     <section id="content">
       <header>
-        <div className="left-section">
-          <Link to="/">
-            <img className="logo" src="/images/cf_logo_pink.png" alt="Cooking Flamingoz Logo" />
-          </Link>
-        </div>
-        <div className="right-section">
+        <div className="option-section">
           <div className="menu">
-            <Link className="profile-link" to="/login">
-              login
+            <Link className="login-link" to="/login">
+              LOG IN
             </Link>
-            <Link className="profile-link" to="/signup">
-              signup
+            <Link className="signup-link" to="/signup">
+              SIGN UP
             </Link>
             <Link className="profile-link" to="/login">
               <img className="profile-icon" src="/images/profile_icon.png" alt="Profile icon" />
@@ -33,12 +28,14 @@ export function HomePage() {
             alt="Banner"
           />
         </div>
-        <div className="banner-text">Hrana za misli</div>
+        <div className="banner-text">Food for thought</div>
       </div>
-
+      <div className="about-us-text">Here at Cooking Flamingoz, we bring the world of culinary arts straight to your kitchen. Our platform hosts thorough and easy-to-follow courses from professional chefs, sharing their expertise in cuisines from around the globe. Whether you’re a beginner or a seasoned cook, our interactive courses make learning fun, delicious, and inspiring. Explore, cook, and savor the flavors with us! </div>
       <div className="demo-courses">
-        <div id="demo-courses-text">Isprobajte sada!</div>
+
         <div className="demo-courses-cards">
+               <div id="demo-courses-text">Try it out now!</div>
+          <div className="cards-row">
           <div className="course-card">
             <div className="course-card-thumbnail">
               <a className="course-card-link" href="course1.html">
@@ -49,7 +46,7 @@ export function HomePage() {
                 />
               </a>
             </div>
-            <div className="course-card-text">Mediteranska kuhinja</div>
+            <div className="course-card-text">Mediterranean cuisine</div>
           </div>
 
           <div className="course-card">
@@ -62,7 +59,7 @@ export function HomePage() {
                 />
               </a>
             </div>
-            <div className="course-card-text">Kineska kuhinja</div>
+            <div className="course-card-text">Chinese cuisine</div>
           </div>
 
           <div className="course-card">
@@ -75,8 +72,9 @@ export function HomePage() {
                 />
               </a>
             </div>
-            <div className="course-card-text">Indijska kuhinja</div>
+            <div className="course-card-text">Indian cuisine</div>
           </div>
+        </div>
         </div>
       </div>
 
