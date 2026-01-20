@@ -1,19 +1,21 @@
 import { NavLink } from "react-router";
 
-export function Card({ link, name, desc, tags}) {
-    return (
-        <NavLink className="card" to={"" + link} viewTransition>
-            <section className="info">
-                <h2 className="title">{"" + name}</h2>
-                <span className="desc">
-                    { desc}
-                </span>
-                <section className="tags">
-                    {tags?.map((tag) =>
-                        <div className="tag">{tag['name']}</div>
-                    )}
-                </section>
+export function Card({ link, name, desc, tags, type, lessons, prepTime, cookTime, difficulty }: any) {
+  const defaultBanner = "/images/banner_daska_za_rezanje.jpg";
 
+  return (
+    <NavLink className={`card ${type}`} to={"" + link} viewTransition>
+      <section className="info">
+        <h2 className="title">{name}</h2>
+
+      
+        {type === "course" && (
+          <>
+            <span className="desc">{desc}</span>
+            <section className="tags">
+              {tags?.map((tag: any, index: number) => (
+                <div className="tag" key={index}>{tag.name}</div>
+              ))}
             </section>
           </>
         )}

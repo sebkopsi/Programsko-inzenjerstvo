@@ -8,13 +8,6 @@ const info = () => {
     )
 }
 
-const info = () => {
-    return (
-        <section className="cardInfo">
-            <span className="">Number of Lectures: </span>
-        </section>
-    )
-}
 
 
 export function allModules(modules: any) {
