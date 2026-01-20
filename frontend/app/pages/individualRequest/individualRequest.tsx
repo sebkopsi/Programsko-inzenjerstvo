@@ -5,6 +5,7 @@ export function IndividualRequest() {
   return (
     <div id="page">
       <h2 id="title">Request</h2>
+      <hr/>
       <div id="request">
         <div id="image">
           <img src={id} alt="identification card"/>
@@ -21,6 +22,7 @@ export function IndividualRequest() {
           </span>
         </div>
       </div>
+      <hr/>
       <div id="buttons">
         <button>Approve</button>
         <button>Deny</button>
