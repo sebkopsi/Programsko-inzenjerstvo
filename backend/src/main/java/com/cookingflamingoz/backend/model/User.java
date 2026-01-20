@@ -48,6 +48,12 @@ public class User implements Serializable {
     @Column(name = "\"isVerified\"", nullable = false)
     private Boolean isVerified = false; // match DB default
 
+    @Column(name= "\"isAdmin\"", nullable = false)
+    private Boolean isAdmin = false;    //by default user isn't admin
+
+    @Column(name = "\"isModerator\"", nullable = false)
+    private Boolean isModerator = false; //by default user isn't moderator
+
     @OneToMany(mappedBy = "primaryKey.user")
     private Set<UserTag> tags = new  HashSet<>();
 

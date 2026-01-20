@@ -8,6 +8,8 @@ public class UserProfileResult extends GenericResult {
     public String firstname;
     public String surname;
     public boolean isInstructor;
+    public boolean isAdmin;
+    public boolean isModerator;
 
     UserProfileResult(boolean success, String message, User user) {
         super(success, message);
@@ -16,6 +18,8 @@ public class UserProfileResult extends GenericResult {
             this.firstname = user.getFirstname();
             this.surname = user.getSurname();
             this.isInstructor = user.getInstructorId() != null;
+            this.isAdmin = user.getIsAdmin();
+            this.isModerator = user.getIsModerator();
         }
     }
 
