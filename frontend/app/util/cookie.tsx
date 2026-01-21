@@ -1,25 +1,31 @@
 import { redirect } from "react-router";
 
 const parseJwt = (token: string) => {
-    try {
-        return JSON.parse(atob(token.split(".")[1]));
-    } catch (e) {
-        return null;
-    }
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
 };
 
-export function GetJwtToken(request: any): String {
-    const cookieHeader = request.headers.get("Cookie");
-    const cookies: Record<string, string> = {};
 
-    cookieHeader?.split(";").forEach((cookie: any) => {
-        const [name, value] = cookie.trim().split("=");
-        if (name && value) {
-            cookies[name] = decodeURIComponent(value);
-        }
-    });
+export function GetJwtToken(request: any): string {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookies: Record<string, string> = {};
 
-    if(cookies["jwt"] === "") return "";
+  cookieHeader?.split(";").forEach((cookie: string) => {
+    const [name, value] = cookie.trim().split("=");
+    if (name && value) cookies[name] = decodeURIComponent(value);
+  });
 
-    return cookies["jwt"];
+  return cookies["jwt"] || "";
+}
+
+
+export function GetUserFromJwt(request: any) {
+  const token = GetJwtToken(request);
+  if (!token) return null;
+
+  const user = parseJwt(token);
+  return user; 
 }
