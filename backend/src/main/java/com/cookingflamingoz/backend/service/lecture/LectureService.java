@@ -64,6 +64,7 @@ public class LectureService {
             return new LectureResults.CreateResult(false, "course does not exist", null);
         }
 
+        //userId is compared with courseId? Probably typo should be creatorId
         if(!userId.equals(courseData.get().getCourseId())){
             return new LectureResults.CreateResult(false, "user is not owner of course", null);
         }
