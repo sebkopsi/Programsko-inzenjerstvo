@@ -26,6 +26,7 @@ export function HomePage() {
             className="banner-image"
             src="/images/banner_daska_za_rezanje.jpg"
             alt="Banner"
+            loading="eager"
           />
         </div>
         <div className="banner-text">Food for thought</div>
