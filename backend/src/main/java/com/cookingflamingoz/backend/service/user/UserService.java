@@ -245,5 +245,44 @@ public class UserService {
 
         return GenericResult.Success("Added tag");
     }
+
+
+    // Changing name and surname
+    public GenericResult updateName(int userId, String firstname, String surname) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
+
+        User user = userOptional.get();
+        user.setFirstname(firstname);
+        user.setSurname(surname);
+        userRepository.save(user);
+
+        return GenericResult.Success("Name updated successfully");
+    }
+
+    // Change email
+    public GenericResult updateEmail(int userId, String email) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
+
+        User user = userOptional.get();
+        String newEmail = email.trim().toLowerCase();
+
+        // Email format validation
+        String emailRegex = "^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}$";
+        if (!java.util.regex.Pattern.matches(emailRegex, newEmail)) {
+            return GenericResult.Failure("Email format not valid!");
+        }
+
+        // Taken email check
+        if (!newEmail.equals(user.getEmail()) && userRepository.findByEmail(newEmail) != null) {
+            return GenericResult.Failure("Email already in use!");
+        }
+
+        user.setEmail(newEmail);
+        userRepository.save(user);
+        return GenericResult.Success("Email updated successfully");
+    }
+
 }
 

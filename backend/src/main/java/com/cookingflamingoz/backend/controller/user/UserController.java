@@ -99,4 +99,24 @@ public class UserController {
         }
         return userService.AddTag(userID, tagRequest.name, tagRequest.category, tagRequest.preferred, true);
     }
+
+
+    @PatchMapping("/my/name")
+    public GenericResult updateMyName(@RequestBody Map<String, String> data) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(auth.getPrincipal().toString());
+
+        return userService.updateName(userID, data.get("firstname"), data.get("surname"));
+    }
+
+
+    @PatchMapping("/my/email")
+    public GenericResult updateMyEmail(@RequestBody Map<String, String> data) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(auth.getPrincipal().toString());
+
+        return userService.updateEmail(userID, data.get("email"));
+    }
+
+
 }
