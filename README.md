@@ -36,7 +36,7 @@ VAŽNO! Te vrijednosti pohranite u `.env` u vasem lokalnom klonu projekta, i pos
 
 # Manual
 
-## Migracije
+## 1. Migracije
 Za ovaj dio je potrebno postaviti psql na PATH u enviorment variables.
 Ovisno o terminalu koji koristite ucinite sljedece:
 ### Powershell
@@ -53,7 +53,7 @@ Ovisno o terminalu koji koristite ucinite sljedece:
 ### psql nije postavljen na PATH
 Treba rucno kopirati sql svake datoteke u migrations i pokrenuti u skripti u lokalnoj bazi podataka
 
-## Pokretanje backend-a
+## 2. Pokretanje backend-a
 Za ovaj dio je potreno imati `.env` ispunjen sa informacijom vase lokalne baze podataka
 1. Otvorit terminal u ./backend i pokrenut sljedece:
   `mvn spring-boot:run`
@@ -61,7 +61,7 @@ Za ovaj dio je potreno imati `.env` ispunjen sa informacijom vase lokalne baze p
 
 >> Ako je ovo prvi put da pokrecete backend, mozda ce trebat prvo pokrenut `mvn clean install` prvo
 
-## Pokretanje frontend-a
+## 3. Pokretanje frontend-a
 Za ovaj dio je potreno imati NodeJS ispravno uspostavljen
 1. Otvorit drugi terminal u .frontend/ i pokrenut sljedece:
   1.  `npm install`

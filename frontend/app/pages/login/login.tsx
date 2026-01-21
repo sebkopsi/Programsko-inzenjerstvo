@@ -15,15 +15,15 @@ export function LoginPage() {
         <div className="CF-login-form">
           <fetcher.Form className="login-form" method="POST" action="/login">
             <div className="form-text-and-input">
-              <span>email adresa</span>
+              <span>email address</span>
               <input type="email" name="email" required />
             </div>
             <div className="form-text-and-input">
-              <span>lozinka</span>
+              <span>password</span>
               <input type="password" name="password" required />
             </div>
             <button className="submit-button" type="submit">
-              {busy ? "Logging in..." : "Login"}
+              {busy ? "Logging in..." : "Log in"}
               <div className="arrow-icon">&#8594;</div>
             </button>
           </fetcher.Form>
@@ -58,18 +58,10 @@ export function LoginPage() {
               src="/images/google_icon.png"
               alt="Google"
             />
-            <span>Prijava putem Google računa</span>
+            <span>Sign in with Google</span>
           </button>
         </div>
       </section>
-
-      <div id="login-footer">
-        <img
-          className="footer-logo"
-          src="/images/cf_logo_green.png"
-          alt="Footer Logo"
-        />
-      </div>
     </section>
   );
 }

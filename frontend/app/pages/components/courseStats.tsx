@@ -20,7 +20,7 @@ export function courseStats(courseInfo: any, additional: any) {
                     height="100%" >
                     <path className="grey" d="M40,90 A40,40 0 1,1 60,90" />
                     <path className="purple" d="M40,90 A40,40 0 1,1 60,90" />
-                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">75</text>
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">75%</text>
                 </svg>
             </section>
         </section>

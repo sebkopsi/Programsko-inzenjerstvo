@@ -3,32 +3,13 @@ body {
     margin: 0;
 }
 
-
-.login-text {
-    font-family: "Catamaran", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 3.125rem;
-    color:white;
-    text-decoration: none;
-
-    width:100%;
-    height:100%;
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    
-
-}
-
 .oAuth-options{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.875rem;
-    margin-top: 3.75rem;
+    margin-bottom: 2rem;
 
 }
 
@@ -45,7 +26,7 @@ body {
     font-family: "Arial", serif;
 
     background-color: rgb(241, 238, 238);
-    border-radius: 0.9375rem;
+    border-radius: 1rem;
     border: none;
     box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.3);
 
@@ -89,20 +70,10 @@ body {
    font-family: "Catamaran", sans-serif;
     font-weight: bolder;
     font-style: normal;
-    font-size:1.5rem;
+    font-size:20px;
     color:#004C22;
     text-decoration: none;
 
-}
-
-input{
-    width: 18.75rem;
-    height: 2.1875rem;
-    border: #004C22 0.1875rem solid;
-    background-color:rgb(241, 238, 238) ;
-    border-radius: 0.9375rem;
-    font-size: 1rem;
-    padding: 0.5rem;
 }
 
 .submit-button {
@@ -112,12 +83,12 @@ input{
     align-items: center;
     gap: 0.625rem;
 
-    border-radius: 0.9375rem;
-    width: 10.625rem;
-    height: 3.75rem;
+    border-radius: 1rem;
+    width: 10rem;
+    height: 3rem;
     margin-top: 1.25rem;
 
-    font-size: 1.875rem;
+    font-size: 20px;
     font-family: "Catamaran", sans-serif;
     font-weight: bolder;
     font-style: normal;
@@ -128,15 +99,21 @@ input{
     cursor: pointer;
 }
 
-#login-footer {
-     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 14.375rem;
+.submit-button:hover {
+    background-color: #004c2293;   
 }
-#login-footer img {
-    width: 5rem;
-    height: auto;
-    margin-top: 5rem;
-    margin-bottom: -2rem;
+
+.submit-button:active {
+    background-color: #004c2249;
 }
+
+input{
+    width: 18rem;
+    height: 1.5rem;
+    border: #004C22 0.1rem solid;
+    background-color:rgb(241, 238, 238) ;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
