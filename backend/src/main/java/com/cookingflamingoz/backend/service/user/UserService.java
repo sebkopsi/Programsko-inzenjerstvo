@@ -284,5 +284,50 @@ public class UserService {
         return GenericResult.Success("Email updated successfully");
     }
 
+
+    // Change username
+    public GenericResult updateUsername(int userId, String newUsername) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
+
+        User user = userOptional.get();
+        if (user.getEnrolleeId() == null) {
+            return GenericResult.Failure("User does not have an enrollee profile");
+        }
+
+        if (enrolleeProfileRepository.findByUsername(newUsername) != null) {
+            return GenericResult.Failure("Username already exists!");
+        }
+
+        return enrolleeProfileRepository.findById(user.getEnrolleeId()).map(profile -> {
+            profile.setUsername(newUsername);
+            enrolleeProfileRepository.save(profile);
+            return GenericResult.Success("Username updated successfully");
+        }).orElse(GenericResult.Failure("Enrollee profile not found in database"));
+    }
+
+    // Change skill level
+    public GenericResult updateSkillLevel(int userId, int newSkillLevelId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
+
+        User user = userOptional.get();
+
+        if (user.getEnrolleeId() == null) {
+            return GenericResult.Failure("User is not an enrollee");
+        }
+
+        Optional<EnrolleeProfile> profileOptional = enrolleeProfileRepository.findById(user.getEnrolleeId());
+
+        if (profileOptional.isPresent()) {
+            EnrolleeProfile profile = profileOptional.get();
+            profile.setSkillLevelId(newSkillLevelId);
+            enrolleeProfileRepository.save(profile);
+            return GenericResult.Success("Skill level ID updated successfully");
+        } else {
+            return GenericResult.Failure("Enrollee profile not found in database");
+        }
+    }
+
 }
 
