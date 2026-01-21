@@ -9,6 +9,7 @@ const info = () => {
 }
 
 
+
 export function allModules(modules: any) {
     return (
         <section id="all-modules" className="cardTable section">
@@ -20,3 +21,4 @@ export function allModules(modules: any) {
         </section>
     )
 }
+

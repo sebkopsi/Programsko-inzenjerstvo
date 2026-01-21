@@ -12,13 +12,9 @@ VALUES
   );
 INSERT INTO public."enrolleeProfile" (username, "skillLevelId") 
 VALUES 
-  ( 'test', 1);
-
-INSERT INTO public."enrolleeProfile" (
-  username, "skillLevelId"
-) 
-VALUES 
-  ('instructor', 1);
+  ( 'test', 1),
+  ('instructor', 1),
+  ('admin', 1);
 
 
 INSERT INTO public."tag" (
@@ -35,18 +31,27 @@ VALUES
 INSERT INTO public."user" (
    firstname, surname, password_hash, 
   email, "createdAt", "enrolleeId", 
-  "instructorId", "isVerified"
+  "instructorId", "isVerified",
+  "isAdmin", "isModerator"
 )
 VALUES 
   (
      'test', 'test', '$argon2id$v=19$m=8192,t=3,p=1$A7Vw2BZ7D4o2YADMheJe2g$RpPi3ozewwv/ebhqgr92qD1ccckNvj8QXNFpoi3ai3c', 
-    'test@testmail.com', '2026-01-15 19:11:48.945', 
-    1, NULL, false
+    'test@testmail.com', '2026-01-15 19:11:48.945', 1, 
+    NULL, false,
+    false, false
   ),
   (
     'instructor', 'instructor', '$argon2id$v=19$m=8192,t=3,p=1$DdjjsyoOYhjzjdPMXeGc1w$xztykIEvw1hq3nG/0l5SaogiR8x/Isv/ZQ6TWyKeqTA', 
-    'instructor@testmail.com', '2026-01-15 19:18:40.723', 
-    2, 1, false
+    'instructor@testmail.com', '2026-01-15 19:18:40.723', 2, 
+    1, false,
+    false, false
+  ),
+  (
+	'admin', 'admin', '$argon2id$v=19$m=8192,t=3,p=1$D4PFX/lQO1eiydI6FrP+9g$y9x1omRk+XJvmhC8a9FB7G6d7GIxj2loMpC2IZP2s9I',
+	'admin@testmail.com', '2026-01-20 09:40:25.429 +0100', 3,
+	NULL, false,
+	true, true
   );
 
 INSERT INTO public.course (
