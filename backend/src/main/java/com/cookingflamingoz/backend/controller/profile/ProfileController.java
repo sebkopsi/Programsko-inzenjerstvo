@@ -18,4 +18,12 @@ public class ProfileController {
 
     public ProfileController(ProfileService profileService) { this.profileService = profileService; }
 
+    /*
+    @GetMapping("/my")
+    public ProfileResult.InboxResult findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return adminService.getInbox(userID);
+    }
+    */
 }
