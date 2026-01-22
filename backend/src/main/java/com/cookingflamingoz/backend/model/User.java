@@ -70,6 +70,7 @@ public class User implements Serializable {
         this.createdAt = createdAt;
         this.enrolleeId = enrolleeId;
         this.instructorId = instructorId;
+    
     }
 
 
