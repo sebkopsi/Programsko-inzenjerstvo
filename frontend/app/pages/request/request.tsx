@@ -1,7 +1,7 @@
-import './individualRequest.css'
+import './request.css'
 import id from './EuropeanIdCard2_A-1-4204201529.jpg'
 
-export function IndividualRequest() {
+export function Request() {
   return (
     <div id="page">
       <h2 id="title">Request</h2>
