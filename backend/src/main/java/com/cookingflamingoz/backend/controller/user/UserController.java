@@ -100,3 +100,4 @@ public class UserController {
         return userService.AddTag(userID, tagRequest.name, tagRequest.category, tagRequest.preferred, true);
     }
 }
+
