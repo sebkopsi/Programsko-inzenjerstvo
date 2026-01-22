@@ -2,7 +2,10 @@
 
 INSERT INTO public."difficultyLevel" ("name") 
 VALUES 
-  ('beginner');
+  ('beginner'),
+  ('intermediate'),
+  ('advanced');
+
 INSERT INTO public."instructorProfile" (
   biography, username, specialization
 ) 
@@ -10,6 +13,7 @@ VALUES
   (
     'Lorem ', 'Josip Josipovic', 'Croatian Cuisine'
   );
+
 INSERT INTO public."enrolleeProfile" (username) 
 VALUES 
   ('test'),
