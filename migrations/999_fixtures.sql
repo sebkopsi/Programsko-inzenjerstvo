@@ -10,11 +10,11 @@ VALUES
   (
     'Lorem ', 'Josip Josipovic', 'Croatian Cuisine'
   );
-INSERT INTO public."enrolleeProfile" (username, "skillLevelId") 
+INSERT INTO public."enrolleeProfile" (username) 
 VALUES 
-  ( 'test', 1),
-  ('instructor', 1),
-  ('admin', 1);
+  ('test'),
+  ('instructor'),
+  ('admin');
 
 
 INSERT INTO public."tag" (
