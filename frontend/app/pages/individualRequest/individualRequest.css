@@ -1,25 +1,53 @@
 #page {
   max-width: 1000px;
-  /* display: flex;
-  flex-direction: column; */
-  /* gap: 30px; */
+  font-size: 1rem;
+  font-family: "Catamaran", sans-serif;
 }
 img {
   width: 500px;
 }
 #request {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   margin: 20px 0;
 }
 #image {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  color: grey;
 }
+#text {
+  padding: 20px;
+}
+
 button {
   margin-top: 20px;
   width: 400px;
   margin-left: 50px;
   padding: 10px;
+  border-radius: 1rem;
+  font-size: 16px;
+  font-family: "Catamaran", sans-serif;
+  font-weight: bolder;
+  font-style: normal;
+  color: white;
+  background-color: #004C22;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+    background-color: #004c2261;   
+    transform: translateY(-1px); 
+}
+button:active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}
+#approve {
+  background-color: green;
+}
+#deny {
+  background-color: rgb(199, 0, 0);
 }
