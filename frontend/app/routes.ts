@@ -19,6 +19,9 @@ export default [
     route("course/:courseId/:moduleId/:lectureId", "routes/lecture/lecture.tsx"),
     route("course/:courseId/:moduleId/new", "routes/lecture/new.tsx"),
 
+    route("adminpanel", "routes/admin_panel/adminPanel.tsx"),
+    route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx")
+
     route("individualRequest", "routes/individualRequest.tsx")
 
 ] satisfies RouteConfig;

@@ -1,0 +1,74 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+    justify-content: flex-start; 
+    padding-left: 2rem;
+}
+
+.header-wrapper {
+    width: 100%;
+    text-align: left;
+}
+
+
+h1{
+    color:#004C22;
+    font-family: "Catamaran", sans-serif;
+    text-align: left;   
+    width: 100%;        
+}
+
+.button-group{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    border-top: 1px solid #a0a0a0;
+    width: 90%;
+}
+
+.button-group a {
+    text-decoration: none; 
+}
+
+
+.admin-options-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+
+    border-radius: 1rem;
+    width: 10rem;
+    height: 10rem;
+
+    font-size: 20px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: #004C22;
+    text-decoration: none;
+
+    background-color: white;
+    border: #004C22 2px solid;
+    cursor: pointer;
+}
+
+.admin-options-button:hover {
+    background-color: #004c2261;   
+    transform: translateY(-1px); 
+}
+
+.admin-options-button:active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}
+
+.icon-wrapper {
+    width: 3rem;
+    height: 3rem;
+}

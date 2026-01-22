@@ -48,10 +48,10 @@ VALUES
     false, false
   ),
   (
-	'admin', 'admin', '$argon2id$v=19$m=8192,t=3,p=1$D4PFX/lQO1eiydI6FrP+9g$y9x1omRk+XJvmhC8a9FB7G6d7GIxj2loMpC2IZP2s9I',
-	'admin@testmail.com', '2026-01-20 09:40:25.429 +0100', 3,
-	NULL, false,
-	true, true
+    'admin', 'admin', '$argon2id$v=19$m=8192,t=3,p=1$D4PFX/lQO1eiydI6FrP+9g$y9x1omRk+XJvmhC8a9FB7G6d7GIxj2loMpC2IZP2s9I',
+    'admin@testmail.com', '2026-01-20 09:40:25.429 +0100', 3,
+    NULL, false,
+    true, true
   );
 
 INSERT INTO public.course (
@@ -194,4 +194,26 @@ Plate the pasta while it is still hot. Sprinkle with freshly grated Parmesan che
 }
 ' :: json, 
     50
+  );
+
+INSERT INTO public.request  (
+   "title", "content", 
+   "type", "sentByUserId", 
+   "reportedUserId", "targetCourseId"
+)
+VALUES 
+  (
+	'I want to be an instuructor plz', 'This is the content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  	'promoteInstructor', 1,
+  	NULL, NULL
+  ),
+  (
+	'Im reporting mr test', 'This is the content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  	'report', 2,
+  	1, NULL
+  ),
+  (
+	'Update my course plz', 'This is the content Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  	'updateCourse', 2,
+  	NULL, 1
   );

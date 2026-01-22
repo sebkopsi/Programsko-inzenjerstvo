@@ -1,0 +1,118 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+    justify-content: flex-start; 
+    padding-left: 2rem;
+}
+
+
+.admin-header h1{
+    color:#004C22;
+    font-family: "Catamaran", sans-serif;
+    text-align: left;   
+    width: 100%;    
+}
+
+.inbox-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    
+}
+
+.inbox-specifications-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #dfdddd;
+    font-family: "Londrina", sans-serif;
+}
+
+.inbox-title-header {
+    flex: 3;
+    font-weight: 500;
+    color: rgb(31, 31, 31);
+}
+
+.inbox-type-header {
+    flex: 2;
+    font-size: 0.9rem;
+      color: rgb(31, 31, 31);
+}
+
+.inbox-sender-header {
+    flex: 2;
+    font-size: 0.9rem;
+      color: rgb(31, 31, 31);
+}
+
+.inbox-time-header {
+    flex: 1;
+    font-size: 0.9rem;
+      color: rgb(31, 31, 31);
+    text-align: center;
+}
+
+.inbox-status-header {
+   flex: 1;
+    font-size: 0.9  rem;
+    color: rgb(31, 31, 31);
+    text-align: center;
+}
+
+
+.inbox-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.inbox-item:hover {
+    background-color: #f5f5f5;
+}
+
+.inbox-title {
+    flex: 3;
+    font-weight: 500;
+}
+
+.inbox-type {
+    flex: 2;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.inbox-sender {
+    flex: 2;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.inbox-time {
+    flex: 1;
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+}
+
+.inbox-status {
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+
+
+
