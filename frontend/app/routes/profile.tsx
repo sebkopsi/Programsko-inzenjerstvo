@@ -25,6 +25,10 @@ export async function loader({ request }: Route.LoaderArgs) {
       }
     });
 
+    if (tagsPreferred.status === 401 || tagsNotPreferred.status === 401) {
+      return redirect("/login");
+    }
+
     // Check if responses are OK
     if (!tagsPreferred.ok || !tagsNotPreferred.ok) {
       return {
@@ -78,6 +82,10 @@ export async function action({ request }: Route.ActionArgs) {
         preferred: preferred
       })
     });
+
+    if (resp.status === 401) {
+      return redirect("/login");
+    }
 
     if (!resp.ok) {
       return {
