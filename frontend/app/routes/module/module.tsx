@@ -16,6 +16,11 @@ export async function loader({ params, request }: Route.LoaderArgs) {
         "Authorization": "Bearer " + jwt,
       }
     });
+
+    if(courseReq.status === 401) {
+      return redirect("/login");
+    }
+    
     if (!courseReq.ok) {
       return {
         courseInfo: null,
@@ -41,6 +46,11 @@ export async function loader({ params, request }: Route.LoaderArgs) {
         "Authorization": "Bearer " + jwt,
       }
     });
+
+    if(moduleReq.status === 401) {
+      return redirect("/login");
+    }
+    
     if (!moduleReq.ok) {
       return {
         courseInfo,
@@ -68,6 +78,11 @@ export async function loader({ params, request }: Route.LoaderArgs) {
       },
       body: JSON.stringify({ term: "", moduleId: params['moduleId']})
     });
+
+    if(lecturesReq.status === 401) {
+      return redirect("/login");
+    }
+    
     if (!lecturesReq.ok) {
       return {
         courseInfo,
