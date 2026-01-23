@@ -25,6 +25,10 @@ export async function action({ request }: Route.ActionArgs) {
       })
     });
 
+    if(resp.status === 401) {
+      return redirect("/login");
+    }
+
     if(!resp.ok) {
       const text = await resp.text();
       return {
