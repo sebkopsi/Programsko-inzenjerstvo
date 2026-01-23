@@ -37,10 +37,6 @@ export async function action({request}: Route.ActionArgs) {
       password: formData.get("password")
     })
   })
-
-  if(resp.status === 401) {
-      return redirect("/login");
-  }
   
   if(!resp.ok){
     const loginInfo =  await resp.text()
