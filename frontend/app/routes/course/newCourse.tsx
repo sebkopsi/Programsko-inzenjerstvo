@@ -26,15 +26,22 @@ export async function action({ request }: Route.ActionArgs) {
       })
     });
 
+    if(!resp.ok) {
+      const respText = await resp.text();
 
+      return {
+        ok: false,
+        errorObject: { message: "Creating course failed: " + respText }
+      };
+    }
 
+    return redirect("/course");
     
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error) {
+    throw new Error("Create course error: " + error);
   }
 }
 
 export default function Newcourse() {
   return <NewCoursePage />
 }
-
