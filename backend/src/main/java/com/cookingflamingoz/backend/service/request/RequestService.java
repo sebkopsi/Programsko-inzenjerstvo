@@ -14,12 +14,12 @@ public class RequestService {
     }
 
     // Method for users to submit reports
-    public GenericResult submitReport(int senderId, String title, String reason, String type, Integer courseId, Integer reportedUserId) {
+    public GenericResult submitReport(int senderId, String title, String content, String type, Integer courseId, Integer reportedUserId) {
         try {
             Request report = new Request();
             report.setSentByUserId(senderId);
             report.setTitle(title);
-            report.setContent(reason);
+            report.setContent(content);
             report.setType(type); // npr. "REPORT_COMMENT" ili "REPORT_LESSON"
             report.setTargetCourseId(courseId);
             report.setReportedUserId(reportedUserId);
