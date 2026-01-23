@@ -1,7 +1,8 @@
 import { redirect } from "react-router";
 import type { Route } from "../+types/home";
 import AdminPanelContent from "~/pages/admin_panel/adminInbox";
-import AdminInboxContent from "~/pages/admin_panel/adminInbox";
+import { GetJwtToken } from "~/util/cookie";
+
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,24 +11,34 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-// export async function loader({ request }: Route.LoaderArgs) {
-//   try {
-//     const res = await fetch("http://localhost:8890/user/me", {
-//       headers: {
-//         cookie: request.headers.get("cookie") || "",
-//       },
-//     });
+export async function loader({ request }: Route.LoaderArgs) {
+  const jwt = GetJwtToken(request);
+    if (!jwt) return redirect("/login"); 
+  
+  
+    const res = await fetch("http://localhost:8890/user/my", {
+      headers: { "Authorization": "Bearer " + jwt },
+    });
+  
+    if (!res.ok) throw new Error("Failed to fetch user info");
+  
+    const user = await res.json();
+  
+    console.log("RAW /user/my response:");  
+    console.log(JSON.stringify(user, null, 2));
+  
+    console.log("user.isAdmin:", user.isAdmin);
+  
+  
+   if (!user.isAdmin) {
+      return redirect("/");
+    }
+  
+  
+  
+    return user;
+  }
 
-//     if (!res.ok) {
-//       return redirect("/");
-//     }
-
-//     const user = await res.json();
-
-//     if (!user?.isAdmin) {
-//       return redirect("/"); 
-//     }
-// }
 
 export default function AdminInbox() {
   return <AdminInboxContent />;
