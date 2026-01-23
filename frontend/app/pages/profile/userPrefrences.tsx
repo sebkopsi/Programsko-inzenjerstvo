@@ -8,10 +8,15 @@ interface Tag {
 }
 
 export default function UserPrefernces() {
-  const { preferred, notpreferred } = useLoaderData();
+  const { preferred, notpreferred, errorObject } = useLoaderData();
   const fetcher = useFetcher();
   return (
     <section>
+      {fetcher.data?.ok === false && (
+        <div className="error">
+          <p>{fetcher.data.errorObject.message}</p>
+        </div>
+      )}
       <section id="tags">
         <h2 className="preferences-big-text">Tags</h2>
         <section className="section">
