@@ -15,9 +15,13 @@ export function NewModulePage() {
     setTags([...set])
   }
 
+  const errorObject = fetcher.data?.errorObject;
 
   return (
     <section id="content">
+        {fetcher.data?.ok === false && (
+                <div className="error">{fetcher.data.errorObject.message}</div>
+        )}
       <section id="path">
         <h4>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
