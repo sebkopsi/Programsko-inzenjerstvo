@@ -40,7 +40,7 @@ public class AdminService {
 
     private boolean validateAdmin(int userId) {
         return userRepository.findById(userId)
-                .map(User::getIsAdmin)
+                .map(User::isAdmin)
                 .orElse(false);
     }
 }
