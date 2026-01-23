@@ -17,6 +17,9 @@ export async function loader({ request }: Route.LoaderArgs) {
       },
     });
 
+    if(userInfoReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!userInfoReq.ok) {
       return {
@@ -47,6 +50,10 @@ export async function loader({ request }: Route.LoaderArgs) {
       body: JSON.stringify({ term: "", scope: "" })
     });
 
+    if(allCoursesReq.status === 401) {
+      return redirect("/login");
+    }
+
     if (!allCoursesReq.ok) {
       return {
         userInfoData,
@@ -75,6 +82,9 @@ export async function loader({ request }: Route.LoaderArgs) {
       body: JSON.stringify({ term: "", scope: "my" })
     });
 
+    if(myCoursesReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!myCoursesReq.ok) {
       return {
