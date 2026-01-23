@@ -9,63 +9,97 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+  try{
+    const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+
+    if (!courseReq.ok) {
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch courses" }
+      };
     }
-  });
 
-  if (!courseReq.ok) {
-    throw new Error("Failed to fetch courses");
-  }
+    const courseInfo = await courseReq.json();
 
-  const courseInfo = await courseReq.json();
-
-  if (!courseInfo.success) {
-    throw new Error("No course found :(")
-  }
-
-  const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+    if (!courseInfo.success) {
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "No course found :(" }
+      };
     }
-  });
 
-  if (!moduleReq.ok) {
-    throw new Error("Failed to fetch modules");
-  }
+    const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
 
-  const moduleInfo = await moduleReq.json();
-
-  if (!moduleInfo.success) {
-    throw new Error("No module found :(")
-  }
-
-
-  const lectureReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/${params['lectureId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+    if (!moduleReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch modules" }
+      };
     }
-  });
 
-  if (!lectureReq.ok) {
-    throw new Error("Failed to fetch lecture");
-  }
+    const moduleInfo = await moduleReq.json();
 
-  const lectureInfo = await lectureReq.json();
+    if (!moduleInfo.success) {
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "No module found :(" }
+      };
+    }
 
-  if (!lectureInfo.success) {
-    throw new Error("No module lecture :(")
-  }
 
+    const lectureReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/${params['lectureId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
 
-  return {
-    courseInfo,
-    moduleInfo,
-    lectureInfo
+    if (!lectureReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch lecture" }
+      };
+    }
+
+    const lectureInfo = await lectureReq.json();
+
+    if (!lectureInfo.success) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lectureInfo: null,
+        errorObject: { message: "No lecture found :(" }
+      };
+    }
+
+    return {
+      courseInfo,
+      moduleInfo,
+      lectureInfo,
+      errorObject: null
+    };
+  } catch (error) {
+    throw new Error("Lecture error: " + error);
   }
 }
 
@@ -92,9 +126,16 @@ export async function action({params, request }: Route.ActionArgs) {
       })
     });
 
+    if(!resp.ok) {
+      const respText = await resp.text();
+      return {
+        ok: false,
+        errorObject: { message: "Lecture error: " + respText }
+      };
+    }
     
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error) {
+    throw new Error("Lecture error: " + error)
   }
 }
 
@@ -102,4 +143,3 @@ export async function action({params, request }: Route.ActionArgs) {
 export default function userCourses() {
   return <LecturePage />
 }
-
