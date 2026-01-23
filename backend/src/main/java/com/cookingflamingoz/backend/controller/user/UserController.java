@@ -99,51 +99,5 @@ public class UserController {
         }
         return userService.AddTag(userID, tagRequest.name, tagRequest.category, tagRequest.preferred, true);
     }
-
-
-    @PatchMapping("/my/name")
-    public GenericResult updateMyName(@RequestBody Map<String, String> data) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        int userID = Integer.parseInt(auth.getPrincipal().toString());
-
-        return userService.updateName(userID, data.get("firstname"), data.get("surname"));
-    }
-
-
-    @PatchMapping("/my/email")
-    public GenericResult updateMyEmail(@RequestBody Map<String, String> data) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        int userID = Integer.parseInt(auth.getPrincipal().toString());
-
-        return userService.updateEmail(userID, data.get("email"));
-    }
-
-
-    @PatchMapping("/my/username")
-    public GenericResult updateMyUsername(@RequestBody Map<String, String> data) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int userID = Integer.parseInt(authentication.getPrincipal().toString());
-
-        String newUsername = data.get("username");
-        if (newUsername == null || newUsername.trim().isEmpty()) {
-            return GenericResult.Failure("Username cannot be empty");
-        }
-
-        return userService.updateUsername(userID, newUsername);
-    }
-
-
-    @PatchMapping("/my/skill-level")
-    public GenericResult updateMySkillLevel(@RequestBody Integer skillLevelId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int userID = Integer.parseInt(authentication.getPrincipal().toString());
-
-        if (skillLevelId == null) {
-            return GenericResult.Failure("skillLevelId is required");
-        }
-
-        return userService.updateSkillLevel(userID, skillLevelId);
-    }
-
-
 }
+

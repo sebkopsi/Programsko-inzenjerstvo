@@ -15,7 +15,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
       "Authorization": "Bearer " + jwt,
     }
   });
-
+  
   if (!courseReq.ok) {
     throw new Error("Failed to fetch courses");
   }

@@ -50,7 +50,9 @@ public class User implements Serializable {
 
     @Column(name= "\"isAdmin\"", nullable = false)
     private Boolean isAdmin = false;    //by default user isn't admin
-
+    public boolean isAdmin() {
+    return isAdmin;
+}
     @Column(name = "\"isModerator\"", nullable = false)
     private Boolean isModerator = false; //by default user isn't moderator
 
@@ -70,6 +72,7 @@ public class User implements Serializable {
         this.createdAt = createdAt;
         this.enrolleeId = enrolleeId;
         this.instructorId = instructorId;
+
     }
 
 
