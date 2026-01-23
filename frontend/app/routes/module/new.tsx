@@ -10,8 +10,6 @@ export async function action({ request }: Route.ActionArgs) {
   if (!jwt) {
     return redirect("/login");
   }
-
- 
  
   try {
     const resp = await fetch("http://localhost:8890/course", {
@@ -27,13 +25,28 @@ export async function action({ request }: Route.ActionArgs) {
       })
     });
 
+    if(!resp.ok) {
+      const text = await resp.text();
+      return {
+        errorObject: { message: "Failed to create module: " + text },
+      };
+    }
+
+    const data = await resp.json();
+    if (!data.success) {
+      return {
+        errorObject: { message: "Module creation failed" },
+      };
+    }
+
+    return redirect(`/course/${data.data.courseId}`);
+
     
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error) {
+    throw new Error("Module creation error: " + error);
   }
 }
 
 export default function NewModule() {
   return <NewModulePage />
 }
-
