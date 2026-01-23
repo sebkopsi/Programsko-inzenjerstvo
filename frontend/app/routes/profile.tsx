@@ -27,18 +27,31 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     // Check if responses are OK
     if (!tagsPreferred.ok || !tagsNotPreferred.ok) {
-      throw new Error("Failed to fetch tags");
+      return {
+        preferred: [],
+        notpreferred: [],
+        errorObject: { message: "Failed to fetch tags" },
+      };
     }
 
     const preferred = await tagsPreferred.json();
     const notpreferred = await tagsNotPreferred.json();
 
+    if (!preferred.success || !notpreferred.success) {
+      return {
+        preferred: [],
+        notpreferred: [],
+        errorObject: { message: "Invalid data received from server" },
+      };
+    }
+
     return {
       preferred,
-      notpreferred
+      notpreferred,
+      errorObject: null
     };
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error) {
+    throw new Response("Error fetching tags" + error);
   }
 }
 
@@ -67,14 +80,23 @@ export async function action({ request }: Route.ActionArgs) {
     });
 
     if (!resp.ok) {
-      throw new Error("Failed to add tag");
+      return {
+        ok: false,
+        errorObject: { message: "Failed to add tag" },
+      };
+    }
+
+    const data = await resp.json();
+    if (!data.success) {
+      return {
+        ok: false,
+        errorObject: { message: "Failed to add tag" }
+      };
     }
 
     return redirect("/profile");
   } catch (error) {
-    console.error("Action error:", error);
-
-    return redirect("/profile?error=failed_to_add_tag");
+    throw new Error("Profile action error: " + error);
   }
 }
 
