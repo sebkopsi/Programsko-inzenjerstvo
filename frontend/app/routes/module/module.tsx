@@ -9,63 +9,95 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+  try {
+    const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+    if (!courseReq.ok) {
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lecturesData: [],
+        errorObject: { message: "Failed to fetch course" },
+      };
     }
-  });
 
-  if (!courseReq.ok) {
-    throw new Error("Failed to fetch courses");
-  }
-
-  const courseInfo = await courseReq.json();
-  
-  if(!courseInfo.success){
-    throw new Error("No course found :(")
-  }
-
-  const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+    const courseInfo = await courseReq.json();
+    if(!courseInfo.success){
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lecturesData: [],
+        errorObject: { message: "Course not found" },
+      };
     }
-  });
 
-  if (!moduleReq.ok) {
-    throw new Error("Failed to fetch modules");
-  }
+    const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+    if (!moduleReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lecturesData: [],
+        errorObject: { message: "Failed to fetch module" },
+      };
+    }
 
-  const moduleInfo = await moduleReq.json();
-  
-  if(!moduleInfo.success){
-    throw new Error("No module found :(")
-  }
+    const moduleInfo = await moduleReq.json();
+    if(!moduleInfo.success){
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lecturesData: [],
+        errorObject: { message: "Module not found" },
+      };
+    }
 
-  const lecturesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/search`, {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + jwt,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ term: "", moduleId: params['moduleId']})
-  });
+    const lecturesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/search`, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ term: "", moduleId: params['moduleId']})
+    });
+    if (!lecturesReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lecturesData: [],
+        errorObject: { message: "Failed to fetch lectures" },
+      };
+    }
 
-  if (!lecturesReq.ok) {
-    throw new Error("Failed to fetch lectures");
-  }
+    const lecturesData = await lecturesReq.json();
+    if (!lecturesData.success) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lecturesData: [],
+        errorObject: { message: "No lectures found" },
+      };
+    }
 
-  const lecturesData = await lecturesReq.json();
-
-  return {
-    courseInfo,
-    moduleInfo,
-    lecturesData
+    return {
+      courseInfo,
+      moduleInfo,
+      lecturesData,
+      errorObject: null,
+    }
+  } catch (error) {
+    throw new Error("Module loader crash: " + error);
   }
 }
 
 export default function Module() {
   return <ModulePage/>
 }
-
