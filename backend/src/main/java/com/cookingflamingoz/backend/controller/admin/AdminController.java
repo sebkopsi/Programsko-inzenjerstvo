@@ -29,4 +29,19 @@ public class AdminController {
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         return adminService.getById(id, userID);
     }
+
+    @PatchMapping("/request/{id}/status")
+    public com.cookingflamingoz.backend.util.GenericResult updateStatus(
+            @PathVariable Integer id,
+            @RequestBody java.util.Map<String, String> body) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+
+        String newStatus = body.get("status");
+
+        return adminService.updateStatus(id, newStatus, userID);
+    }
+
+
 }

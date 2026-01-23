@@ -5,6 +5,7 @@ import com.cookingflamingoz.backend.model.RequestSummary;
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.repository.RequestRepository;
 import com.cookingflamingoz.backend.repository.UserRepository;
+import com.cookingflamingoz.backend.util.GenericResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,24 @@ public class AdminService {
         return request.map(value -> new AdminResults.DetailsResult(true, "", value))
                 .orElseGet(() -> new AdminResults.DetailsResult(false, "Request not found", null));
     }
+
+    public GenericResult updateStatus(int requestId, String newStatus, int userId) {
+        if (!validateAdmin(userId)) {
+            return new GenericResult(false, "Access denied: Not an admin");
+        }
+
+        Optional<Request> requestOptional = requestRepository.findById(requestId);
+        if (requestOptional.isEmpty()) {
+            return new GenericResult(false, "Request not found");
+        }
+
+        Request request = requestOptional.get();
+        request.setStatus(newStatus);
+        requestRepository.save(request);
+
+        return new GenericResult(true, "Status successfully updated to: " + newStatus);
+    }
+
 
     private boolean validateAdmin(int userId) {
         return userRepository.findById(userId)
