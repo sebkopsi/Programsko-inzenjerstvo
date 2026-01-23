@@ -9,4 +9,5 @@ import java.util.Set;
 
 public interface UserTagRepository extends JpaRepository<UserTag, Integer> {
     public Set<UserTag> findByPreferred(boolean preferred);
+    public Set<UserTag> findByUserId(Integer userId);
 }

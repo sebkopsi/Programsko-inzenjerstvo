@@ -17,7 +17,6 @@ public class ProfileResults {
      * */
     public static class ProfileInfo {
         // Profile User Info
-        public Integer userId;
         public String firstname;
         public String surname;
         public String email;
@@ -41,8 +40,7 @@ public class ProfileResults {
         // Biljeske
 
 
-        public ProfileInfo(Integer userId, String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags) {
-            this.userId = userId;
+        public ProfileInfo(String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags) {
             this.firstname = firstname;
             this.surname = surname;
             this.email = email;

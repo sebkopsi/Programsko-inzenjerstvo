@@ -1,6 +1,7 @@
 package com.cookingflamingoz.backend.controller.profile;
 
 import com.cookingflamingoz.backend.service.admin.AdminResults;
+import com.cookingflamingoz.backend.service.profile.ProfileResults;
 import com.cookingflamingoz.backend.service.profile.ProfileService;
 import com.cookingflamingoz.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class ProfileController {
 
     public ProfileController(ProfileService profileService) { this.profileService = profileService; }
 
+    @GetMapping("/my")
+    public ProfileResults.GetAllResults findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+        return profileService.getAllProfileInfo(userID);
+    }
     /*
     @GetMapping("/my")
     public ProfileResult.InboxResult findAll() {
