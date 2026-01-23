@@ -2,7 +2,10 @@
 
 INSERT INTO public."difficultyLevel" ("name") 
 VALUES 
-  ('beginner');
+  ('beginner'),
+  ('intermediate'),
+  ('advanced');
+
 INSERT INTO public."instructorProfile" (
   biography, username, specialization
 ) 
@@ -10,11 +13,12 @@ VALUES
   (
     'Lorem ', 'Josip Josipovic', 'Croatian Cuisine'
   );
-INSERT INTO public."enrolleeProfile" (username, "skillLevelId") 
+
+INSERT INTO public."enrolleeProfile" (username) 
 VALUES 
-  ( 'test', 1),
-  ('instructor', 1),
-  ('admin', 1);
+  ('test'),
+  ('instructor'),
+  ('admin');
 
 
 INSERT INTO public."tag" (
@@ -25,7 +29,9 @@ VALUES
   ('italian', 'general'),
   ('pasta', 'general'),
   ('gluten', 'general'),
-  ('sauces', 'general');
+  ('sauces', 'general'),
+  ('brocolli','general'),
+  ('pizza','general');
 
 
 INSERT INTO public."user" (
@@ -53,6 +59,13 @@ VALUES
     NULL, false,
     true, true
   );
+
+INSERT INTO public.userTag (
+  "userId", "tagId", preferred
+)
+VALUES
+  (1,6,false),
+  (1,7,true);
 
 INSERT INTO public.course (
    "name", "creatorId", description, 

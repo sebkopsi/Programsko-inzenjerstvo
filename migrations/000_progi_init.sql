@@ -83,7 +83,7 @@ CREATE TABLE public.tag (
 CREATE TABLE public."enrolleeProfile" (
 	"enrolleeId" int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
 	username text NOT NULL,
-	"skillLevelId" int4 NOT NULL,
+	"skillLevelId" int4 NOT NULL DEFAULT 1,
 	CONSTRAINT polaznikprofil_pkey PRIMARY KEY ("enrolleeId"),
 	CONSTRAINT polaznikprofil_idrazinevjestine_fkey FOREIGN KEY ("skillLevelId") REFERENCES public."difficultyLevel"("difficultyId") ON DELETE RESTRICT
 );
