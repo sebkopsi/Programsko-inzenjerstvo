@@ -8,6 +8,27 @@
 h3 {
   margin-bottom: 0;
 }
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+#title {
+  display: flex;
+  gap: 10px;
+}
+#prevNext {
+  display: flex;
+}
+#prevNext button {
+  width: 150px;
+  margin-left: 20px;
+  margin-top: 0;
+}
+h3 {
+  padding-left: 20px;
+}
 
 button {
   margin-top: 20px;
@@ -35,6 +56,6 @@ button:active {
 #approve {
   background-color: green;
 }
-#deny {
+.deny {
   background-color: rgb(199, 0, 0);
 }

@@ -1,5 +1,5 @@
 import './request.css'
-import id from './EuropeanIdCard2_A-1-4204201529.jpg'
+import { useEffect, useState } from "react";
 
 const types = ["promoteInstructor", "report", "updateCourse"]
 
@@ -14,13 +14,35 @@ function Footer() {
       </div>
       <div id="buttons">
         <button id="approve">Approve</button>
-        <button id="deny">Deny</button>
+        <button className="deny">Deny</button>
       </div>
     </div>
   );
 }
 
 export function Request() {
+  const [data, setData] = useState([]); 
+  const [error, setError] = useState<string|null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const res = await fetch("http://localhost:8890/admin/request/2");
+        if (!res.ok) throw new Error(String(res.status));
+        setData(await res.json());
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError("Unknown error");
+        }
+      }
+    };
+    loadData();
+  }, []);
+
+  if (error) return <p>Error: {error}</p>;
+
   const userID = 22345;
   const userName = "Darko2303";
   const title = "Request title here";
@@ -32,10 +54,20 @@ export function Request() {
   const dateTime = "12.1.2022. 13:00";
   const courseName = "Mediteranska kuhinja";
   const courseID = 676767;
+  const reqID = 1239;
 
   return (
     <section id="content">
-      <h2 id="title">requests &gt; {userName} (ID {userID}) </h2>
+      <div id="header">
+        <div id="title">
+          <a href="#"><h2>requests</h2></a>
+          <h2> &gt; {reqID} ({type})</h2>
+        </div>
+        <div id="prevNext">
+          <button>Previous</button>
+          <button>Next</button>
+        </div>
+      </div>
       <hr/>
       <h3>{title}</h3>
       <div className="request">
@@ -48,7 +80,30 @@ export function Request() {
         </div>
       </div>
       <hr/>
-      {type == "promoteInstructor" && <Footer/>}
+      <div className="request">
+        <div>
+          {type == "promoteInstructor" && <>
+            <p><b>Attachments:</b></p>
+            <a href="#">diploma</a><br/>
+            <a href="#">osobna iskaznica</a><br/>
+            <a href="#">vozacka dozvola</a>
+          </>}
+        </div>
+        <div>
+          {type == "report" && <>
+            <button className="deny">Suspend user</button>
+            <button>Discard</button>
+          </>}
+          {type == "promoteInstructor" && <>
+            <button id="approve">Approve</button>
+            <button className="deny">Deny</button>
+          </>}
+          {type == "updateCourse" && <>
+            <button>Edit course</button>
+            <button>Discard</button>
+          </>}
+        </div>
+      </div>
     </section>
   );
 }
