@@ -2,9 +2,11 @@ import { Form, useFetcher } from "react-router";
 import '../../styles/courses.css';
 import "../../styles/forms.css";
 import { useState } from "react";
+import { GlobalError } from "~/components/GlobalError";
 
 export function NewCoursePage() {
   const fetcher = useFetcher();
+  const errorObject = fetcher.data?.errorObject;
   const [tags, setTags] = useState<string[]>([]);
 
   const addTag = () => {
@@ -21,6 +23,7 @@ export function NewCoursePage() {
 
   return (
     <section id="content">
+      <GlobalError error={errorObject} />
       <section id="path">
         <h4>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
