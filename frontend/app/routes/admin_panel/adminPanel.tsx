@@ -18,11 +18,6 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const user = await res.json();
 
-  console.log("RAW /user/my response:");  
-  console.log(JSON.stringify(user, null, 2));
-
-  console.log("user.isAdmin:", user.isAdmin);
-
 
  if (!user.isAdmin) {
     return redirect("/");

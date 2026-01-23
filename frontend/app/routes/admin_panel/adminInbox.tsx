@@ -1,45 +1,51 @@
 import { redirect } from "react-router";
 import type { Route } from "../+types/home";
-import AdminPanelContent from "~/pages/admin_panel/adminInbox";
 import { GetJwtToken } from "~/util/cookie";
+import { useLoaderData } from "react-router";
+import AdminInboxContent from "~/pages/admin_panel/adminInbox";
 
+type RequestSummary = {
+  id: number;
+  title: string;
+  createdAt: string;
+  status: string;
+};
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Admin Inbox - Cooking Flamingoz" },
-    { name: "description", content: "admin dashboard" },
-  ];
-}
+type InboxResult = {
+  success: boolean;
+  message: string;
+  requests: RequestSummary[] | null;
+};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const jwt = GetJwtToken(request);
-    if (!jwt) return redirect("/login"); 
-  
-  
-    const res = await fetch("http://localhost:8890/user/my", {
-      headers: { "Authorization": "Bearer " + jwt },
-    });
-  
-    if (!res.ok) throw new Error("Failed to fetch user info");
-  
-    const user = await res.json();
-  
-    console.log("RAW /user/my response:");  
-    console.log(JSON.stringify(user, null, 2));
-  
-    console.log("user.isAdmin:", user.isAdmin);
-  
-  
-   if (!user.isAdmin) {
+  if (!jwt) return redirect("/login");
+
+  const res = await fetch("http://localhost:8890/admin/inbox", {
+    headers: {
+      Authorization: "Bearer " + jwt,
+    },
+  });
+
+  if (!res.ok) {
+    if (res.status === 401 || res.status === 403) {
       return redirect("/");
     }
-  
-  
-  
-    return user;
+    throw new Error("Failed to load admin inbox");
   }
 
+  const data: InboxResult = await res.json();
 
-export default function AdminInbox() {
+  if (!data.success) {
+    throw new Error(data.message);
+  }
+
+  return {
+    requests: data.requests ?? [],
+  };
+}
+
+export default function AdminInboxPage() {
+  const data = useLoaderData<typeof loader>();
   return <AdminInboxContent />;
 }

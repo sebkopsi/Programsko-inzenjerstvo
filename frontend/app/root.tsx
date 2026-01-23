@@ -50,12 +50,15 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const jwt = GetJwtToken(request);
 
-
+ if (!jwt) {
+    // User is not logged in
+    return { user: null };
+  }
   const res = await fetch("http://localhost:8890/user/my", {
     headers: { "Authorization": "Bearer " + jwt },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch user info");
+  if (!res.ok) throw new Error("Failed to fetch user info22");
 
   const user = await res.json();
 
