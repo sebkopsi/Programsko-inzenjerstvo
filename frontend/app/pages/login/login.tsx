@@ -1,17 +1,21 @@
 import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
 import "./login.css";
+import { GlobalError } from "../components/GlobalError";
 
 export function LoginPage() {
   const actionData = useLoaderData();
   const fetcher = useFetcher();
   const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
   let busy = fetcher.state !== "idle";
+  const errorObject = fetcher.data?.errorObject;
+
   return (
     <section id="content">
-      <section id="form">
-        {fetcher.data?.ok == false && (
-          <div id="error">{fetcher.data.errors.message}</div>
+      <GlobalError error={errorObject} />
+        {fetcher.data?.ok === false && (
+                <div className="error">{fetcher.data.errorObject.message}</div>
         )}
+      <section id="form">
         <div className="CF-login-form">
           <fetcher.Form className="login-form" method="POST" action="/login">
             <div className="form-text-and-input">
