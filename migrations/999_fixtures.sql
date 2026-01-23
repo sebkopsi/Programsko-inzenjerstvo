@@ -29,7 +29,9 @@ VALUES
   ('italian', 'general'),
   ('pasta', 'general'),
   ('gluten', 'general'),
-  ('sauces', 'general');
+  ('sauces', 'general'),
+  ('brocolli','general'),
+  ('pizza','general');
 
 
 INSERT INTO public."user" (
@@ -57,6 +59,13 @@ VALUES
     NULL, false,
     true, true
   );
+
+INSERT INTO public.userTag (
+  "userId", "tagId", preferred
+)
+VALUES
+  (1,6,false),
+  (1,7,true);
 
 INSERT INTO public.course (
    "name", "creatorId", description, 

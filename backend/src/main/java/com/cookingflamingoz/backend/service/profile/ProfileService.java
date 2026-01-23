@@ -16,14 +16,12 @@ public class ProfileService {
     private final EnrolleeProfileRepository enrolleeProfileRepository;
     private final DifficultyLevelRepository difficultyLevelRepository;
     private final UserTagRepository userTagRepository;
-    private final TagRepository tagRepository;
 
-    public ProfileService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, UserTagRepository userTagRepository, TagRepository tagRepository) {
+    public ProfileService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, UserTagRepository userTagRepository) {
         this.userRepository = userRepository;
         this.enrolleeProfileRepository = enrolleeProfileRepository;
         this.difficultyLevelRepository = difficultyLevelRepository;
         this.userTagRepository = userTagRepository;
-        this.tagRepository = tagRepository;
     }
 
     public ProfileResults.GetAllResults getAllProfileInfo(int userId){
@@ -38,13 +36,19 @@ public class ProfileService {
 
         EnrolleeProfile enrolleeProfile = enrolleeProfileRepository.getById(user.getEnrolleeId());
         DifficultyLevel difficultyLevel = difficultyLevelRepository.getById(enrolleeProfile.getEnrolleeId());
-        Set<UserTag> userTagSet = userTagRepository.findByUserId(user.getUserId());
-        // Set<ProfileResults.UserTagInfo> userTagInfoSet = tagRepository.
+        Set<UserTag> userTagSet = userTagRepository.findAllByUserId(user.getUserId());
+        Set<ProfileResults.UserTagInfo> userTagInfoSet = userTagSet.stream()
+                .map(ut -> new ProfileResults.UserTagInfo(
+                        ut.getTag().getName(),
+                        ut.getTag().getCategory(),
+                        ut.isPreferred()
+                ))
+                .collect(java.util.stream.Collectors.toSet());
 
-        // ProfileResults.ProfileInfo profileInfo = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName());
+        ProfileResults.ProfileInfo data = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName(), userTagInfoSet);
 
         return new ProfileResults.GetAllResults(true, "Found all profile information."
-                , null);
+                , data);
     }
     /*
     *     public AdminResults.InboxResult getInbox(int userId) {
