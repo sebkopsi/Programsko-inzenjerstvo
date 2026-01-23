@@ -17,6 +17,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
       }
     });
 
+    if(courseReq.status === 401) {
+      return redirect("/login");
+    }
+
     if (!courseReq.ok) {
       return {
         courseInfo: null,
@@ -43,6 +47,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
         "Authorization": "Bearer " + jwt,
       }
     });
+
+    if(moduleReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!moduleReq.ok) {
       return {
@@ -71,6 +79,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
         "Authorization": "Bearer " + jwt,
       }
     });
+
+    if(lectureReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!lectureReq.ok) {
       return {
@@ -114,7 +126,6 @@ export async function action({params, request }: Route.ActionArgs) {
 
   console.debug(formData)
 
-  try {
     const resp = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params.moduleId}/lecture/${params.lectureId}/submit`, {
       method: "POST",
       headers: {
@@ -126,6 +137,10 @@ export async function action({params, request }: Route.ActionArgs) {
       })
     });
 
+    if(resp.status === 401) {
+      return redirect("/login");
+    }
+
     if(!resp.ok) {
       const respText = await resp.text();
       return {
@@ -134,9 +149,6 @@ export async function action({params, request }: Route.ActionArgs) {
       };
     }
     
-  } catch (error) {
-    throw new Error("Lecture error: " + error)
-  }
 }
 
 
