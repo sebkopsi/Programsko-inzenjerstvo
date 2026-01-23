@@ -247,12 +247,7 @@ public class UserService {
     }
 
 
-<<<<<<< Updated upstream
-    // Changing name and surname
-    public GenericResult updateName(int userId, String firstname, String surname) {
-=======
        public GenericResult updateName(int userId, String firstname, String surname) {
->>>>>>> Stashed changes
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
 
@@ -264,12 +259,7 @@ public class UserService {
         return GenericResult.Success("Name updated successfully");
     }
 
-<<<<<<< Updated upstream
-    // Change email
-    public GenericResult updateEmail(int userId, String email) {
-=======
       public GenericResult updateEmail(int userId, String email) {
->>>>>>> Stashed changes
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) return GenericResult.Failure("User not found");
 
