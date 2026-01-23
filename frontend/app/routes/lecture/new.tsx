@@ -33,6 +33,9 @@ export async function action({ request }: Route.ActionArgs) {
       body: JSON.stringify(data)
     });
 
+    if(createReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!createReq.ok) {
       return {
@@ -67,93 +70,110 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+  try {
+    const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+
+    if(courseReq.status === 401) {
+      return redirect("/login");
     }
-  });
 
-  if (!courseReq.ok) {
-    return {
-      courseInfo: null,
-      moduleInfo: null,
-      lectureInfo: null,
-      errorObject: { message: "Failed to fetch courses" }
-    };
-  }
-
-  const courseInfo = await courseReq.json();
-
-  if (!courseInfo.success) {
-    return {
-      courseInfo: null,
-      moduleInfo: null,
-      lectureInfo: null,
-      errorObject: { message: "No course found" }
-    };
-  }
-
-  const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+    if (!courseReq.ok) {
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch courses" }
+      };
     }
-  });
 
-  if (!moduleReq.ok) {
-    return {
-      courseInfo,
-      moduleInfo: null,
-      lectureInfo: null,
-      errorObject: { message: "Failed to fetch modules" }
-    };
-  }
+    const courseInfo = await courseReq.json();
 
-  const moduleInfo = await moduleReq.json();
+  
+    if (!courseInfo.success) {
+      return {
+        courseInfo: null,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "No course found" }
+      };
+    }
 
-  if (!moduleInfo.success) {
-    return {
-      courseInfo,
-      moduleInfo: null,
-      lectureInfo: null,
-      errorObject: { message: "No module found" }
-    };
-  }
+    const moduleReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
 
-  const lecturesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/search`, {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + jwt,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ term: "", moduleId: params['moduleId'] })
-  });
+    if(moduleReq.status === 401) {
+      return redirect("/login");
+    }
 
-  if (!lecturesReq.ok) {
+    if (!moduleReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch modules" }
+      };
+    }
+
+    const moduleInfo = await moduleReq.json();
+
+    if (!moduleInfo.success) {
+      return {
+        courseInfo,
+        moduleInfo: null,
+        lectureInfo: null,
+        errorObject: { message: "No module found" }
+      };
+    }
+
+    const lecturesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params['moduleId']}/lecture/search`, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ term: "", moduleId: params['moduleId'] })
+    });
+
+    if(lecturesReq.status === 401) {
+      return redirect("/login");
+    }
+
+    if (!lecturesReq.ok) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lectureInfo: null,
+        errorObject: { message: "Failed to fetch lectures" }
+      };
+    }
+
+    const lecturesData = await lecturesReq.json();
+    if (!lecturesData.success) {
+      return {
+        courseInfo,
+        moduleInfo,
+        lectureInfo: null,
+        errorObject: { message: "No lectures found" }
+      };
+    }
+
     return {
       courseInfo,
       moduleInfo,
-      lectureInfo: null,
-      errorObject: { message: "Failed to fetch lectures" }
-    };
-  }
-
-  const lecturesData = await lecturesReq.json();
-  if (!lecturesData.success) {
-    return {
-      courseInfo,
-      moduleInfo,
-      lectureInfo: null,
-      errorObject: { message: "No lectures found" }
-    };
-  }
-
-  return {
-    courseInfo,
-    moduleInfo,
-    lecturesData,
-    errorObject: null
+      lecturesData,
+      errorObject: null
+    }
+  } catch (error) {
+    throw new Error(message: "Lecture error");
   }
 }
 
