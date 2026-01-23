@@ -32,7 +32,7 @@ export async function action({request}: Route.ActionArgs) {
   if(formData.get("password") != formData.get("password2")){
     return {
       ok: false,
-      errors: {
+      errorObject: {
         message: "Passwords do not match!"
       }
     }
@@ -51,18 +51,17 @@ export async function action({request}: Route.ActionArgs) {
       username: formData.get("username") 
     })
   })
-  
-  if(resp.status != 200){
-    const info = await resp.text()
+
+  if (!resp.ok) {
+    const info = await resp.text();
     return {
       ok: false,
-      errors: {
-        message: "Signup failed... response status: " + info
-      }
-    }
+      errorObject: {
+        message: "Signup failed: " + info,
+      },
+    };
   }
-
-
+  
   return redirect("/login")
 }
 
