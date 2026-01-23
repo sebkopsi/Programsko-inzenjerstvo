@@ -44,7 +44,7 @@ export async function action({request}: Route.ActionArgs) {
     const loginInfo =  await resp.text()
     return {
       ok: false,
-      errors: {
+      errorObject: {
         message: "Login failed: " + loginInfo
       }
     }
@@ -55,7 +55,7 @@ export async function action({request}: Route.ActionArgs) {
   if(!loginInfo?.token){
     return {
       ok: false,
-      errors: {
+      errorObject: {
         message: "Login failed to get JWT token"
       }
     }
