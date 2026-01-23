@@ -9,45 +9,70 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
-  
-  const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
-    method: "GET",
-    headers: {
-      "Authorization": "Bearer " + jwt,
+  try {
+    const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+
+    if (!courseReq.ok) {
+      return {
+        courseInfo: null,
+        modulesData: [],
+        errorObject: { message: "Failed to fetch courses" }
+      };
     }
-  });
 
-  if (!courseReq.ok) {
-    throw new Error("Failed to fetch courses");
-  }
-
-  const courseInfo = await courseReq.json();
+    const courseInfo = await courseReq.json();
   
-  if(!courseInfo.success){
-    throw new Error("No course found :(")
+    if(!courseInfo.success){
+      return {
+        courseInfo: null,
+        modulesData: [],
+        errorObject: { message: "No course found :(" }
+      };
+    }
+
+    const modulesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/search`, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + jwt,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ term: "", scope: "" })
+    });
+
+    if (!modulesReq.ok) {
+      return {
+        courseInfo,
+        modulesData: [],
+        errorObject: { message: "Failed to fetch modules" }
+      };
+    }
+
+    const modulesData = await modulesReq.json();
+
+    if (!modulesData.success) {
+      return {
+        courseInfo,
+        modulesData: [],
+        errorObject: { message: "Failed to load modules" }
+      };
+    }
+
+    return {
+      courseInfo,
+      modulesData,
+      errorObject: null
+    };
+
+  } catch (error) {
+    throw new Error("Fetch module error: " + error);
   }
-
-  const modulesReq = await fetch(`http://localhost:8890/course/${params['courseId']}/module/search`, {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + jwt,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ term: "", scope: "" })
-  });
-
-  if (!modulesReq.ok) {
-    throw new Error("Failed to fetch modules");
-  }
-
-  const modulesData = await modulesReq.json();
-
-  return {
-    courseInfo,
-    modulesData
-  }
+  
 }
-
 
 export default function Course() {
   return <CoursePage/>
