@@ -8,8 +8,12 @@ export function SignUpPage() {
   const app_url = import.meta.env.PROD ? "https://cooking.planine.hr" : "http://localhost:5173"
   return (
     <section id="content">
+
       <section>
-        {fetcher.data?.ok == false && <div>{fetcher.data.errors.message}</div>}
+        <GlobalError error={errorObject} />
+        {fetcher.data?.ok === false && (
+                <div className="error">{fetcher.data.errorObject.message}</div>
+        )}
         <div className="CF-login-form">
           <fetcher.Form className="login-form" method="POST" action="/signup">
             <div className="form-text-and-input">
