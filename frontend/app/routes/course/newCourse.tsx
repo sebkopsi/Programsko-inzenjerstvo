@@ -11,8 +11,6 @@ export async function action({ request }: Route.ActionArgs) {
     return redirect("/login");
   }
 
-
-  try {
     const resp = await fetch("http://localhost:8890/course", {
       method: "POST",
       headers: {
@@ -26,6 +24,10 @@ export async function action({ request }: Route.ActionArgs) {
       })
     });
 
+    if (resp.status === 401) {
+      return redirect("/login");
+    }
+
     if(!resp.ok) {
       const respText = await resp.text();
 
@@ -37,9 +39,6 @@ export async function action({ request }: Route.ActionArgs) {
 
     return redirect("/course");
     
-  } catch (error) {
-    throw new Error("Create course error: " + error);
-  }
 }
 
 export default function Newcourse() {
