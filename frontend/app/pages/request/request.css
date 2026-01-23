@@ -1,25 +1,12 @@
-#page {
-  max-width: 1000px;
-  font-size: 1rem;
-  font-family: "Catamaran", sans-serif;
+.request {
+  display: flex;
 }
-img {
+.request>* {
+  padding: 10px 20px;
   width: 500px;
 }
-#request {
-  display: flex;
-  /* align-items: center; */
-  margin: 20px 0;
-}
-#image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  color: grey;
-}
-#text {
-  padding: 20px;
+h3 {
+  margin-bottom: 0;
 }
 
 button {
