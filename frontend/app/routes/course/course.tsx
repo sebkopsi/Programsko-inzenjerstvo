@@ -17,6 +17,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
       }
     });
 
+    if (courseReq.status === 401) {
+      return redirect("/login");
+    }
+    
     if (!courseReq.ok) {
       return {
         courseInfo: null,
@@ -43,6 +47,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
       },
       body: JSON.stringify({ term: "", scope: "" })
     });
+
+    if (modulesReq.status === 401) {
+      return redirect("/login");
+    }
 
     if (!modulesReq.ok) {
       return {
