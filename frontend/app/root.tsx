@@ -62,12 +62,6 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const user = await res.json();
 
-  console.log("RAW /user/my response:");  
-  console.log(JSON.stringify(user, null, 2));
-
-  console.log("user.isAdmin:", user.isAdmin);
-
-
   return {user};
 }
 
@@ -86,31 +80,31 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
+// export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+//   let message = "Oops!";
+//   let details = "An unexpected error occurred.";
+//   let stack: string | undefined;
 
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
+//   if (isRouteErrorResponse(error)) {
+//     message = error.status === 404 ? "404" : "Error";
+//     details =
+//       error.status === 404
+//         ? "The requested page could not be found."
+//         : error.statusText || details;
+//   } else if (import.meta.env.DEV && error && error instanceof Error) {
+//     details = error.message;
+//     stack = error.stack;
+//   }
 
-  return (
-    <main >
-      {/* <SideBar isAdmin={user?.isAdmin === true} /> */}
-      <section id="content">
-        <section id="error">
-          <h1>{message}</h1>
-          <p>{details}</p>
-        </section>
-      </section>
-    </main>
-  );
-}
+//   return (
+//     <main >
+//       <SideBar />
+//       <section id="content">
+//         <section id="error">
+//           <h1>{message}</h1>
+//           <p>{details}</p>
+//         </section>
+//       </section>
+//     </main>
+//   );
+// }

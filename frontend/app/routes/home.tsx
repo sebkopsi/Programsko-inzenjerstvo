@@ -1,13 +1,29 @@
 import type { Route } from "./+types/home";
 import { HomePage } from "~/pages/home/home";
+import { GetJwtToken } from "~/util/cookie";
+import { useLoaderData } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
+export async function loader({ request }: Route.LoaderArgs) {
+  const jwt = GetJwtToken(request);
+
+  if (!jwt) {
+    return { user: null };
+  }
+
+  const res = await fetch("http://localhost:8890/user/my", {
+    headers: { Authorization: "Bearer " + jwt },
+  });
+
+  if (!res.ok) {
+    return { user: null };
+  }
+
+  const user = await res.json();
+  return { user };
 }
 
 export default function Home() {
-  return <HomePage/>
+  const { user } = useLoaderData<typeof loader>();
+
+  return <HomePage user={user} />;
 }

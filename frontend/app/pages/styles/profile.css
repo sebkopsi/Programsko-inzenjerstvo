@@ -1,0 +1,182 @@
+
+/* ------------------------ HEADER ------------------------ */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem;
+}
+
+.avatar-wrapper {
+    width: 100px;   /* square size for circle */
+    height: 100px;
+    border-radius: 50%;  /* circular wrapper */
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: #004C2261; /* optional placeholder background */
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-image {
+    width: 3rem;
+    height: 100%;
+    object-fit: contain; /* show entire image */
+    object-position: center; /* center the image in the circle */
+    display: block;
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    margin:0;
+}
+
+.fullname {
+    display: flex;
+    font-size: 2rem;
+    font-weight: bolder;
+    gap:5px;
+    color:#004C22
+}
+
+.username {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.profile-name {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bolder;
+}
+
+.date {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.profile-email {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* ------------------------ FORM ELEMENTS ------------------------ */
+.profile-section {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-label,
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+}
+
+/* SELECT INPUT */
+.skill-select {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1rem;
+    border: 0.1rem solid #004C22;
+    font-size: 1rem;
+    background-color: rgb(241, 238, 238);
+}
+
+/* ------------------------ CHIPS ------------------------ */
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.chip {
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+    border: 0.1rem solid #004C22;
+    background-color: rgb(241, 238, 238);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.chip span {
+    font-weight: bold;
+}
+
+.chip:hover {
+    background-color: #004C2261;
+    color: white;
+}
+
+/* ------------------------ HISTORY GRID ------------------------ */
+.history-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.history-card {
+    flex: 1 1 150px;
+    background-color: rgb(241, 238, 238);
+    border-radius: 1rem;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 0.5rem;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+}
+
+.history-card img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.history-card p {
+    margin: 0.5rem 0 0;
+}
+
+/* ------------------------ NOTES ------------------------ */
+.notes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.notes p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ------------------------ RESPONSIVE ------------------------ */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 1.7rem;
+    }
+
+    .history-card {
+        flex: 1 1 100%;
+    }
+}

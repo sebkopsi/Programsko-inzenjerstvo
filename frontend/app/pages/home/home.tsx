@@ -1,21 +1,36 @@
 import { Link } from "react-router";
-import './home.css'
+import "./home.css";
 
-export function HomePage() {
- return (
+type HomePageProps = {
+  user: any | null;
+};
+
+export function HomePage({ user }: HomePageProps) {
+  return (
     <section id="content">
       <header>
         <div className="option-section">
           <div className="menu">
-            <Link className="login-link" to="/login">
-              LOG IN
-            </Link>
-            <Link className="signup-link" to="/signup">
-              SIGN UP
-            </Link>
-            <Link className="profile-link" to="/login">
-              <img className="profile-icon" src="/images/profile_icon.png" alt="Profile icon" />
-            </Link>
+            {!user && (
+              <>
+                <Link className="login-link" to="/login">
+                  LOG IN
+                </Link>
+                <Link className="signup-link" to="/signup">
+                  SIGN UP
+                </Link>
+              </>
+            )}
+
+            {user && (
+              <Link className="profile-link" to="/profile">
+                <img
+                  className="profile-icon"
+                  src="/images/profile_icon.png"
+                  alt="Profile icon"
+                />
+              </Link>
+            )}
           </div>
         </div>
       </header>
