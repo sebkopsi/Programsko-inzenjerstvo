@@ -1,5 +1,6 @@
 package com.cookingflamingoz.backend.service.profile;
 
+import com.cookingflamingoz.backend.model.EnrolledCourse;
 import com.cookingflamingoz.backend.service.course.CourseResults;
 import com.cookingflamingoz.backend.util.GenericResult;
 import jakarta.annotation.Nullable;
@@ -28,19 +29,13 @@ public class ProfileResults {
         // Profile Enrollee Info
         public String username;
         public String skillLevel;
-        // Prehrambene preferencije
+        // Prehrambene preferencije + omiljene kuhinje + alergeni
         public Set<UserTagInfo> tags;
-        // Alergeni
-        // Omiljene kuhinje
-
-        // Napredak po upisanim tecajevima
-
-        // Povijest upisanih tecajeva
-
-        // Biljeske
+        // Napredak po upisanim tecajevima + Povijest upisanih tecajeva
+        public Set<EnrolledCourse> enrolledCourses;
 
 
-        public ProfileInfo(String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags) {
+        public ProfileInfo(String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags, Set<EnrolledCourse> enrolledCourses ) {
             this.firstname = firstname;
             this.surname = surname;
             this.email = email;
@@ -51,6 +46,7 @@ public class ProfileResults {
             this.username = username;
             this.skillLevel = skillLevel;
             this.tags = tags;
+            this.enrolledCourses = enrolledCourses;
         }
     }
 
