@@ -100,8 +100,7 @@ public class UserController {
         return userService.AddTag(userID, tagRequest.name, tagRequest.category, tagRequest.preferred, true);
     }
 
-
-    @PatchMapping("/my/name")
+     @PatchMapping("/my/name")
     public GenericResult updateMyName(@RequestBody Map<String, String> data) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(auth.getPrincipal().toString());
@@ -145,5 +144,7 @@ public class UserController {
         return userService.updateSkillLevel(userID, skillLevelId);
     }
 
-
 }
+
+
+   

@@ -44,12 +44,42 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { GetJwtToken } from "~/util/cookie";
+
+export async function loader({ request }: Route.LoaderArgs) {
+
+  const jwt = GetJwtToken(request);
+
+ if (!jwt) {
+    // User is not logged in
+    return { user: null };
+  }
+  const res = await fetch("http://localhost:8890/user/my", {
+    headers: { "Authorization": "Bearer " + jwt },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch user info22");
+
+  const user = await res.json();
+
+  console.log("RAW /user/my response:");  
+  console.log(JSON.stringify(user, null, 2));
+
+  console.log("user.isAdmin:", user.isAdmin);
+
+
+  return {user};
+}
+
+import { useLoaderData } from "react-router"; 
+
 export default function App() {
   const navigation = useNavigation()
+   const { user } = useLoaderData<typeof loader>();
   return (
     <>
       <main>
-        <SideBar />
+        <SideBar isAdmin={user?.isAdmin === true} />
         <Outlet />
       </main>
     </>
@@ -74,7 +104,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main >
-      <SideBar />
+      {/* <SideBar isAdmin={user?.isAdmin === true} /> */}
       <section id="content">
         <section id="error">
           <h1>{message}</h1>

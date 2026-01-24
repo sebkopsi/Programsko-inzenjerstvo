@@ -18,7 +18,7 @@ public class UserProfileResult extends GenericResult {
             this.firstname = user.getFirstname();
             this.surname = user.getSurname();
             this.isInstructor = user.getInstructorId() != null;
-            this.isAdmin = user.getIsAdmin();
+            this.isAdmin = user.isAdmin();
             this.isModerator = user.getIsModerator();
         }
     }
