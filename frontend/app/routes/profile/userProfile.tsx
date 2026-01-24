@@ -1,20 +1,15 @@
 import { redirect, useLoaderData } from "react-router";
+import type { Route } from "../+types/home";
 import UserProfile from "~/pages/profile/userProfile";
 import { GetJwtToken } from "~/util/cookie";
 
-interface ProfileResponse {
-  success: boolean;
-  message: string;
-  data: UserData;
-}
-
-export interface Tag {
+type Tag = {
   name: string;
   category: string;
   preferred: boolean;
-}
+};
 
-export interface EnrolledCourse {
+type EnrolledCourse = {
   courseId: number;
   userId: number;
   completionPercentage: number;
@@ -22,9 +17,9 @@ export interface EnrolledCourse {
   enrolledAt: string;
   status: string;
   endedAt: string | null;
-}
+};
 
-export interface UserData {
+type UserData = {
   firstname: string;
   surname: string;
   email: string;
@@ -36,9 +31,15 @@ export interface UserData {
   skillLevel: string;
   tags: Tag[];
   enrolledCoursesSet: EnrolledCourse[];
-}
+};
 
-export async function profileLoader({ request }: { request: Request }) {
+type ProfileResponse = {
+  success: boolean;
+  message: string;
+  data: UserData | null;
+};
+
+export async function loader({ request }: Route.LoaderArgs) {
   const jwt = GetJwtToken(request);
   console.log("JWT token from cookie:", jwt);
 
@@ -62,13 +63,16 @@ export async function profileLoader({ request }: { request: Request }) {
     throw new Error("Failed to fetch profile");
   }
 
-  const profile = await res.json();
-  console.log("Profile response from backend:", profile);
+  const profile: ProfileResponse = await res.json();
+  console.log("Profile response from backend ssuccess?:", profile.success);
+  console.log(JSON.stringify(profile.data, null, 2));
 
-  return profile.data;
+  return {
+    requests: profile.data ?? null
+  };
 }
 
 export default function ProfileRoute() {
-  const user = useLoaderData<UserData>();
-  return <UserProfile user={user} />;
+  const user = useLoaderData<typeof loader>();
+  return <UserProfile user={user.requests} />;
 }

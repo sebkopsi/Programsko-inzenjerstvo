@@ -4,7 +4,7 @@ import type { UserData } from "~/routes/profile/userProfile"; // import the type
 
 interface UserProfileProps {
   user: UserData;
-}
+}    
 
 export default function UserProfile({ user }: UserProfileProps) {
     console.log("User data in component:", user);
@@ -85,14 +85,14 @@ export default function UserProfile({ user }: UserProfileProps) {
       </section>
 
       {/* LOG OUT BUTTON */}
-      <section className="log-out-section">
-        <button className="log-out-button" onClick={() => {
-          document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          window.location.href = "/login";
-        }}>
-          Log Out
-        </button>
-      </section>
+      <section className="logout-section">
+  <a href="/logout">
+    <button className="logout-button">
+      LOG OUT
+    </button>
+  </a>
+</section>
+
     </section>
   );
 }
