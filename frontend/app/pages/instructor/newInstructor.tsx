@@ -17,7 +17,7 @@ export function NewInstructorPage() {
     <section id="content">
       <h2>Instructor application</h2>
       <hr/>
-      <fetcher.Form className="course-form" method="POST" action="/course/new">
+      <fetcher.Form method="POST" action="/newInstructor">
 
         <div>
           <h3>Profile picture</h3>
@@ -29,6 +29,7 @@ export function NewInstructorPage() {
           </div>
           <input 
             type="file"
+            name="pfp"
             accept="image/*"
             onChange={onFileChange} />
         </div>
