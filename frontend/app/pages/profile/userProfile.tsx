@@ -1,13 +1,15 @@
 // pages/profile/userProfile.tsx
 import "../styles/profile.css";
 import type { UserData } from "~/routes/profile/userProfile"; // import the type
+import { Card } from "../components/card"; // import Card
 
 interface UserProfileProps {
   user: UserData;
 }    
 
 export default function UserProfile({ user }: UserProfileProps) {
-    console.log("User data in component:", user);
+  console.log("User data in component:", user);
+
   return (
     <section id="content">
       {/* HEADER */}
@@ -50,17 +52,14 @@ export default function UserProfile({ user }: UserProfileProps) {
         <div className="history-grid">
           {user.enrolledCoursesSet.length > 0 ? (
             user.enrolledCoursesSet.map((course) => (
-              <div key={course.courseId} className="history-card">
-                <img
-                  src={`https://via.placeholder.com/180x120?text=Course+${course.courseId}`}
-                  alt={`Course ${course.courseId}`}
-                />
-                <p>Course {course.courseId}</p>
-                <p>Progress: {course.completionPercentage}%</p>
-                {course.endedAt && (
-                  <p>Ended at: {new Date(course.endedAt).toLocaleDateString()}</p>
-                )}
-              </div>
+              <Card
+                key={course.courseId}
+                link={`/course/${course.courseId}`}
+                name={`Course ${course.courseId}`}
+                desc={`Progress: ${course.completionPercentage}%`}
+                tags={[]} // you can map real tags if available
+                type="course"
+              />
             ))
           ) : (
             <p>No courses enrolled yet.</p>
@@ -86,13 +85,10 @@ export default function UserProfile({ user }: UserProfileProps) {
 
       {/* LOG OUT BUTTON */}
       <section className="logout-section">
-  <a href="/logout">
-    <button className="logout-button">
-      LOG OUT
-    </button>
-  </a>
-</section>
-
+        <a href="/logout">
+          <button className="logout-button">LOG OUT</button>
+        </a>
+      </section>
     </section>
   );
 }
