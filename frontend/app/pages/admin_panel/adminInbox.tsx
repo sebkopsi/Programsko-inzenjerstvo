@@ -2,12 +2,13 @@ import { useLoaderData } from "react-router";
 import "./adminInbox.css";
 
 type RequestSummary = {
-  id: number;
-  title: string;
+  userEmail: string;
   type: string;
   status: string;
-  sender: string;
-  time: string;
+  title: string;
+  createdAt: string;
+  sentByUserId: string;
+  reqId: number;
 };
 
 export default function AdminInboxContent() {
@@ -40,11 +41,11 @@ export default function AdminInboxContent() {
         {/* Render each request if present */}
         {requests.length > 0 ? (
           requests.map((mail) => (
-            <div key={mail.id} className="inbox-item">
+            <div key={mail.reqId} className="inbox-item">
               <div className="inbox-title">{mail.title}</div>
               <div className="inbox-type">{mail.type}</div>
-              <div className="inbox-sender">{mail.sender}</div>
-              <div className="inbox-time">{mail.time}</div>
+              <div className="inbox-sender">{mail.userEmail}</div>
+              <div className="inbox-time">{mail.createdAt}</div>
               <div
                 className="inbox-status"
                 style={{ backgroundColor: statusColors[mail.status] || "#ccc" }}

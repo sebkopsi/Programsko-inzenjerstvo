@@ -5,10 +5,12 @@ import com.cookingflamingoz.backend.model.RequestSummary;
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.repository.RequestRepository;
 import com.cookingflamingoz.backend.repository.UserRepository;
+import com.cookingflamingoz.backend.service.profile.ProfileResults;
 import com.cookingflamingoz.backend.util.GenericResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Optional;
 
 @Service
@@ -26,7 +28,21 @@ public class AdminService {
             return new AdminResults.InboxResult(false, "Access denied: Not an admin", null);
         }
         List<RequestSummary> requests = requestRepository.findAllProjectedBy();
-        return new AdminResults.InboxResult(true, "Found " + requests.size() + " requests.", requests);
+        User user = userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
+
+        List<AdminResults.AdminSummaryInfo> adminSummaryInfoList = requests.stream()
+                .map(ut -> { return new AdminResults.AdminSummaryInfo(
+                            user.getEmail(),
+                            ut.getCreatedAt(),
+                            ut.getSentByUserId(),
+                            ut.getStatus(),
+                            ut.getType(),
+                            ut.getTitle(),
+                            ut.getReqId()
+                    );
+                })
+                .collect(java.util.stream.Collectors.toList());;
+        return new AdminResults.InboxResult(true, "Found " + requests.size() + " requests.", adminSummaryInfoList);
     }
 
     public AdminResults.DetailsResult getById(int requestId, int userId) {

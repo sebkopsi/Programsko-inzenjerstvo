@@ -11,6 +11,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.cookingflamingoz.backend.repository.EnrolledCourseRepository;
+import com.cookingflamingoz.backend.util.GenericResult;
 
 
 import java.util.HashSet;
@@ -26,12 +28,14 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final TagRepository tagRepository;
     private final CourseTagRepository courseTagRepository;
+    private final EnrolledCourseRepository enrolledCourseRepository;
 
-    public CourseService(CourseRepository courseRepository, TagRepository tagRepository, CourseTagRepository courseTagRepository, UserRepository userRepository){
+    public CourseService(CourseRepository courseRepository, TagRepository tagRepository, CourseTagRepository courseTagRepository, UserRepository userRepository, EnrolledCourseRepository enrolledCourseRepository) {
         this.courseRepository = courseRepository;
         this.tagRepository = tagRepository;
         this.courseTagRepository = courseTagRepository;
         this.userRepository = userRepository;
+        this.enrolledCourseRepository = enrolledCourseRepository;
     }
 
     public CourseResults.GetByIdResult getById(int id, int userId){
@@ -95,5 +99,36 @@ public class CourseService {
         courseTagRepository.saveAll(courseTags);
 
         return new CourseResults.CreateResult(true, "", finalNewCourse);
+    }
+
+    // User enrolling in a course
+    public GenericResult enroll(int courseId, int userId) {
+        // Find course
+        Optional<Course> courseOpt = courseRepository.findById(courseId);
+        if (courseOpt.isEmpty()) {
+            return new GenericResult(false, "Course not found.");
+        }
+
+        // Find user
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            return new GenericResult(false, "User does not exist.");
+        }
+
+        // Check if already enrolled using the @IdClass
+        EnrolledCourse.EnrolledCourseId enrollmentId = new EnrolledCourse.EnrolledCourseId(courseId, userId);
+        if (enrolledCourseRepository.existsById(enrollmentId)) {
+            return new GenericResult(false, "You are already enrolled in this course.");
+        }
+
+        // Create new enrollment
+        EnrolledCourse enrollment = new EnrolledCourse();
+        enrollment.setCourse(courseOpt.get());
+        enrollment.setUser(userOpt.get());
+        enrollment.setCompletionPercentage(0); // Default value
+
+        enrolledCourseRepository.save(enrollment);
+
+        return new GenericResult(true, "Successfully enrolled in the course.");
     }
 }
