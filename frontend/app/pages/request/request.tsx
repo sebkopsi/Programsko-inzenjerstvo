@@ -1,5 +1,7 @@
-import './request.css'
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router";
+import 'any-date-parser';
+
+import './request.css';
 
 const types = ["promoteInstructor", "report", "updateCourse"]
 
@@ -20,48 +22,20 @@ function Footer() {
   );
 }
 
-export function Request() {
-  const [data, setData] = useState([]); 
-  const [error, setError] = useState<string|null>(null);
+export function RequestPage() {
+  const { requestInfo } = useLoaderData();
+  const { reqId, title, content, type, sentByUserId, reportedUserId, targetCourseId, status, createdAt } = requestInfo.data;
+  const dateTime = (new Date(createdAt)).toLocaleString();
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const res = await fetch("http://localhost:8890/admin/request/2");
-        if (!res.ok) throw new Error(String(res.status));
-        setData(await res.json());
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(e.message);
-        } else {
-          setError("Unknown error");
-        }
-      }
-    };
-    loadData();
-  }, []);
-
-  if (error) return <p>Error: {error}</p>;
-
-  const userID = 22345;
   const userName = "Darko2303";
-  const title = "Request title here";
-  const content = `
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
-  const type = types[2];
-  const dateTime = "12.1.2022. 13:00";
   const courseName = "Mediteranska kuhinja";
-  const courseID = 676767;
-  const reqID = 1239;
 
   return (
     <section id="content">
       <div id="header">
         <div id="title">
           <a href="#"><h2>requests</h2></a>
-          <h2> &gt; {reqID} ({type})</h2>
+          <h2> &gt; {reqId} ({type})</h2>
         </div>
         <div id="prevNext">
           <button>Previous</button>
@@ -73,10 +47,10 @@ export function Request() {
       <div className="request">
         <p>{content}</p>
         <div>
-          <p><b>Sent by:</b> {userName} ({userID})</p>
+          <p><b>Sent by:</b> {userName} ({sentByUserId})</p>
           <p><b>Created at:</b> {dateTime}</p>
-          {type == "report" && <p><b>Reported user:</b> {userName} ({userID})</p>}
-          {type == "updateCourse" && <p><b>Target course:</b> {courseName} ({courseID})</p>}
+          {type == "report" && <p><b>Reported user:</b> {userName} ({reportedUserId})</p>}
+          {type == "updateCourse" && <p><b>Target course:</b> {courseName} ({targetCourseId})</p>}
         </div>
       </div>
       <hr/>
