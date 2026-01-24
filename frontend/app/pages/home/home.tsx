@@ -11,7 +11,7 @@ export function HomePage({ user }: HomePageProps) {
       <header>
         <div className="option-section">
           <div className="menu">
-            {!user && (
+            {/* {!user && ( */}
               <>
                 <Link className="login-link" to="/login">
                   LOG IN
@@ -20,7 +20,7 @@ export function HomePage({ user }: HomePageProps) {
                   SIGN UP
                 </Link>
               </>
-            )}
+            {/* )} */}
 
             {user && (
               <Link className="profile-link" to="/profile">
