@@ -9,7 +9,14 @@ import java.util.Set;
 
 public interface EnrolledCourseRepository extends JpaRepository<EnrolledCourse, Integer> {
 
-    @Query("select ut from EnrolledCourse ut where ut.user.userId = :userId")
-    public Set<EnrolledCourse> findAllByUserId(@Param("userId") Integer userId);
+    @Query("""
+    select distinct ec
+    from EnrolledCourse ec
+    join fetch ec.course c
+    join fetch c.creator
+    left join fetch c.tags t
+    where ec.user.userId = :userId
+    """)
+    Set<EnrolledCourse> findAllByUserId(@Param("userId") Integer userId);
 
 }

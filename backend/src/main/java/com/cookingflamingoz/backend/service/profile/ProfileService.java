@@ -51,13 +51,4 @@ public class ProfileService {
         return new ProfileResults.GetAllResults(true, "Found all profile information."
                 , data);
     }
-    /*
-    *     public AdminResults.InboxResult getInbox(int userId) {
-    *    if (!validateAdmin(userId)) {
-    *        return new AdminResults.InboxResult(false, "Access denied: Not an admin", null);
-    *    }
-    *    List<RequestSummary> requests = requestRepository.findAllProjectedBy();
-    *    return new AdminResults.InboxResult(true, "Found " + requests.size() + " requests.", requests);
-    * }
-    * */
 }

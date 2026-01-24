@@ -176,7 +176,7 @@ CREATE TABLE public."enrolledCourse" (
 	"completionPercentage" int4 NOT NULL,
 	"certificateId" int4 NULL,
 	"enrolledAt" timestamptz DEFAULT now() NOT NULL,
-	"status" text NOT NULL DEFAULT 'pending',
+	"status" text NOT NULL DEFAULT 'enrolled',
 	"endedAt" timestamptz NULL,
 	CONSTRAINT completion_range CHECK ((("completionPercentage" >= 0) AND ("completionPercentage" <= 100))),
 	CONSTRAINT upistecaj_pkey PRIMARY KEY ("courseId", "userId"),
@@ -335,6 +335,7 @@ CREATE TABLE public."enrolledLecture" (
 	"lectureId" int4 NOT NULL,
 	"userId" int4 NOT NULL,
 	CONSTRAINT upislekcija_pkey PRIMARY KEY ("lectureId", "userId"),
+	CONSTRAINT completion_range CHECK ((("completionPercentage" >= 0) AND ("completionPercentage" <= 100))),
 	CONSTRAINT upislekcija_idlekc_fkey FOREIGN KEY ("lectureId") REFERENCES public.lecture("lectureId") ON DELETE CASCADE,
 	CONSTRAINT upislekcija_idpolaz_fkey FOREIGN KEY ("userId") REFERENCES public."user"("userId") ON DELETE CASCADE
 );
