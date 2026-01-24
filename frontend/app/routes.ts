@@ -5,8 +5,9 @@ export default [
     route("login", "routes/login.tsx"),
     route("signup", "routes/signup.tsx"),
     route("oauth", "routes/oauth.tsx"),
-    route("logout", "routes/logout.tsx"),
-    route("profile/preferences", "routes/profile.tsx"),
+    route("profile", "routes/profile/userProfile.tsx"),
+    route("profile/userPreferences", "routes/profile/userPreferences.tsx"),
+
 
     route("course", "routes/course/userCourses.tsx"),
     route("course/new", "routes/course/newCourse.tsx"),

@@ -56,3 +56,40 @@ input{
     font-size: 1rem;
     padding: 0.5rem;
 }
+
+.tag-explanation {
+    font-size: 0.7rem;
+    color: #9d9c9c;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+#submitter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.submitAllButton {
+    margin-top: 1rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1rem;
+    background-color: #004C22;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  
+}
+
+.submitAllButton:hover {
+    background-color: #004c2261;
+    transform: translateY(-2px);
+}
+.submitAllButton:active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}

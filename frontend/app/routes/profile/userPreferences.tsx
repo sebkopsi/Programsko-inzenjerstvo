@@ -1,7 +1,8 @@
-import { ProfilePage } from "~/pages/profile/profile";
-import type { Route } from "./+types/profile";
+import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
+import UserPreferences from "~/pages/profile/userPreferences";
 import { redirect } from "react-router";
 import { GetJwtToken } from "~/util/cookie";
+import type { Route } from "./+types/userPreferences";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const jwt = GetJwtToken(request)
@@ -78,6 +79,13 @@ export async function action({ request }: Route.ActionArgs) {
   }
 }
 
-export default function ProfileRoute() {
-  return <ProfilePage />;
+export default function userPreferences() {
+  return <PreferencesPage />;
 }
+
+export function PreferencesPage() {
+  return (
+      <section id="content">{UserPreferences()}</section>
+  );
+}
+

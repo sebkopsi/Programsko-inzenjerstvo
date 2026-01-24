@@ -32,5 +32,5 @@ public class ProfileController {
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         return adminService.getInbox(userID);
     }
-    */
+    */  
 }
