@@ -150,18 +150,25 @@
     margin: 0.5rem 0 0;
 }
 
-/* ------------------------ NOTES ------------------------ */
-.notes {
+.logout-section {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    justify-content: center;
 }
 
-.notes p {
-    margin: 0;
+.logout-button {
+    margin: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 1rem;
     font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+;
 }
-
 /* ------------------------ RESPONSIVE ------------------------ */
 @media (max-width: 600px) {
     .profile-header {

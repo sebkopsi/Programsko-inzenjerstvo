@@ -7,6 +7,7 @@ export default [
     route("oauth", "routes/oauth.tsx"),
     route("profile", "routes/profile/userProfile.tsx"),
     route("profile/userPreferences", "routes/profile/userPreferences.tsx"),
+    route("logout", "routes/profile/logout.tsx"),
 
 
     route("course", "routes/course/userCourses.tsx"),
