@@ -1,9 +1,6 @@
 package com.cookingflamingoz.backend.service.profile;
 
-import com.cookingflamingoz.backend.model.DifficultyLevel;
-import com.cookingflamingoz.backend.model.User;
-import com.cookingflamingoz.backend.model.EnrolleeProfile;
-import com.cookingflamingoz.backend.model.UserTag;
+import com.cookingflamingoz.backend.model.*;
 import com.cookingflamingoz.backend.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +13,14 @@ public class ProfileService {
     private final EnrolleeProfileRepository enrolleeProfileRepository;
     private final DifficultyLevelRepository difficultyLevelRepository;
     private final UserTagRepository userTagRepository;
+    private final EnrolledCourseRepository enrolledCourseRepository;
 
-    public ProfileService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, UserTagRepository userTagRepository) {
+    public ProfileService(UserRepository userRepository, EnrolleeProfileRepository enrolleeProfileRepository, DifficultyLevelRepository difficultyLevelRepository, UserTagRepository userTagRepository, EnrolledCourseRepository enrolledCourseRepository) {
         this.userRepository = userRepository;
         this.enrolleeProfileRepository = enrolleeProfileRepository;
         this.difficultyLevelRepository = difficultyLevelRepository;
         this.userTagRepository = userTagRepository;
+        this.enrolledCourseRepository = enrolledCourseRepository;
     }
 
     public ProfileResults.GetAllResults getAllProfileInfo(int userId){
@@ -45,18 +44,22 @@ public class ProfileService {
                 ))
                 .collect(java.util.stream.Collectors.toSet());
 
-        ProfileResults.ProfileInfo data = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName(), userTagInfoSet);
+        Set<EnrolledCourse> enrolledCourses = enrolledCourseRepository.findByUserId(user.getUserId());
+        Set<ProfileResults.EnrolledCoursesInfo> enrolledCoursesInfoSet = enrolledCourses.stream()
+                .map(ut -> new ProfileResults.EnrolledCoursesInfo(
+                        ut.getCourse().getCourseId(),
+                        ut.getUser().getUserId(),
+                        ut.getCompletionPercentage(),
+                        ut.getCertificateId(),
+                        ut.getEnrolledAt(),
+                        ut.getStatus(),
+                        ut.getEndedAt()
+                ))
+                .collect(java.util.stream.Collectors.toSet());;
+
+        ProfileResults.ProfileInfo data = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName(), userTagInfoSet, enrolledCoursesInfoSet);
 
         return new ProfileResults.GetAllResults(true, "Found all profile information."
                 , data);
     }
-    /*
-    *     public AdminResults.InboxResult getInbox(int userId) {
-    *    if (!validateAdmin(userId)) {
-    *        return new AdminResults.InboxResult(false, "Access denied: Not an admin", null);
-    *    }
-    *    List<RequestSummary> requests = requestRepository.findAllProjectedBy();
-    *    return new AdminResults.InboxResult(true, "Found " + requests.size() + " requests.", requests);
-    * }
-    * */
 }

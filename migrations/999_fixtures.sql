@@ -26,12 +26,15 @@ INSERT INTO public."tag" (
 )
 VALUES
   ('cooking', 'general'),
-  ('italian', 'general'),
+  ('italian', 'favorite cuisines'),
   ('pasta', 'general'),
   ('gluten', 'general'),
   ('sauces', 'general'),
-  ('brocolli','general'),
-  ('pizza','general');
+  ('brocolli','dietary preferences'),
+  ('pizza','dietary preferences'),
+  ('american','favorite cuisines'),
+  ('poison','allergies')
+  ;
 
 
 INSERT INTO public."user" (
@@ -65,7 +68,9 @@ INSERT INTO public.userTag (
 )
 VALUES
   (1,6,false),
-  (1,7,true);
+  (1,7,true),
+  (1,8,true),
+  (1,9,false);
 
 INSERT INTO public.course (
    "name", "creatorId", description, 
@@ -230,3 +235,13 @@ VALUES
   	'updateCourse', 2,
   	NULL, 1
   );
+
+INSERT INTO public."enrolledCourse" (
+	"courseId", "userId",
+	"completionPercentage", "certificateId"
+)
+VALUES
+(
+	1,1,
+	75, null
+);

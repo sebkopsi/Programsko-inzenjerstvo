@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-
+import java.util.Date;
 
 @Entity
 @Getter
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @IdClass(EnrolledCourse.EnrolledCourseId.class)
 public class EnrolledCourse {
 
-    public  static class EnrolledCourseId implements Serializable {
+    public static class EnrolledCourseId implements Serializable {
         private Integer course;
         private Integer user;
 
@@ -40,11 +40,20 @@ public class EnrolledCourse {
     @JoinColumn(name = "\"userId\"", nullable = false)
     private User user;
 
-    @Column(name = "completionPercentage", nullable = false)
+    @Column(name = "\"completionPercentage\"", nullable = false)
     private Integer completionPercentage = 0;
 
-    @Column(name = "certificateId", nullable = true)
+    @Column(name = "\"certificateId\"", nullable = true)
     private Integer certificateId;
+
+    @Column(name = "\"enrolledAt\"", nullable = false)
+    private Date enrolledAt;
+
+    @Column(name = "\"status\"", nullable = false)
+    private String status;
+
+    @Column(name = "\"endedAt\"", nullable = true)
+    private Date endedAt;
 
     //constructors
     public EnrolledCourse() {} // needed for JPA
