@@ -70,7 +70,8 @@ CREATE TABLE public.tag (
 	"name" varchar NOT NULL,
 	category varchar NOT NULL,
 	CONSTRAINT tag_pk PRIMARY KEY ("tagId"),
-	CONSTRAINT tag_unique UNIQUE (category, name)
+	CONSTRAINT tag_unique UNIQUE (category, name),
+	CONSTRAINT tag_category_check CHECK ("category" IN ('general','dietary preferences','allergies','favorite cuisines'))
 );
 
 
