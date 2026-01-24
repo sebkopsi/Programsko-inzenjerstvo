@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import com.cookingflamingoz.backend.util.GenericResult;
 
 
 
@@ -47,5 +48,13 @@ public class CourseController {
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         request.userId=userID;
         return courseService.search(request);
+    }
+
+    @PostMapping("/{courseId}/enroll")
+    public GenericResult enroll(@PathVariable Integer courseId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userId = Integer.parseInt(authentication.getPrincipal().toString());
+
+        return courseService.enroll(courseId, userId);
     }
 }

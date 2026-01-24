@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Set;
 
-public interface EnrolledCourseRepository extends JpaRepository<EnrolledCourse, Integer> {
+public interface EnrolledCourseRepository extends JpaRepository<EnrolledCourse, EnrolledCourse.EnrolledCourseId> {
 
     @Query("""
     select distinct ec
