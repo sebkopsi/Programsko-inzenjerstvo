@@ -104,7 +104,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main >
-      <SideBar />
+      {/* <SideBar isAdmin={user?.isAdmin === true} /> */}
       <section id="content">
         <section id="error">
           <h1>{message}</h1>
