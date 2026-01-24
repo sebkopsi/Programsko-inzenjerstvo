@@ -31,10 +31,10 @@ public class ProfileResults {
         // Prehrambene preferencije + omiljene kuhinje + alergeni
         public Set<UserTagInfo> tags;
         // Napredak po upisanim tecajevima + Povijest upisanih tecajeva
-        public Set<EnrolledCourse> enrolledCoursesSet;
+        public Set<EnrolledCoursesInfo> enrolledCoursesSet;
 
 
-        public ProfileInfo(String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags, Set<EnrolledCourse> enrolledCourses ) {
+        public ProfileInfo(String firstname, String surname, String email, Date createdAt, boolean isAdmin, boolean isModerator, boolean isVerified, String username, String skillLevel, Set<UserTagInfo> tags, Set<EnrolledCoursesInfo> enrolledCourses ) {
             this.firstname = firstname;
             this.surname = surname;
             this.email = email;
@@ -46,6 +46,26 @@ public class ProfileResults {
             this.skillLevel = skillLevel;
             this.tags = tags;
             this.enrolledCoursesSet = enrolledCourses;
+        }
+    }
+
+    public static class EnrolledCoursesInfo {
+        public Integer courseId;
+        public Integer userId;
+        public Integer completionPercentage;
+        public Integer certificateId;
+        public Date enrolledAt;
+        public String status;
+        public Date endedAt;
+
+        public EnrolledCoursesInfo(Integer courseId, Integer userId, Integer completionPercentage, Integer certificateId, Date enrolledAt, String status, Date endedAt) {
+            this.courseId = courseId;
+            this.userId = userId;
+            this.completionPercentage = completionPercentage;
+            this.certificateId = certificateId;
+            this.enrolledAt = enrolledAt;
+            this.status = status;
+            this.endedAt = endedAt;
         }
     }
 

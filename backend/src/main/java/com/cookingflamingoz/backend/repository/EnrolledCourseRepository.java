@@ -17,6 +17,6 @@ public interface EnrolledCourseRepository extends JpaRepository<EnrolledCourse, 
     left join fetch c.tags t
     where ec.user.userId = :userId
     """)
-    Set<EnrolledCourse> findAllByUserId(@Param("userId") Integer userId);
+    Set<EnrolledCourse> findByUserId(@Param ("userId") Integer userId);
 
 }

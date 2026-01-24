@@ -44,9 +44,20 @@ public class ProfileService {
                 ))
                 .collect(java.util.stream.Collectors.toSet());
 
-        Set<EnrolledCourse> enrolledCourses = enrolledCourseRepository.findAllByUserId(user.getUserId());
+        Set<EnrolledCourse> enrolledCourses = enrolledCourseRepository.findByUserId(user.getUserId());
+        Set<ProfileResults.EnrolledCoursesInfo> enrolledCoursesInfoSet = enrolledCourses.stream()
+                .map(ut -> new ProfileResults.EnrolledCoursesInfo(
+                        ut.getCourse().getCourseId(),
+                        ut.getUser().getUserId(),
+                        ut.getCompletionPercentage(),
+                        ut.getCertificateId(),
+                        ut.getEnrolledAt(),
+                        ut.getStatus(),
+                        ut.getEndedAt()
+                ))
+                .collect(java.util.stream.Collectors.toSet());;
 
-        ProfileResults.ProfileInfo data = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName(), userTagInfoSet, enrolledCourses);
+        ProfileResults.ProfileInfo data = new ProfileResults.ProfileInfo(user.getFirstname(), user.getSurname(), user.getEmail(), user.getCreatedAt(), user.getIsAdmin(), user.getIsModerator(), user.getIsVerified(), enrolleeProfile.getUsername(), difficultyLevel.getName(), userTagInfoSet, enrolledCoursesInfoSet);
 
         return new ProfileResults.GetAllResults(true, "Found all profile information."
                 , data);
