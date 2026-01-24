@@ -20,7 +20,8 @@ export default [
     route("course/:courseId/:moduleId/new", "routes/lecture/new.tsx"),
 
     route("adminpanel", "routes/admin_panel/adminPanel.tsx"),
-    route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx")
+    route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx"),
 
+    route("request", "routes/request.tsx")
 
 ] satisfies RouteConfig;
