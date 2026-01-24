@@ -230,3 +230,13 @@ VALUES
   	'updateCourse', 2,
   	NULL, 1
   );
+
+INSERT INTO public."enrolledCourse" (
+	"courseId", "userId",
+	"completionPercentage", "certificateId"
+)
+VALUES
+(
+	1,1,
+	75, null
+);
