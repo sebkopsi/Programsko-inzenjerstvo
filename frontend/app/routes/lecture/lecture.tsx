@@ -9,12 +9,18 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     return redirect("/login");
   }
 
+  
+
   const courseReq = await fetch(`http://localhost:8890/course/${params['courseId']}`, {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + jwt,
     }
   });
+
+  if(courseReq.status === 401) {
+      return redirect("/login");
+  }
 
   if (!courseReq.ok) {
     throw new Error("Failed to fetch courses");
@@ -69,37 +75,62 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   }
 }
 
-export async function action({params, request }: Route.ActionArgs) {
+
+export async function action({ params, request }: Route.ActionArgs) {
   const formData = await request.formData();
 
   const jwt = GetJwtToken(request);
-  if (!jwt) {
+  if (!jwt) return redirect("/login");
+
+  const answers: Record<string, any> = {};
+
+  for (const [key, value] of formData.entries()) {
+    const k = String(key);
+    const v = String(value);
+
+    if (answers[k] === undefined) {
+      answers[k] = v;
+    } else if (Array.isArray(answers[k])) {
+      answers[k].push(v);
+    } else {
+      answers[k] = [answers[k], v];
+    }
+
+  }
+
+  const resp = await fetch(`http://localhost:8890/lecture/${params.lectureId}/quiz/submit`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer " + jwt,
+    },
+    body: JSON.stringify({
+      answersJson: JSON.stringify(answers),
+    }),
+  });
+
+  if (resp.status === 401 || resp.status === 403) {
     return redirect("/login");
   }
 
-
-  console.debug(formData)
+  const text = await resp.text();
+  if (!text) {
+    return { 
+      success: false, 
+      message: "Empty response from backend" 
+    };
+  }
 
   try {
-    const resp = await fetch(`http://localhost:8890/course/${params['courseId']}/module/${params.moduleId}/lecture/${params.lectureId}/submit`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "Authorization": "Bearer " + jwt
-      },
-      body: JSON.stringify({
-
-      })
-    });
-
-    
-  } catch (error: any) {
-    throw new Error(error)
+    return JSON.parse(text);
+  } catch {
+    return { 
+      success: false, 
+      message: "Backend returned invalid JSON",  
+    };
   }
 }
-
 
 export default function userCourses() {
   return <LecturePage />
 }
-
