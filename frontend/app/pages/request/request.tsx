@@ -1,8 +1,7 @@
+import './request.css';
 import { useLoaderData } from "react-router";
 import 'any-date-parser';
 import pfp from '../instructor/fame-media_no-prophile-picture-1-74336437.jpg';
-
-import './request.css';
 
 const types = ["promoteInstructor", "report", "updateCourse"]
 
