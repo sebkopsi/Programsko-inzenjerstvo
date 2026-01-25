@@ -22,7 +22,7 @@ export default [
     route("adminpanel", "routes/admin_panel/adminPanel.tsx"),
     route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx"),
 
-    route("request", "routes/request.tsx"),
+    route("request/:reqId", "routes/request.tsx"),
     route("newInstructor", "routes/newInstructor.tsx")
 
 ] satisfies RouteConfig;

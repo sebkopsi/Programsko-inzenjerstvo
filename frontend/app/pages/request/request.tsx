@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router";
 import 'any-date-parser';
+import pfp from '../instructor/fame-media_no-prophile-picture-1-74336437.jpg';
 
 import './request.css';
 
@@ -34,7 +35,7 @@ export function RequestPage() {
     <section id="content">
       <div id="header">
         <div id="title">
-          <a href="#"><h2>requests</h2></a>
+          <a href="/adminpanel/inbox"><h2>requests</h2></a>
           <h2> &gt; {reqId} ({type})</h2>
         </div>
         <div id="prevNext">
@@ -47,8 +48,13 @@ export function RequestPage() {
       <div className="request">
         <p>{content}</p>
         <div>
+          {type == "promoteInstructor" && 
+            <div className="imgFrame">
+              <img src={pfp} alt="pfp" />
+            </div>}
           <p><b>Sent by:</b> {userName} ({sentByUserId})</p>
           <p><b>Created at:</b> {dateTime}</p>
+          {type == "promoteInstructor" && <p><b>Identification document:</b> <a href="">driver's licence</a></p>}
           {type == "report" && <p><b>Reported user:</b> {userName} ({reportedUserId})</p>}
           {type == "updateCourse" && <p><b>Target course:</b> {courseName} ({targetCourseId})</p>}
         </div>
@@ -57,10 +63,12 @@ export function RequestPage() {
       <div className="request">
         <div>
           {type == "promoteInstructor" && <>
-            <p><b>Attachments:</b></p>
-            <a href="#">diploma</a><br/>
-            <a href="#">osobna iskaznica</a><br/>
-            <a href="#">vozacka dozvola</a>
+            <p><b>Certificates/diplomas:</b></p>
+            <ul>
+              <li><a href="#">diploma</a></li>
+              <li><a href="#">certifikat 1</a></li>
+              <li><a href="#">certifikat 2</a></li>
+            </ul>
           </>}
         </div>
         <div>
