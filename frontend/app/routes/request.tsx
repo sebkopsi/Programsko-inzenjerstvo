@@ -8,7 +8,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   if (!jwt)
     return redirect("/login");
 
-  const requestReq = await fetch("http://localhost:8890/admin/request/2", {
+  const requestReq = await fetch("http://localhost:8890/admin/request/1", {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + jwt,
