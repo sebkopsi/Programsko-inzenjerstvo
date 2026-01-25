@@ -112,10 +112,22 @@
     font-weight: bold;
 }
 
-.chip:hover {
-    background-color: #004C2261;
-    color: white;
+.chip.preferred {
+    background-color: #d4f5d4; /* light green */
+    border:none;
+    color: #004C22;
 }
+
+.chip.not-preferred {
+    background-color: #f5d4d4; /* light red */
+        border:none;
+    color: #660000;
+}
+
+.chip:hover {
+    filter: brightness(0.9);
+}
+
 
 /* ------------------------ HISTORY GRID ------------------------ */
 .history-grid {
@@ -167,9 +179,63 @@
     transition: background-color 0.2s ease;
     font-family: "Catamaran", sans-serif;
     font-weight: bold
-;
+;}
+.edit-section {
+    display: flex;
+    justify-content: center;
 }
-/* ------------------------ RESPONSIVE ------------------------ */
+
+.edit-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #d3d3d3;
+    color: rgb(130, 130, 130);
+    border-radius: 1rem;
+    border:none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+;}
+
+.save-button{
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #004C22;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+}
+
+.cancel-button{
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+}
+
+input{
+    flex:1;
+    height: 1rem;
+    border: #004C22 0.1rem solid;
+    background-color:rgb(241, 238, 238) ;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
 @media (max-width: 600px) {
     .profile-header {
         flex-direction: column;

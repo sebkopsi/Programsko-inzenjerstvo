@@ -29,7 +29,6 @@ export default function AdminInboxContent() {
       </div>
 
       <div className="inbox-list">
-        {/* Inbox table headers always shown */}
         <div className="inbox-specifications-header">
           <div className="inbox-title-header">Title</div>
           <div className="inbox-type-header">Type</div>
@@ -37,8 +36,6 @@ export default function AdminInboxContent() {
           <div className="inbox-time-header">Time</div>
           <div className="inbox-status-header">Status</div>
         </div>
-
-        {/* Render each request if present */}
         {requests.length > 0 ? (
           requests.map((mail) => (
             <div key={mail.reqId} className="inbox-item">
