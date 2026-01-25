@@ -2,6 +2,9 @@ processes:
   database:
     command: make database
 
+  fileserver:
+    command: make fileserver-local
+
   frontend:
     command: make frontend-local
     depends_on:
