@@ -12,4 +12,15 @@ public class InstructorRequests {
         public Integer userId;
     };
 
+    @AllArgsConstructor
+    public static class PromotionRequestBody {
+        public String username;
+        public String biography;
+        public String specialization;
+
+        public Byte[] profilePicture;
+        public Byte[] identificationDocument;
+        public Byte[] diploma;
+    };
+
 }

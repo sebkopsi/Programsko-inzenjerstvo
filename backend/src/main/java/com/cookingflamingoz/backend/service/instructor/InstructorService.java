@@ -1,6 +1,7 @@
 package com.cookingflamingoz.backend.service.instructor;
 
 import com.cookingflamingoz.backend.controller.course.CourseRequests;
+import com.cookingflamingoz.backend.controller.instructor.InstructorRequests;
 import com.cookingflamingoz.backend.model.*;
 import com.cookingflamingoz.backend.repository.*;
 import com.cookingflamingoz.backend.service.course.CourseResults;
@@ -49,10 +50,13 @@ public class InstructorService {
 
 
     // TODO: fix this (what with files?)
-    public GenericResult createPromotionRequest(int userId, String title, String content) {
+    public GenericResult createPromotionRequest(int userId, InstructorRequests.PromotionRequestBody data) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return new GenericResult(false, "user does not exist");
+        }
+        if(data == null){
+            return new GenericResult(false, "invalid request data");
         }
 
         // Optional: prevent duplicate pending promote requests
@@ -63,11 +67,49 @@ public class InstructorService {
             return new GenericResult(false, "there is already a pending promotion request");
         }
 
+        String username = data.username;
+        String biography = data.biography;
+        String specialization = data.specialization;
+
+        //null for now
+        Byte[] profilePicture = data.profilePicture;
+        Byte[] identificationDocument = data.identificationDocument;
+        Byte[] diploma = data.diploma;
+
+        //check if username doesn't contain invalid characters
+        if(!username.matches("^[a-zA-Z0-9_]+$")){
+            return new GenericResult(false, "username contains invalid characters");
+        }
+        //check if username is already taken
+        Optional<InstructorProfile> existingProfile = instructorProfileRepository.findByUsername(username);
+        if(existingProfile.isPresent()){
+            return new GenericResult(false, "username is already taken");
+        }
+
+        if (username == null || username.isEmpty()) {
+            return new GenericResult(false, "username cannot be empty");
+        }
+        if (biography == null || biography.isEmpty()) {
+            return new GenericResult(false, "biography cannot be empty");
+        }
+        if (specialization == null || specialization.isEmpty()) {
+            return new GenericResult(false, "specialization cannot be empty");
+        }
+
+        // compose safely
+        StringBuilder sb = new StringBuilder(256);
+        sb.append("Username: ").append(username).append("\n")
+                .append("Biography: ").append(biography).append("\n")
+                .append("Specialization: ").append(specialization).append("\n");
+        String content = sb.toString();
+
         Request req = new Request();
         req.setType("promoteInstructor");
         req.setSentByUserId(userId);
-        req.setTitle(title == null || title.isEmpty() ? "Promotion request" : title);
-        req.setContent(content == null ? "" : content);
+        req.setTitle("Promotion request"); // just this ??
+        req.setContent(content);
+        req.setReportedUserId(null);
+        req.setTargetCourseId(null);
         // status defaults to "pending" per model; createdAt handled by DB
         Request saved = requestRepository.save(req);
 

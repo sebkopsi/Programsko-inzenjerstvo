@@ -39,16 +39,13 @@ public class InstructorController {
         return instructorService.getRequestByUserId(userID);
     }
 
-    public static class PromotionRequestBody {
-        public String title;
-        public String content;
-    }
+
 
     @PostMapping("/promotionRequest")
-    public GenericResult postPromotionRequest(@RequestBody PromotionRequestBody body) {
+    public GenericResult postPromotionRequest(@RequestBody InstructorRequests.PromotionRequestBody body) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
-        return instructorService.createPromotionRequest(userID, body == null ? null : body.title, body == null ? null : body.content);
+        return instructorService.createPromotionRequest(userID, body);
     }
 
 
