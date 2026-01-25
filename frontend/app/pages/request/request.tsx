@@ -1,7 +1,7 @@
+import './request.css';
 import { useLoaderData } from "react-router";
 import 'any-date-parser';
-
-import './request.css';
+import pfp from '../instructor/fame-media_no-prophile-picture-1-74336437.jpg';
 
 const types = ["promoteInstructor", "report", "updateCourse"]
 
@@ -23,18 +23,16 @@ function Footer() {
 }
 
 export function RequestPage() {
-  const { requestInfo } = useLoaderData();
+  const { requestInfo, userInfo } = useLoaderData();
   const { reqId, title, content, type, sentByUserId, reportedUserId, targetCourseId, status, createdAt } = requestInfo.data;
+  const { firstname, surname, email } = userInfo;
   const dateTime = (new Date(createdAt)).toLocaleString();
-
-  const userName = "Darko2303";
-  const courseName = "Mediteranska kuhinja";
 
   return (
     <section id="content">
       <div id="header">
         <div id="title">
-          <a href="#"><h2>requests</h2></a>
+          <a href="/adminpanel/inbox"><h2>requests</h2></a>
           <h2> &gt; {reqId} ({type})</h2>
         </div>
         <div id="prevNext">
@@ -47,20 +45,27 @@ export function RequestPage() {
       <div className="request">
         <p>{content}</p>
         <div>
-          <p><b>Sent by:</b> {userName} ({sentByUserId})</p>
+          {type == "promoteInstructor" && 
+            <div className="imgFrame">
+              <img src={pfp} alt="pfp" />
+            </div>}
+          <p><b>Sent by:</b> {firstname} {surname} ({sentByUserId}) {email}</p>
           <p><b>Created at:</b> {dateTime}</p>
-          {type == "report" && <p><b>Reported user:</b> {userName} ({reportedUserId})</p>}
-          {type == "updateCourse" && <p><b>Target course:</b> {courseName} ({targetCourseId})</p>}
+          {type == "promoteInstructor" && <p><b>Identification document:</b> <a href="#">driver's licence</a></p>}
+          {type == "report" && <p><b>Reported user ID:</b> {reportedUserId}</p>}
+          {type == "updateCourse" && <p><b>Target course ID:</b> {targetCourseId}</p>}
         </div>
       </div>
       <hr/>
       <div className="request">
         <div>
           {type == "promoteInstructor" && <>
-            <p><b>Attachments:</b></p>
-            <a href="#">diploma</a><br/>
-            <a href="#">osobna iskaznica</a><br/>
-            <a href="#">vozacka dozvola</a>
+            <p><b>Certificates/diplomas:</b></p>
+            <ul>
+              <li><a href="#">diploma</a></li>
+              <li><a href="#">certifikat 1</a></li>
+              <li><a href="#">certifikat 2</a></li>
+            </ul>
           </>}
         </div>
         <div>
