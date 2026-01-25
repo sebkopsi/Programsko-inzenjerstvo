@@ -4,7 +4,7 @@ import type { UserData } from "~/routes/profile/userProfile";
 import { Card } from "../components/card";
 import { useState } from "react";
 
-interface UserProfileProps {
+type UserProfileProps = {
   user: UserData;
   jwt: string;
 }
@@ -248,6 +248,23 @@ export default function UserProfile({ user, jwt }: UserProfileProps) {
   </div>
 </section>
 
+<section className="profile-section">
+  <h2 className="section-title">Tags:</h2>
+  <div className="chip-group">
+    {user.tags.length > 0 ? (
+      user.tags.map((tag, index) => (
+        <button
+          key={index}
+          className={`chip ${tag.preferred ? "preferred" : "not-preferred"}`}
+        >
+          {tag.name}
+        </button>
+      ))
+    ) : (
+      <p>No tags added yet.</p>
+    )}
+  </div>
+</section>
 
       <section className="edit-section">
   {editing ? (

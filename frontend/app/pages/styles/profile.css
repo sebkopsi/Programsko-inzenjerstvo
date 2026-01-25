@@ -1,5 +1,4 @@
 
-/* ------------------------ HEADER ------------------------ */
 .profile-header {
     display: flex;
     align-items: center;
@@ -8,12 +7,12 @@
 }
 
 .avatar-wrapper {
-    width: 100px;   /* square size for circle */
+    width: 100px;   
     height: 100px;
-    border-radius: 50%;  /* circular wrapper */
+    border-radius: 50%;  
     overflow: hidden;
     flex-shrink: 0;
-    background-color: #004C2261; /* optional placeholder background */
+    background-color: #004C2261; 
     display: flex;
     justify-content: center;
 }
@@ -21,8 +20,8 @@
 .avatar-image {
     width: 3rem;
     height: 100%;
-    object-fit: contain; /* show entire image */
-    object-position: center; /* center the image in the circle */
+    object-fit: contain; 
+    object-position: center; 
     display: block;
 }
 .profile-info {
@@ -63,7 +62,7 @@
     color: #666;
 }
 
-/* ------------------------ FORM ELEMENTS ------------------------ */
+
 .profile-section {
     margin: 2rem;
     display: flex;
@@ -78,7 +77,6 @@
     margin-bottom: 0.5rem;
 }
 
-/* SELECT INPUT */
 .skill-select {
     flex: 1;
     padding: 0.5rem 0.75rem;
@@ -88,40 +86,22 @@
     background-color: rgb(241, 238, 238);
 }
 
-/* ------------------------ CHIPS ------------------------ */
-.chip-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
 .chip {
-    padding: 0.35rem 0.75rem;
-    border-radius: 2rem;
-    border: 0.1rem solid #004C22;
-    background-color: rgb(241, 238, 238);
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: all 0.2s ease;
-}
-
-.chip span {
-    font-weight: bold;
+  padding: 6px 12px;
+  margin: 4px;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  cursor: default;
+  font-size: 14px;
 }
 
 .chip.preferred {
-    background-color: #d4f5d4; /* light green */
-    border:none;
-    color: #004C22;
+  background-color: #258916; 
 }
 
 .chip.not-preferred {
-    background-color: #f5d4d4; /* light red */
-        border:none;
-    color: #660000;
+  background-color: #f03b4d; 
 }
 
 .chip:hover {
@@ -129,7 +109,7 @@
 }
 
 
-/* ------------------------ HISTORY GRID ------------------------ */
+
 .history-grid {
     display: flex;
     gap: 1rem;

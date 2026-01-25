@@ -48,7 +48,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const res = await fetch("http://localhost:8890/profile/my", {
     headers: {
-      Authorization: `Bearer ${jwt}`,
+      "Authorization": `Bearer ${jwt}`,
       "Content-Type": "application/json",
     },
   });
@@ -58,7 +58,6 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
 
   const profile: ProfileResponse = await res.json();  
-
   return {
     user: profile.data,
     jwt,
