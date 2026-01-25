@@ -1,4 +1,5 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import MaterialPage from "./material";
 
 export default [
     index("routes/home.tsx"),
@@ -25,6 +26,8 @@ export default [
     route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx"),
 
     route("request", "routes/request.tsx"),
-    route("newInstructor", "routes/newInstructor.tsx")
+    route("newInstructor", "routes/newInstructor.tsx"),
+
+    route("material/:id", "material.tsx"),
 
 ] satisfies RouteConfig;

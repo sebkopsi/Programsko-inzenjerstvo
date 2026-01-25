@@ -1,6 +1,8 @@
 package com.cookingflamingoz.backend.controller.lecture;
 
 import com.cookingflamingoz.backend.model.Quiz;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Duration;
 import java.util.Set;
@@ -21,5 +23,8 @@ public class LectureRequests {
         public String steps;
         public Integer minScore;
         public Quiz quiz;
+        public String videoType;
+        public MultipartFile video;
+        public String url;
     }
 }

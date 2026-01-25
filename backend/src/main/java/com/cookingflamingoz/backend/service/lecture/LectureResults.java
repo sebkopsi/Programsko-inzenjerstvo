@@ -19,6 +19,7 @@ public class LectureResults {
         public String writtenSteps;
         public String difficulty;
         public Quiz quiz;
+        public Integer videoId;
 
         LectureInfo(String name, Integer id){
             this.name = name;
@@ -45,6 +46,7 @@ public class LectureResults {
                         lecture.getName(),
                         lecture.getLectureId()
                 );
+                data.videoId = lecture.getVideoId();
                data.cookTime = String.format("%02dm %02ds", lecture.getCookingTime().toHours() % 24,
                        lecture.getCookingTime().toMinutes() % 60);;
                data.prepTime = String.format("%02dm %02ds", lecture.getPreparationTime().toHours() % 24,

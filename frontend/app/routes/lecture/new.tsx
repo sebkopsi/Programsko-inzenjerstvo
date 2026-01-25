@@ -14,23 +14,33 @@ export async function action({ request }: Route.ActionArgs) {
 
   try {
     const quizData = String(formData.get('quizJson'));
-    const data = {
+    var data = {
       name: formData.get('name'),
       prepTime: `PT${formData.get('prepTime')}M`,
       cookTime: `PT${formData.get('cookTime')}M`,
       difficulty: formData.get('difficulty'),
       steps: formData.get('steps'),
       quiz: JSON.parse(quizData),
-      minScore: formData.get('minScore')
+      minScore: formData.get('minScore'),
+      videoType: formData.get("video"),
+      url: formData.get('videoUrl'),
     }
- 
+
+    const multipartData = new FormData();
+    multipartData.append("info", new Blob([JSON.stringify(data)], { type: "application/json" }));
+
+    if (formData.get("videoFile")) {
+      multipartData.append("videoFile", formData.get("videoFile") as File);
+    }
+
+    console.debug(multipartData)
+
     const createReq = await fetch(`http://localhost:8890/course/${formData.get("courseId")}/module/${formData.get("moduleId")}/lecture`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
         "Authorization": "Bearer " + jwt
       },
-      body: JSON.stringify(data)
+      body: multipartData
     });
 
 
@@ -39,7 +49,7 @@ export async function action({ request }: Route.ActionArgs) {
     }
 
     const createResponse = await createReq.json();
-    if(!createResponse.success){
+    if (!createResponse.success) {
       throw new Error("failed to create lecture: " + createResponse.message)
     }
 
