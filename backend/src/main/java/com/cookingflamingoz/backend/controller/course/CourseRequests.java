@@ -19,4 +19,12 @@ public class CourseRequests {
         public String desc;
         public Set<String> tags;
     }
+
+    @AllArgsConstructor
+    public static class UpdateRequest {
+        // fields are optional; service will apply non-null / non-empty values
+        public String name;
+        public String desc;
+        public Set<String> tags;
+    }
 }

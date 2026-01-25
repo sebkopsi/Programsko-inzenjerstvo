@@ -3,7 +3,8 @@
   "packages": [
     "jdk@22",
     "binutils@latest",
-    "maven@latest"
+    "maven@latest",
+    "process-compose@latest"
   ],
   "shell": {
     "init_hook": [

@@ -84,4 +84,21 @@ public class CourseResults {
         }
     }
 
+    public static class UpdateResult extends GenericResult {
+        public Integer id;
+
+        public UpdateResult(boolean success, String message, @Nullable Course course) {
+            super(success, message);
+            if(course != null){
+                this.id = course.getCourseId();
+            }
+        }
+    }
+
+    public static class DeleteResult extends GenericResult {
+        public DeleteResult(boolean success, String message) {
+            super(success, message);
+        }
+    }
+
 }
