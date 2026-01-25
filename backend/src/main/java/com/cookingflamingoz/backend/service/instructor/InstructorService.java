@@ -1,11 +1,9 @@
 package com.cookingflamingoz.backend.service.instructor;
 
-import com.cookingflamingoz.backend.controller.course.CourseRequests;
 import com.cookingflamingoz.backend.controller.instructor.InstructorRequests;
 import com.cookingflamingoz.backend.controller.material.MaterialRequests;
 import com.cookingflamingoz.backend.model.*;
 import com.cookingflamingoz.backend.repository.*;
-import com.cookingflamingoz.backend.service.course.CourseResults;
 import com.cookingflamingoz.backend.service.material.MaterialResults;
 import com.cookingflamingoz.backend.service.material.MaterialService;
 import com.cookingflamingoz.backend.util.GenericResult;
@@ -15,10 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
