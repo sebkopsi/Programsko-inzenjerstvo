@@ -23,12 +23,10 @@ function Footer() {
 }
 
 export function RequestPage() {
-  const { requestInfo } = useLoaderData();
+  const { requestInfo, userInfo } = useLoaderData();
   const { reqId, title, content, type, sentByUserId, reportedUserId, targetCourseId, status, createdAt } = requestInfo.data;
+  const { firstname, surname, email } = userInfo;
   const dateTime = (new Date(createdAt)).toLocaleString();
-
-  const userName = "Darko2303";
-  const courseName = "Mediteranska kuhinja";
 
   return (
     <section id="content">
@@ -51,11 +49,11 @@ export function RequestPage() {
             <div className="imgFrame">
               <img src={pfp} alt="pfp" />
             </div>}
-          <p><b>Sent by:</b> {userName} ({sentByUserId})</p>
+          <p><b>Sent by:</b> {firstname} {surname} ({sentByUserId}) {email}</p>
           <p><b>Created at:</b> {dateTime}</p>
-          {type == "promoteInstructor" && <p><b>Identification document:</b> <a href="">driver's licence</a></p>}
-          {type == "report" && <p><b>Reported user:</b> {userName} ({reportedUserId})</p>}
-          {type == "updateCourse" && <p><b>Target course:</b> {courseName} ({targetCourseId})</p>}
+          {type == "promoteInstructor" && <p><b>Identification document:</b> <a href="#">driver's licence</a></p>}
+          {type == "report" && <p><b>Reported user ID:</b> {reportedUserId}</p>}
+          {type == "updateCourse" && <p><b>Target course ID:</b> {targetCourseId}</p>}
         </div>
       </div>
       <hr/>
