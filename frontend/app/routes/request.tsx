@@ -8,6 +8,15 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   if (!jwt)
     return redirect("/login");
 
+  const res = await fetch("http://localhost:8890/user/my", {
+    headers: { "Authorization": "Bearer " + jwt },
+  });
+  if (!res.ok) throw new Error("Failed to fetch user info");
+  const user = await res.json();
+  if (!user.isAdmin) {
+    return redirect("/");
+  }
+
   const requestReq = await fetch(`http://localhost:8890/admin/request/${params['reqId']}`, {
     method: "GET",
     headers: {
