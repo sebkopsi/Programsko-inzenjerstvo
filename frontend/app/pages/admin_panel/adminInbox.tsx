@@ -46,7 +46,7 @@ export default function AdminInboxContent() {
                 <div className="inbox-title">{mail.title}</div>
                 <div className="inbox-type">{mail.type}</div>
                 <div className="inbox-sender">{mail.userEmail}</div>
-                <div className="inbox-time">{mail.createdAt}</div>
+                <div className="inbox-time">{(new Date(mail.createdAt)).toLocaleString()}</div>
                 <div
                   className="inbox-status"
                   style={{ backgroundColor: statusColors[mail.status] || "#ccc" }}
