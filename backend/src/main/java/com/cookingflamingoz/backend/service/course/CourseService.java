@@ -96,4 +96,57 @@ public class CourseService {
 
         return new CourseResults.CreateResult(true, "", finalNewCourse);
     }
+
+    public CourseResults.UpdateResult update(Integer courseId, Integer userId, CourseRequests.UpdateRequest request){
+        if(courseId == null || userId == null || request == null){
+            return new CourseResults.UpdateResult(false, "missing parameters", null);
+        }
+
+        var courseOpt = courseRepository.findById(courseId);
+        if(courseOpt.isEmpty()){
+            return new CourseResults.UpdateResult(false, "course not found", null);
+        }
+        var course = courseOpt.get();
+
+        // verify ownership
+        if(course.getCreator() == null || !course.getCreator().getUserId().equals(userId)){
+            return new CourseResults.UpdateResult(false, "user is not owner of course", null);
+        }
+
+        boolean changed = false;
+        if(request.name != null && !request.name.isEmpty()){
+            course.setName(request.name);
+            changed = true;
+        }
+        if(request.desc != null && !request.desc.isEmpty()){
+            course.setDescription(request.desc);
+            changed = true;
+        }
+
+        // update tags if provided
+        if(request.tags != null){
+            // remove old tags and add new ones
+            // naive approach: delete existing CourseTag entries for this course and add new ones
+            // (CourseTagRepository currently does not expose delete by course, so use JPA cascade via entity manager)
+            Set<Tag> tags = tagRepository.findByNameIn(request.tags);
+
+            // recreate course tags
+            final Course courseRef = course;
+            Set<CourseTag> courseTags = tags.stream().map(tag -> {
+                CourseTag ct = new CourseTag();
+                ct.setCourse(courseRef);
+                ct.setTag(tag);
+                return ct;
+            }).collect(Collectors.toSet());
+
+            course.setTags(courseTags);
+            changed = true;
+        }
+
+        if(changed){
+            course = courseRepository.save(course);
+        }
+
+        return new CourseResults.UpdateResult(true, "", course);
+    }
 }

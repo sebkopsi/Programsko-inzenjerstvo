@@ -45,7 +45,17 @@
     },
     "chromium": {
       "resolved": "github:NixOS/nixpkgs/13868c071cc73a5e9f610c47d7bb08e5da64fdd5?narHash=sha256-ZhuYJbwbZT32QA95tSkXd9zXHcdZj90EzHpEXBMabaw%3D#chromium",
-      "source": "nixpkg"
+      "source": "nixpkg",
+      "systems": {
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "path": "/nix/store/1id5xlj91r8d5cj5ks4a5byrxdvr4b50-chromium-143.0.7499.192",
+              "default": true
+            }
+          ]
+        }
+      }
     },
     "cups": {
       "resolved": "github:NixOS/nixpkgs/13868c071cc73a5e9f610c47d7bb08e5da64fdd5?narHash=sha256-ZhuYJbwbZT32QA95tSkXd9zXHcdZj90EzHpEXBMabaw%3D#cups",
@@ -134,7 +144,8 @@
       }
     },
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
-      "resolved": "github:NixOS/nixpkgs/13868c071cc73a5e9f610c47d7bb08e5da64fdd5?lastModified=1768395095&narHash=sha256-ZhuYJbwbZT32QA95tSkXd9zXHcdZj90EzHpEXBMabaw%3D"
+      "last_modified": "2026-01-16T13:18:18Z",
+      "resolved": "github:NixOS/nixpkgs/be5afa0fcb31f0a96bf9ecba05a516c66fcd8114?lastModified=1768569498"
     },
     "glib@latest": {
       "last_modified": "2026-01-14T04:14:06Z",
@@ -276,12 +287,12 @@
         "x86_64-linux": {
           "outputs": [
             {
-              "path": "/nix/store/ll1iic0x0q3gxvi4g29g40qrad5yqskx-libnotify-0.8.7",
+              "name": "man",
+              "path": "/nix/store/22nfdw5y0c4jfq3w8z46m3crpp3dm7v9-libnotify-0.8.7-man",
               "default": true
             },
             {
-              "name": "man",
-              "path": "/nix/store/22nfdw5y0c4jfq3w8z46m3crpp3dm7v9-libnotify-0.8.7-man",
+              "path": "/nix/store/ll1iic0x0q3gxvi4g29g40qrad5yqskx-libnotify-0.8.7",
               "default": true
             }
           ]
@@ -424,12 +435,12 @@
         "x86_64-linux": {
           "outputs": [
             {
-              "path": "/nix/store/ii3ybky5dqjikcrw7vdnh1j76ssy0ycm-libx11-1.8.12",
+              "name": "man",
+              "path": "/nix/store/9ycsgzschx46z5nn9j4slns5x76m78jw-libx11-1.8.12-man",
               "default": true
             },
             {
-              "name": "man",
-              "path": "/nix/store/9ycsgzschx46z5nn9j4slns5x76m78jw-libx11-1.8.12-man",
+              "path": "/nix/store/ii3ybky5dqjikcrw7vdnh1j76ssy0ycm-libx11-1.8.12",
               "default": true
             }
           ]

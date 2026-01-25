@@ -9,4 +9,6 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     List<RequestSummary> findAllProjectedBy();
 
+    List<Request> findAllBySentByUserId(Integer sentByUserId);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.core.ParameterizedTypeReference;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class OauthService {
         String googleTokenInfoUrl = "https://www.googleapis.com/oauth2/v1/userinfo";
         Map<String, Object> tokenInfo;
         try {
-           tokenInfo = webClient.get().uri(googleTokenInfoUrl).header("Authorization", "Bearer " + token).accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Map.class).block();
+           tokenInfo = webClient.get().uri(googleTokenInfoUrl).header("Authorization", "Bearer " + token).accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {}).block();
         } catch (Exception e) {
             return OauthResult.Failure(e.getMessage());
         }

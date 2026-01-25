@@ -2,7 +2,7 @@ package com.cookingflamingoz.backend.service.module;
 
 import com.cookingflamingoz.backend.model.Module;
 import com.cookingflamingoz.backend.util.GenericResult;
-import jakarta.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.stream.Collectors;
