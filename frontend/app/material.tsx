@@ -1,5 +1,4 @@
 import { redirect, useParams } from "react-router";
-import { GetJwtToken } from "~/util/cookie";
 import type { Route } from "./+types/root";
 import { useState, useEffect } from "react";
 
