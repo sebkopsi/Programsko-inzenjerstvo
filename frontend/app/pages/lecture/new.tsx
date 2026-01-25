@@ -10,7 +10,7 @@ import quiz from "./quiz";
 export function NewLecturePage() {
     const fetcher = useFetcher();
     const { courseInfo, moduleInfo, lectureInfo } = useLoaderData();
-
+    const [videoType, setVideoType] = useState("integrated");
 
     const [questionOptions, setQuestionOption] = useState<QuestionOptions | null>(null);
     const [lastId, setLastId] = useState(0);
@@ -62,7 +62,8 @@ export function NewLecturePage() {
             <fetcher.Form
                 className="course-form"
                 method="POST"
-                
+                encType="multipart/form-data"
+
             >
                 <input type="hidden" name="courseId" value={courseInfo?.data.id} />
                 <input type="hidden" name="moduleId" value={moduleInfo?.data.id} />
@@ -115,6 +116,40 @@ export function NewLecturePage() {
                     </select>
                 </section>
 
+
+                <section className="section">3
+                    <section className="info">
+                        <h3>Video</h3>
+                        <span>Add a video showing how to cook the meal of this lecture! Choose between an integrated video, or an external link.</span>
+                    </section>
+
+                    <section className="form">
+                        <select name="video" className="box" onChange={(e) => setVideoType(e.target.value)} >
+                            <option value="integrated">Integrated</option>
+                            <option value="external">External</option>
+                        </select>
+                        {videoType === "integrated" && (
+                            <input
+                                className="box"
+                                type="file"
+                                name="videoFile"
+                                accept="video/*"
+                                required
+                            />
+                        )}
+
+                        {videoType === "external" && (
+                            <input
+                                className="box"
+                                type="text"
+                                name="videoUrl"
+                                placeholder="External video link"
+                                required
+                            />
+                        )}
+                    </section>
+
+                </section>
 
                 <section className="section">
                     <section className="info">
@@ -180,7 +215,7 @@ export function NewLecturePage() {
                         <label className="label">
                             minimum score required for passing lecture, defaults to 50%
                             <input
-                                
+
                                 className="box"
                                 type="number"
                                 name="minScore"

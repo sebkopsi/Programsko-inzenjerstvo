@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -30,16 +30,17 @@ public class LectureController {
 
 
     @PostMapping("")
-    public LectureResults.CreateResult create(@RequestBody com.cookingflamingoz.backend.controller.lecture.LectureRequests.CreateRequest request, @PathVariable Integer moduleId){
+    public LectureResults.CreateResult create(@RequestPart("info") LectureRequests.CreateRequest request, @RequestPart(value = "videoFile", required = false) MultipartFile file, @PathVariable Integer moduleId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         request.moduleId=moduleId;
+        request.video = file;
         System.out.println(request.quiz);
         return lectureService.create(userID, request);
     }
 
     @PostMapping("/search")
-    public LectureResults.SearchResult findAll(@RequestBody com.cookingflamingoz.backend.controller.lecture.LectureRequests.SearchRequest request) {
+    public LectureResults.SearchResult findAll(@RequestBody LectureRequests.SearchRequest request) {
         return lectureService.search(request);
     }
 }

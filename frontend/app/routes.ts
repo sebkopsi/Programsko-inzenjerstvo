@@ -1,4 +1,5 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import MaterialPage from "./material";
 
 export default [
     index("routes/home.tsx"),
