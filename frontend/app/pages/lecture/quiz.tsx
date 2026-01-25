@@ -1,61 +1,59 @@
 import { useFetcher } from "react-router";
 
-
 function renderSingleQuestion(question, options) {
+  return (
+    <section className="section">
+      <section className="info">
+        <h3 className="label">{question.value}</h3>
+      </section>
 
-    return (
-        <section className="section">
-            <section className="info">
-                <h3 className="label">{question.value}</h3>
-            </section>
-
-            <section className="options">
-                {options.map((opt) => (
-                    <label key={opt.id}>
-                        <input
-                            type="radio"
-                            name={question.id}
-                            value={opt.id}
-                        />
-                        {opt.value}
-                    </label>
-                ))}
-            </section>
-        </section>
-    );
+      <section className="options">
+        {options.map((opt) => (
+          <label key={opt.id}>
+            <input 
+              type="radio" 
+              name={String(question.id)} 
+              value={String(opt.id)} />
+            {opt.value}
+          </label>
+        ))}
+      </section>
+    </section>
+  );
 }
 
 function renderMultipleQuestion(question, options) {
-    return (
-        <section className="section">
-            <section className="info">
-                <h3 className="label">{question.value}</h3>
-            </section>
-            <section className="options">
-                {options.map((opt) => (
-                    <label key={opt.id}>
-                        <input
-                            type="checkbox"
-                            name={question.id}
-                            value={opt.id}
-                        />
-                        {opt.value}
-                    </label>
-                ))}
-            </section>
-        </section>
-    );
+  return (
+    <section className="section">
+      <section className="info">
+        <h3 className="label">{question.value}</h3>
+      </section>
+
+      <section className="options">
+        {options.map((opt) => (
+          <label key={opt.id}>
+            <input 
+              type="checkbox" 
+              name={String(question.id)} 
+              value={String(opt.id)} 
+            />
+            {opt.value}
+          </label>
+        ))}
+      </section>
+    </section>
+  );
 }
 
 function renderTextQuestion(question) {
-    return (
-        <section className="section">
-            <section className="info">
-                <h3 className="label">{question.value}</h3>
-            </section>
-            <input type="text" className="box" name={question.id} />
-        </section>
-    );
+  return (
+    <section className="section">
+      <section className="info">
+        <h3 className="label">{question.value}</h3>
+      </section>
+      <input type="text" className="box" name={String(question.id)} />
+    </section>
+  );
 }
 
 function renderImageQuestion(question, options) {
@@ -78,65 +76,75 @@ function renderImageQuestion(question, options) {
 
 
 const renderQuestion = (question: any, allOptions: any) => {
-    const options = allOptions
-        .filter((o) => o.questionId === question.id)
-        .sort((a, b) => a?.id - b?.id);
+  const options = (allOptions ?? [])
+    .filter((o) => o.questionId === question.id)
+    .sort((a, b) => (a?.id ?? 0) - (b?.id ?? 0));
 
-    switch (question.type) {
-        case "single":
-            return renderSingleQuestion(question, options);
+  switch (question.type) {
+    case "single":
+      return renderSingleQuestion(question, options);
+    case "multiple":
+      return renderMultipleQuestion(question, options);
+    case "text":
+      return renderTextQuestion(question);
+    case "image":
+      return renderImageQuestion(question, options);
+    default:
+      return <p>Unsupported question type</p>;
+  }
+};
 
-        case "multiple":
-            return renderMultipleQuestion(question, options);
+export default function quiz(data: any, formLink?: string) {
+  const fetcher = useFetcher();
 
-        case "text":
-            return renderTextQuestion(question);
+  const questions = (data?.questions ?? [])
+    .slice()
+    .sort((a, b) => (a?.id ?? 0) - (b?.id ?? 0));
 
-        case "image":
-            return renderImageQuestion(question, options);
+  return (
+    <fetcher.Form
+      className="form"
+      method="POST"
+      {...(formLink ? { action: formLink } : {})}
+      id="quiz"
+    >
+      <section className="section">
+        <div className="info">
+          <h2>Quiz</h2>
+          <span>Check your understanding to successfully pass the lecture</span>
+        </div>
+      </section>
 
-        default:
-            return <p>Unsupported question type</p>;
-    }
-}
+      {questions.map((question) => (
+        <section key={question.id} className="quiz-question">
+          {renderQuestion(question, data.options)}
+        </section>
+      ))}
 
+      <section className="section formOptions">
+        <button type="submit" disabled={fetcher.state !== "idle"}>Submit</button>
+      </section>
 
+{fetcher.data ? (
+  <section className="section">
+    {fetcher.data.success ? (
+      <div className="box">
+        <h3>Quiz submitted</h3>
 
-export default function quiz(data: any, formLink: string) {
-    const fetcher = useFetcher();
-    return (
-        <>
-            {typeof formLink === "string" && formLink ? (
-                <fetcher.Form className="form" method="POST" action={formLink} id="quiz">
-                    <section className="section">
-                        <div className="info">
-                            <h2>Quiz</h2>
-                            <span>Check your understanding to successfully pass the lecture</span>
-                        </div>
-                    </section>
+        <p>
+          Score: {fetcher.data.correctAnswers} / {fetcher.data.totalQuestions}
+        </p>
 
-                    {data?.questions?.map((question) => (
-                        <section key={question.id} className="quiz-question">
-                            {renderQuestion(question, data.options)}
-                        </section>
-                    ))}
-
-                    <section className="section formOptions">
-                        <button type="submit">Submit</button>
-                    </section>
-                </fetcher.Form>
-            ) : (
-                <section className="form">
-                    {data?.questions?.map((question) => (
-                        <section key={question.id} className="quiz-question">
-                            {renderQuestion(question, data.options)}
-                        </section>
-                    ))}
-
-                </section>
-            )}
-        </>
-    );
-
-
+        {fetcher.data.completionPercentage === 100 ? (<p>PASS</p>) : (<p>FAIL</p>)}
+      </div>
+    ) : (
+      <div className="box">
+        <h3>Quiz submit failed</h3>
+        <p>{fetcher.data.message ?? "Error"}</p>
+      </div>
+    )}
+  </section>
+) : null}
+    </fetcher.Form>
+  );
 }
