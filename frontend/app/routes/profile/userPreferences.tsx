@@ -26,7 +26,6 @@ export async function loader({ request }: Route.LoaderArgs) {
       }
     });
 
-    // Check if responses are OK
     if (!tagsPreferred.ok || !tagsNotPreferred.ok) {
       throw new Error("Failed to fetch tags");
     }

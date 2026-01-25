@@ -8,22 +8,23 @@
     border: 1px solid #a0a0a0;
     gap: 0.5rem;
     width: 100%;
-    height: fit-content;
-    position: relative;
-    overflow: clip;
+    height: auto;
+    overflow: visible;  
     color: #303030;
 
     .info {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        padding: 1rem;
+      display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+    min-height: 0;  
 
         .desc {
-            .cardInfo {
-                display: flex;
-                flex-direction: column;
-            }
+          display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: visible; 
+
         }
     }
 

@@ -3,13 +3,13 @@ import type { Route } from "../+types/home";
 import UserProfile from "~/pages/profile/userProfile";
 import { GetJwtToken } from "~/util/cookie";
 
-type Tag = {
+export type Tag = {
   name: string;
   category: string;
   preferred: boolean;
 };
 
-type EnrolledCourse = {
+export type EnrolledCourse = {
   courseId: number;
   userId: number;
   completionPercentage: number;
@@ -19,7 +19,7 @@ type EnrolledCourse = {
   endedAt: string | null;
 };
 
-type UserData = {
+export type UserData = {
   firstname: string;
   surname: string;
   email: string;
@@ -41,10 +41,8 @@ type ProfileResponse = {
 
 export async function loader({ request }: Route.LoaderArgs) {
   const jwt = GetJwtToken(request);
-  console.log("JWT token from cookie:", jwt);
 
   if (!jwt) {
-    console.log("No JWT found — redirecting to /login");
     return redirect("/login");
   }
 
@@ -55,24 +53,18 @@ export async function loader({ request }: Route.LoaderArgs) {
     },
   });
 
-  console.log("Fetch response status:", res.status);
-
   if (!res.ok) {
-    const text = await res.text();
-    console.log("Fetch failed, response text:", text);
     throw new Error("Failed to fetch profile");
   }
 
-  const profile: ProfileResponse = await res.json();
-  console.log("Profile response from backend ssuccess?:", profile.success);
-  console.log(JSON.stringify(profile.data, null, 2));
-
+  const profile: ProfileResponse = await res.json();  
   return {
-    requests: profile.data ?? null
+    user: profile.data,
+    jwt,
   };
 }
 
 export default function ProfileRoute() {
-  const user = useLoaderData<typeof loader>();
-  return <UserProfile user={user.requests} />;
+  const data = useLoaderData<typeof loader>();
+  return <UserProfile user={data.user} jwt={data.jwt} />;
 }

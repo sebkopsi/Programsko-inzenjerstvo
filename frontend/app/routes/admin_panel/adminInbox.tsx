@@ -38,11 +38,6 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
 
   const data: InboxResult = await res.json();
-  
-  console.log("data.success:", data.success);
-  console.log("RAW /admin/inbox response:");  
-  console.log(JSON.stringify(data.data, null, 2));
-
 
   if (!data.success) {
     throw new Error(data.message);

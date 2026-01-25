@@ -1,5 +1,4 @@
 
-/* ------------------------ HEADER ------------------------ */
 .profile-header {
     display: flex;
     align-items: center;
@@ -8,12 +7,12 @@
 }
 
 .avatar-wrapper {
-    width: 100px;   /* square size for circle */
+    width: 100px;   
     height: 100px;
-    border-radius: 50%;  /* circular wrapper */
+    border-radius: 50%;  
     overflow: hidden;
     flex-shrink: 0;
-    background-color: #004C2261; /* optional placeholder background */
+    background-color: #004C2261; 
     display: flex;
     justify-content: center;
 }
@@ -21,8 +20,8 @@
 .avatar-image {
     width: 3rem;
     height: 100%;
-    object-fit: contain; /* show entire image */
-    object-position: center; /* center the image in the circle */
+    object-fit: contain; 
+    object-position: center; 
     display: block;
 }
 .profile-info {
@@ -63,7 +62,7 @@
     color: #666;
 }
 
-/* ------------------------ FORM ELEMENTS ------------------------ */
+
 .profile-section {
     margin: 2rem;
     display: flex;
@@ -78,7 +77,6 @@
     margin-bottom: 0.5rem;
 }
 
-/* SELECT INPUT */
 .skill-select {
     flex: 1;
     padding: 0.5rem 0.75rem;
@@ -88,36 +86,30 @@
     background-color: rgb(241, 238, 238);
 }
 
-/* ------------------------ CHIPS ------------------------ */
-.chip-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
 .chip {
-    padding: 0.35rem 0.75rem;
-    border-radius: 2rem;
-    border: 0.1rem solid #004C22;
-    background-color: rgb(241, 238, 238);
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: all 0.2s ease;
+  padding: 6px 12px;
+  margin: 4px;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  cursor: default;
+  font-size: 14px;
 }
 
-.chip span {
-    font-weight: bold;
+.chip.preferred {
+  background-color: #258916; 
+}
+
+.chip.not-preferred {
+  background-color: #f03b4d; 
 }
 
 .chip:hover {
-    background-color: #004C2261;
-    color: white;
+    filter: brightness(0.9);
 }
 
-/* ------------------------ HISTORY GRID ------------------------ */
+
+
 .history-grid {
     display: flex;
     gap: 1rem;
@@ -167,9 +159,63 @@
     transition: background-color 0.2s ease;
     font-family: "Catamaran", sans-serif;
     font-weight: bold
-;
+;}
+.edit-section {
+    display: flex;
+    justify-content: center;
 }
-/* ------------------------ RESPONSIVE ------------------------ */
+
+.edit-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #d3d3d3;
+    color: rgb(130, 130, 130);
+    border-radius: 1rem;
+    border:none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+;}
+
+.save-button{
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #004C22;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+}
+
+.cancel-button{
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bold
+}
+
+input{
+    flex:1;
+    height: 1rem;
+    border: #004C22 0.1rem solid;
+    background-color:rgb(241, 238, 238) ;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
 @media (max-width: 600px) {
     .profile-header {
         flex-direction: column;

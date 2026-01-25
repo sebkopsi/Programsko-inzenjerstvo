@@ -11,7 +11,7 @@ export function Card({ link, name, desc, tags, type, lessons, prepTime, cookTime
       
         {type === "course" && (
           <>
-            <span className="desc">{desc}</span>
+            <div className="desc">{desc}</div>
             <section className="tags">
               {tags?.map((tag: any, index: number) => (
                 <div className="tag" key={index}>{tag.name}</div>
@@ -23,7 +23,7 @@ export function Card({ link, name, desc, tags, type, lessons, prepTime, cookTime
        
         {type === "module" && (
           <>
-            <span className="desc">{desc}</span>
+            <div className="desc">{desc}</div>
             <span className="numOfLessons">Lessons in total: {lessons}</span>
           </>
         )}
@@ -31,7 +31,7 @@ export function Card({ link, name, desc, tags, type, lessons, prepTime, cookTime
   
      {type === "lecture" && (
   <>
-    <span className="desc">{desc}</span>
+    <div className="desc">{desc}</div>
     <section className="lecture-stats">
       {prepTime && <span>Prep: {prepTime}</span>}
       {cookTime && <span>Cook: {cookTime}</span>}
