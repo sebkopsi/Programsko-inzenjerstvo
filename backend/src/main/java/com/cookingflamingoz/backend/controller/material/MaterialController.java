@@ -31,8 +31,6 @@ public class MaterialController {
         if(!file.exists()){
             return ResponseEntity.internalServerError().build();
         }
-
-        
         return ResponseEntity.ok().body(file);
     }
 

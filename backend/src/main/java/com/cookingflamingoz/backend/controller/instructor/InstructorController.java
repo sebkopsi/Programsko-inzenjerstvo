@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/instructor")
@@ -41,8 +42,8 @@ public class InstructorController {
 
 
 
-    @PostMapping("/promotionRequest")
-    public GenericResult postPromotionRequest(@RequestBody InstructorRequests.PromotionRequestBody body) {
+    @PostMapping(value = "/promotionRequest", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+    public GenericResult postPromotionRequest(@ModelAttribute InstructorRequests.PromotionRequestBody body) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int userID = Integer.parseInt(authentication.getPrincipal().toString());
         return instructorService.createPromotionRequest(userID, body);

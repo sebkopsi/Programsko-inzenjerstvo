@@ -2,14 +2,19 @@ package com.cookingflamingoz.backend.service.instructor;
 
 import com.cookingflamingoz.backend.controller.course.CourseRequests;
 import com.cookingflamingoz.backend.controller.instructor.InstructorRequests;
+import com.cookingflamingoz.backend.controller.material.MaterialRequests;
 import com.cookingflamingoz.backend.model.*;
 import com.cookingflamingoz.backend.repository.*;
 import com.cookingflamingoz.backend.service.course.CourseResults;
+import com.cookingflamingoz.backend.service.material.MaterialResults;
+import com.cookingflamingoz.backend.service.material.MaterialService;
 import com.cookingflamingoz.backend.util.GenericResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -22,19 +27,15 @@ public class InstructorService {
     private final UserRepository userRepository;
     @PersistenceContext
     private EntityManager entityManager;
-    private final CourseRepository courseRepository;
-    private final TagRepository tagRepository;
-    private final CourseTagRepository courseTagRepository;
     private final InstructorProfileRepository instructorProfileRepository;
     private final RequestRepository requestRepository;
+    private final MaterialService materialService;
 
-    public InstructorService(CourseRepository courseRepository, TagRepository tagRepository, CourseTagRepository courseTagRepository, UserRepository userRepository, InstructorProfileRepository instructorProfileRepository, RequestRepository requestRepository){
-        this.courseRepository = courseRepository;
-        this.tagRepository = tagRepository;
-        this.courseTagRepository = courseTagRepository;
+    public InstructorService( UserRepository userRepository, InstructorProfileRepository instructorProfileRepository, RequestRepository requestRepository, MaterialService materialService){
         this.userRepository = userRepository;
         this.instructorProfileRepository = instructorProfileRepository;
         this.requestRepository = requestRepository;
+        this.materialService = materialService;
     }
 
     public  InstructorResult.GetListByIdResult getRequestByUserId(int userId){
@@ -67,28 +68,25 @@ public class InstructorService {
             return new GenericResult(false, "there is already a pending promotion request");
         }
 
-        String username = data.username;
-        String biography = data.biography;
+        // prefer frontend names if present
+        String username = data.username != null && !data.username.isEmpty() ? data.username : data.title;
+        String biography = data.biography != null && !data.biography.isEmpty() ? data.biography : data.desc;
         String specialization = data.specialization;
 
-        //null for now
-        Byte[] profilePicture = data.profilePicture;
-        Byte[] identificationDocument = data.identificationDocument;
-        Byte[] diploma = data.diploma;
-
-        //check if username doesn't contain invalid characters
+        // validation
+        if (username == null || username.isEmpty()) {
+            return new GenericResult(false, "username cannot be empty");
+        }
         if(!username.matches("^[a-zA-Z0-9_]+$")){
             return new GenericResult(false, "username contains invalid characters");
         }
+
         //check if username is already taken
         Optional<InstructorProfile> existingProfile = instructorProfileRepository.findByUsername(username);
         if(existingProfile.isPresent()){
             return new GenericResult(false, "username is already taken");
         }
 
-        if (username == null || username.isEmpty()) {
-            return new GenericResult(false, "username cannot be empty");
-        }
         if (biography == null || biography.isEmpty()) {
             return new GenericResult(false, "biography cannot be empty");
         }
@@ -96,17 +94,59 @@ public class InstructorService {
             return new GenericResult(false, "specialization cannot be empty");
         }
 
+        // Handle files: pfp, id, cert(s)
+        List<String> uploadedMaterialRefs = new ArrayList<>();
+
+        try {
+            if (data.pfp != null && !data.pfp.isEmpty()) {
+                MaterialRequests.CreateRequest req = new MaterialRequests.CreateRequest(data.pfp.getContentType(), data.pfp.getOriginalFilename(), data.pfp);
+                MaterialResults.CreateResult res = materialService.uploadFile(req);
+                if (res.success) {
+                    uploadedMaterialRefs.add("pfp:" + res.data.id);
+                }
+            }
+
+            if (data.id != null && !data.id.isEmpty()) {
+                MaterialRequests.CreateRequest req = new MaterialRequests.CreateRequest(data.id.getContentType(), data.id.getOriginalFilename(), data.id);
+                MaterialResults.CreateResult res = materialService.uploadFile(req);
+                if (res.success) {
+                    uploadedMaterialRefs.add("id:" + res.data.id);
+                }
+            }
+
+            if (data.cert != null) {
+                for (MultipartFile c : data.cert) {
+                    if (c != null && !c.isEmpty()) {
+                        MaterialRequests.CreateRequest req = new MaterialRequests.CreateRequest(c.getContentType(), c.getOriginalFilename(), c);
+                        MaterialResults.CreateResult res = materialService.uploadFile(req);
+                        if (res.success) {
+                            uploadedMaterialRefs.add("cert:" + res.data.id);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return new GenericResult(false, "failed to upload attached files: " + e.getMessage());
+        }
+
         // compose safely
-        StringBuilder sb = new StringBuilder(256);
+        StringBuilder sb = new StringBuilder(512);
         sb.append("Username: ").append(username).append("\n")
                 .append("Biography: ").append(biography).append("\n")
                 .append("Specialization: ").append(specialization).append("\n");
+
+        if(!uploadedMaterialRefs.isEmpty()){
+            sb.append("Materials:\n");
+            for(String r : uploadedMaterialRefs) {
+                sb.append(r).append("\n");
+            }
+        }
         String content = sb.toString();
 
         Request req = new Request();
         req.setType("promoteInstructor");
         req.setSentByUserId(userId);
-        req.setTitle("Promotion request"); // just this ??
+        req.setTitle("Promotion request");
         req.setContent(content);
         req.setReportedUserId(null);
         req.setTargetCourseId(null);
@@ -115,7 +155,6 @@ public class InstructorService {
 
         return new GenericResult(true, "request created with id " + saved.getReqId());
     }
-
 
 
 
