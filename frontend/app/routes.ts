@@ -5,8 +5,10 @@ export default [
     route("login", "routes/login.tsx"),
     route("signup", "routes/signup.tsx"),
     route("oauth", "routes/oauth.tsx"),
-    route("logout", "routes/logout.tsx"),
-    route("profile/preferences", "routes/profile.tsx"),
+    route("profile", "routes/profile/userProfile.tsx"),
+    route("profile/userPreferences", "routes/profile/userPreferences.tsx"),
+    route("logout", "routes/profile/logout.tsx"),
+
 
     route("course", "routes/course/userCourses.tsx"),
     route("course/new", "routes/course/newCourse.tsx"),
@@ -20,7 +22,9 @@ export default [
     route("course/:courseId/:moduleId/new", "routes/lecture/new.tsx"),
 
     route("adminpanel", "routes/admin_panel/adminPanel.tsx"),
-    route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx")
+    route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx"),
 
+    route("request", "routes/request.tsx"),
+    route("newInstructor", "routes/newInstructor.tsx")
 
 ] satisfies RouteConfig;

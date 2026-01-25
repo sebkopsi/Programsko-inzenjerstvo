@@ -5,16 +5,19 @@ import { useLoaderData } from "react-router";
 import AdminInboxContent from "~/pages/admin_panel/adminInbox";
 
 type RequestSummary = {
-  id: number;
+  userEmail: string;
+  type: string;
+  status: string;
   title: string;
   createdAt: string;
-  status: string;
+  sentByUserId: string;
+  reqId: number;
 };
 
 type InboxResult = {
   success: boolean;
   message: string;
-  requests: RequestSummary[] | null;
+  data: RequestSummary[] | null;
 };
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -23,7 +26,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const res = await fetch("http://localhost:8890/admin/inbox", {
     headers: {
-      Authorization: "Bearer " + jwt,
+      "Authorization": "Bearer " + jwt
     },
   });
 
@@ -35,13 +38,18 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
 
   const data: InboxResult = await res.json();
+  
+  console.log("data.success:", data.success);
+  console.log("RAW /admin/inbox response:");  
+  console.log(JSON.stringify(data.data, null, 2));
+
 
   if (!data.success) {
     throw new Error(data.message);
   }
 
   return {
-    requests: data.requests ?? [],
+    requests: data.data ?? []
   };
 }
 

@@ -1,5 +1,7 @@
 import { useFetcher, useLoaderData } from "react-router";
 import "../styles/preferences.css";
+import "../styles/components.css"
+import "../styles/forms.css"
 
 interface Tag {
   id: string;
@@ -18,6 +20,9 @@ export default function UserPrefernces() {
           <section className="info">
             <h3>Preffered</h3>
             <span>
+              Here you can specifiy your dietary preferences, favorite cuisines, etc.
+              </span>
+            <span className="tag-explanation">
               Lectures, modules and courses containing these tags will be given
               priority in searches and recommendations.
             </span>
@@ -43,6 +48,9 @@ export default function UserPrefernces() {
           <section className="info">
             <h3>Don't show</h3>
             <span>
+                Here you can specifiy your allergies or keywords you would like to avoid in general.
+                </span>
+              <span className="tag-explanation">
               Lectures, modules and courses containing these tags will be
               discarded in searches and recommendation.
             </span>
@@ -63,6 +71,9 @@ export default function UserPrefernces() {
             ))}
           </section>
         </section>
+      </section>
+      <section id="submitter">
+        <button className="submitAllButton">Save changes</button>
       </section>
     </section>
   );

@@ -11,6 +11,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.cookingflamingoz.backend.repository.EnrolledCourseRepository;
+import com.cookingflamingoz.backend.util.GenericResult;
 
 
 import java.util.HashSet;
@@ -26,12 +28,14 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final TagRepository tagRepository;
     private final CourseTagRepository courseTagRepository;
+    private final EnrolledCourseRepository enrolledCourseRepository;
 
-    public CourseService(CourseRepository courseRepository, TagRepository tagRepository, CourseTagRepository courseTagRepository, UserRepository userRepository){
+    public CourseService(CourseRepository courseRepository, TagRepository tagRepository, CourseTagRepository courseTagRepository, UserRepository userRepository, EnrolledCourseRepository enrolledCourseRepository) {
         this.courseRepository = courseRepository;
         this.tagRepository = tagRepository;
         this.courseTagRepository = courseTagRepository;
         this.userRepository = userRepository;
+        this.enrolledCourseRepository = enrolledCourseRepository;
     }
 
     public CourseResults.GetByIdResult getById(int id, int userId){
@@ -97,56 +101,34 @@ public class CourseService {
         return new CourseResults.CreateResult(true, "", finalNewCourse);
     }
 
-    public CourseResults.UpdateResult update(Integer courseId, Integer userId, CourseRequests.UpdateRequest request){
-        if(courseId == null || userId == null || request == null){
-            return new CourseResults.UpdateResult(false, "missing parameters", null);
+    // User enrolling in a course
+    public GenericResult enroll(int courseId, int userId) {
+        // Find course
+        Optional<Course> courseOpt = courseRepository.findById(courseId);
+        if (courseOpt.isEmpty()) {
+            return new GenericResult(false, "Course not found.");
         }
 
-        var courseOpt = courseRepository.findById(courseId);
-        if(courseOpt.isEmpty()){
-            return new CourseResults.UpdateResult(false, "course not found", null);
-        }
-        var course = courseOpt.get();
-
-        // verify ownership
-        if(course.getCreator() == null || !course.getCreator().getUserId().equals(userId)){
-            return new CourseResults.UpdateResult(false, "user is not owner of course", null);
+        // Find user
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            return new GenericResult(false, "User does not exist.");
         }
 
-        boolean changed = false;
-        if(request.name != null && !request.name.isEmpty()){
-            course.setName(request.name);
-            changed = true;
-        }
-        if(request.desc != null && !request.desc.isEmpty()){
-            course.setDescription(request.desc);
-            changed = true;
+        // Check if already enrolled using the @IdClass
+        EnrolledCourse.EnrolledCourseId enrollmentId = new EnrolledCourse.EnrolledCourseId(courseId, userId);
+        if (enrolledCourseRepository.existsById(enrollmentId)) {
+            return new GenericResult(false, "You are already enrolled in this course.");
         }
 
-        // update tags if provided
-        if(request.tags != null){
-            // remove old tags and add new ones
-            // naive approach: delete existing CourseTag entries for this course and add new ones
-            // (CourseTagRepository currently does not expose delete by course, so use JPA cascade via entity manager)
-            Set<Tag> tags = tagRepository.findByNameIn(request.tags);
+        // Create new enrollment
+        EnrolledCourse enrollment = new EnrolledCourse();
+        enrollment.setCourse(courseOpt.get());
+        enrollment.setUser(userOpt.get());
+        enrollment.setCompletionPercentage(0); // Default value
 
-            // recreate course tags
-            final Course courseRef = course;
-            Set<CourseTag> courseTags = tags.stream().map(tag -> {
-                CourseTag ct = new CourseTag();
-                ct.setCourse(courseRef);
-                ct.setTag(tag);
-                return ct;
-            }).collect(Collectors.toSet());
+        enrolledCourseRepository.save(enrollment);
 
-            course.setTags(courseTags);
-            changed = true;
-        }
-
-        if(changed){
-            course = courseRepository.save(course);
-        }
-
-        return new CourseResults.UpdateResult(true, "", course);
+        return new GenericResult(true, "Successfully enrolled in the course.");
     }
 }
