@@ -1,0 +1,7 @@
+[general]
+
+#### Address & Root dir
+host = "::"
+port = 9999
+root = "./public"
+

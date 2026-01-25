@@ -26,9 +26,12 @@ export async function action({ request }: Route.ActionArgs) {
       })
     });
 
+    if(!resp.ok){
+      throw new Error("failed to create new course")
+    }
 
+    return(redirect("/course"))
 
-    
   } catch (error: any) {
     throw new Error(error)
   }
