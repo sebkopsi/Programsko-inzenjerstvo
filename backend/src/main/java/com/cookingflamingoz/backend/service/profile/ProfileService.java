@@ -34,7 +34,7 @@ public class ProfileService {
         }
 
         EnrolleeProfile enrolleeProfile = enrolleeProfileRepository.getById(user.getEnrolleeId());
-        DifficultyLevel difficultyLevel = difficultyLevelRepository.getById(enrolleeProfile.getEnrolleeId());
+        DifficultyLevel difficultyLevel = difficultyLevelRepository.getById(enrolleeProfile.getSkillLevelId());
         Set<UserTag> userTagSet = userTagRepository.findAllByUserId(user.getUserId());
         Set<ProfileResults.UserTagInfo> userTagInfoSet = userTagSet.stream()
                 .map(ut -> new ProfileResults.UserTagInfo(
