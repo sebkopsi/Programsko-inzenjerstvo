@@ -4,12 +4,14 @@ import com.cookingflamingoz.backend.model.Request;
 import com.cookingflamingoz.backend.model.RequestSummary;
 import com.cookingflamingoz.backend.model.User;
 import com.cookingflamingoz.backend.repository.RequestRepository;
+import com.cookingflamingoz.backend.repository.TagRepository;
 import com.cookingflamingoz.backend.repository.UserRepository;
 import com.cookingflamingoz.backend.service.profile.ProfileResults;
 import com.cookingflamingoz.backend.util.GenericResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Optional;
 
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class AdminService {
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
 
-    public AdminService(RequestRepository requestRepository, UserRepository userRepository) {
+    public AdminService(RequestRepository requestRepository, UserRepository userRepository, TagRepository tagRepository) {
         this.requestRepository = requestRepository;
         this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
     }
 
     public AdminResults.InboxResult getInbox(int userId) {
@@ -72,6 +76,41 @@ public class AdminService {
         return new GenericResult(true, "Status successfully updated to: " + newStatus);
     }
 
+    public AdminResults.StatisticResult statisticCalculation(int userId) {
+        if (!validateAdmin(userId)) {
+            return new AdminResults.StatisticResult(false, "Access denied: Not an admin",
+                    -1, -1, -1,
+                    null, null, null);
+        }
+
+        // Call the correct repository methods and handle possible nulls
+        Long rawActive = userRepository.countByIsActiveTrue();
+        Long rawTotal = userRepository.countAllUsers();
+        Long rawVerified = userRepository.countVerifiedUsers();
+        java.util.Map<String, Long> numUsersByDifficulty = userRepository.countUsersByDifficulty();
+
+        int numActiveUsers = rawActive == null ? 0 : rawActive.intValue();
+        int numTotalUsers = rawTotal == null ? 0 : rawTotal.intValue();
+        int numVerifiedUsers = rawVerified == null ? 0 : rawVerified.intValue();
+        if (numUsersByDifficulty == null) {
+            numUsersByDifficulty = java.util.Map.of();
+        }
+
+        java.util.Map<String, Long> usersByTag = tagRepository.countUsersByTag();
+        if (usersByTag == null) {
+            usersByTag = java.util.Map.of();
+        }
+
+        java.util.Map<String, Long> coursesByTag = tagRepository.countCoursesByTag();
+        if (coursesByTag == null) {
+            usersByTag = java.util.Map.of();
+        }
+
+        return new AdminResults.StatisticResult(true, "All Good",
+            Integer.valueOf(numActiveUsers), Integer.valueOf(numTotalUsers),
+                Integer.valueOf(numVerifiedUsers),
+                numUsersByDifficulty, usersByTag, coursesByTag);
+    }
 
     private boolean validateAdmin(int userId) {
         return userRepository.findById(userId)

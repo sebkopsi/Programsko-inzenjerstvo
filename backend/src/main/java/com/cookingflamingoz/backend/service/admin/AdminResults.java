@@ -7,6 +7,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class AdminResults {
 
@@ -48,5 +49,34 @@ public class AdminResults {
             super(success, message);
             this.data = request;
         }
+    }
+
+    // for stats
+    public static class StatisticResult extends GenericResult {
+        public Integer numActiveUsers;
+        public Integer numTotalUsers;
+        public Integer numVerifiedUsers;
+        public Map<String, Long> numUsersByDifficulty;
+        public Map<String, Long> numUsersByTag;
+        public Map<String, Long> numCoursesByTag;
+
+
+        public StatisticResult(boolean success, String message,
+                               Integer numActiveUsers,
+                               Integer numTotalUsers,
+                               Integer numVerifiedUsers,
+                               Map<String, Long> numUsersByDifficulty,
+                               Map<String, Long> numUsersByTag,
+                               Map<String, Long> numCoursesByTag) {
+            super(success, message);
+            this.numActiveUsers = numActiveUsers;
+            this.numTotalUsers = numTotalUsers;
+            this.numVerifiedUsers = numVerifiedUsers;
+            this.numUsersByDifficulty = numUsersByDifficulty;
+            this.numUsersByTag = numUsersByTag;
+            this.numCoursesByTag = numCoursesByTag;
+        }
+
+
     }
 }
