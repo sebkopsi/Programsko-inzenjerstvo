@@ -44,4 +44,13 @@ public class AdminController {
     }
 
 
+    @GetMapping("/statistics")
+    public AdminResults.StatisticResult stats() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userID = Integer.parseInt(authentication.getPrincipal().toString());
+
+        return  adminService.statisticCalculation(userID);
+    }
+
+
 }
