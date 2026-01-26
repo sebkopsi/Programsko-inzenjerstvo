@@ -35,10 +35,6 @@ export function RequestPage() {
           <a href="/adminpanel/inbox"><h2>requests</h2></a>
           <h2> &gt; {reqId} ({type})</h2>
         </div>
-        <div id="prevNext">
-          <button>Previous</button>
-          <button>Next</button>
-        </div>
       </div>
       <hr/>
       <h3>{title}</h3>
