@@ -28,7 +28,7 @@ export function NewModulePage() {
         <h2>Module Name</h2>
       </section>
 
-      <fetcher.Form className="course-form" method="POST" action="/course/new">
+      <fetcher.Form className="course-form" method="POST"">
 
         <h2>Info</h2>
 
