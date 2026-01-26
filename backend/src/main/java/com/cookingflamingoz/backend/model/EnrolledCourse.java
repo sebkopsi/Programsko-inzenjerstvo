@@ -46,10 +46,10 @@ public class EnrolledCourse {
     @Column(name = "\"certificateId\"", nullable = true)
     private Integer certificateId;
 
-    @Column(name = "\"enrolledAt\"", nullable = false)
+    @Column(name = "\"enrolledAt\"")
     private Date enrolledAt;
 
-    @Column(name = "\"status\"", nullable = false)
+    @Column(name = "\"status\"")
     private String status;
 
     @Column(name = "\"endedAt\"", nullable = true)

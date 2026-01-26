@@ -15,6 +15,39 @@
     }
 }
 
+.enroll-button {
+    margin-left: 2rem;
+    margin-top: 12px;
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+
+    font-size: 20px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    color: white;
+
+    background-color: #04863e;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: 
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.enroll-button:hover {
+    background-color: #004c2293;
+    transform: scale(1.15);
+}
+
+.enroll-button:active {
+    background-color: #004c2249;
+    transform: scale(1.05);
+}
+
+
 .cardList {
     ul {
         list-style: none;

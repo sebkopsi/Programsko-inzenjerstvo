@@ -48,6 +48,62 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   }
 }
 
+type enrollResult = {
+  success: boolean;
+  message: string;
+};
+
+export async function action({ params, request }: Route.ActionArgs) {
+  const jwt = GetJwtToken(request);
+  if (!jwt) {
+    return redirect("/login");
+  }
+
+  try {
+    const enrollReq = await fetch(`http://localhost:8890/course/${params['courseId']}/enroll`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + jwt,
+      }
+    });
+
+    console.log("Status:", enrollReq.status);
+    console.log("JWT Token:", jwt); 
+
+    const data: enrollResult = await enrollReq.json();
+
+    if (enrollReq.status === 403) {
+      return {
+        success: false,
+        message: "Access denied. Please log in again."
+      };
+    }
+
+    if (!data) {
+      return {
+        success: false,
+        message: `Server returned status ${enrollReq.status} with no response`
+      };
+    }
+    
+    if (!data.success) {
+      return {
+        success: false,
+        message: data.message || "Failed to enroll in course"
+      };
+    }
+    
+    return data;
+    
+  } catch (error) {
+    console.error("Enrollment error:", error);
+    return {
+      success: false,
+      message: "An error occurred while enrolling"
+    };
+  }
+}
 
 export default function Course() {
   return <CoursePage/>
