@@ -1,4 +1,4 @@
-import './newInstructor.css';
+import './new.css';
 import pfp from './fame-media_no-prophile-picture-1-74336437.jpg';
 import { Form, useFetcher } from "react-router";
 import { useState } from "react";
@@ -31,31 +31,32 @@ export function NewInstructorPage() {
             type="file"
             name="pfp"
             accept="image/*"
-            onChange={onFileChange} />
+            onChange={onFileChange} 
+            required />
         </div>
         <hr/>
 
         <div className="title">
           <h3>Title</h3>
-          <input type="text" name="title" className="titleInput" />
+          <input type="text" name="title" className="titleInput" required />
         </div>
         <hr/>
 
         <div>
           <h3>Description</h3>
-          <textarea name="desc" className="box" />
+          <textarea name="desc" className="box" required />
         </div>
         <hr/>
 
         <div>
           <h3>Identification document</h3>
-          <input type="file" name="id" />
+          <input type="file" name="id" required/>
         </div>
         <hr/>
 
         <div>
           <h3>Diplomas/certificates</h3>
-          <input type="file" name="cert" multiple />
+          <input type="file" name="cert" multiple required />
         </div>
         <hr/>
 
