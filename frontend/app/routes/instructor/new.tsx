@@ -50,6 +50,15 @@ export async function loader({ request }: Route.LoaderArgs) {
   if (!jwt)
     return redirect("/login");
 
+  const userRes = await fetch("http://localhost:8890/user/my", {
+    headers: { "Authorization": "Bearer " + jwt },
+  });
+  if (!userRes.ok) throw new Error("Failed to fetch user info");
+  const user = await userRes.json();
+  if (user.isInstructor) {
+    return redirect("/instructor/profile");
+  }
+
   const res = await fetch("http://localhost:8890/instructor/promotionRequest", {
     headers: {
       "Authorization": "Bearer " + jwt,
@@ -65,8 +74,6 @@ export async function loader({ request }: Route.LoaderArgs) {
     if (req.type == "promotionRequest") {
       if (req.status == "pending")
         return redirect("/instructor/pending");
-      if (req.status == "approved")
-        return redirect("/instructor/profile");
     }
   }
 
