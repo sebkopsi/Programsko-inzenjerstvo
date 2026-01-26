@@ -99,7 +99,7 @@ public class UserService {
 
         EnrolleeProfile enrolleeProfile = new EnrolleeProfile(null,
                 username,
-                dl.getDiffidultyId());
+                1);
         enrolleeProfile = enrolleeProfileRepository.save(enrolleeProfile);
 
         //password hashing

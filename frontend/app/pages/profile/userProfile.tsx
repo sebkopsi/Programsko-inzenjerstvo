@@ -124,7 +124,6 @@ export default function UserProfile({ user, jwt }: UserProfileProps) {
       })
     );
 
-    console.log("All PATCH responses:", results);
 
     const failed = results.filter((r) => !r.ok);
 
@@ -133,9 +132,6 @@ export default function UserProfile({ user, jwt }: UserProfileProps) {
       alert("Some updates failed. Check console.");
       return;
     }
-
-    console.log("ALL PATCH SUCCEEDED");
-    alert("Profile updated successfully!");
     setEditing(false);
 
   } catch (err) {
