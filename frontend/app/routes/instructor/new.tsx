@@ -50,7 +50,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   if (!jwt)
     return redirect("/login");
 
-  const res = await fetch("http://localhost:8890/instructor/promoteRequest", {
+  const res = await fetch("http://localhost:8890/instructor/promotionRequest", {
     headers: {
       "Authorization": "Bearer " + jwt,
     }
