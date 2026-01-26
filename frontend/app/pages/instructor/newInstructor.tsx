@@ -38,13 +38,13 @@ export function NewInstructorPage() {
 
         <div className="title">
           <h3>Title</h3>
-          <input type="text" name="title" className="titleInput" />
+          <input type="text" name="title" className="titleInput" required />
         </div>
         <hr/>
 
         <div>
           <h3>Description</h3>
-          <textarea name="desc" className="box" />
+          <textarea name="desc" className="box" required />
         </div>
         <hr/>
 
