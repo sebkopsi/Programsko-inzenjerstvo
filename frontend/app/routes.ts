@@ -26,6 +26,8 @@ export default [
 
     route("request/:reqId", "routes/request.tsx"),
     route("instructor/new", "routes/instructor/new.tsx"),
-    route("instructor/pending", "routes/instructor/pending.tsx")
+    route("instructor/pending", "routes/instructor/pending.tsx"),
+
+    route("stats", "routes/stats.tsx")
 
 ] satisfies RouteConfig;

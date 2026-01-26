@@ -1,0 +1,53 @@
+#general {
+  display: flex;
+  padding-left: 1rem;
+  gap: 1rem;
+  text-align: center;
+  width: 80%;
+}
+#general>div {
+  border: 1px solid black;
+  padding: 0 1rem 1rem 1rem;
+  width: 33%;
+  background-color: #f7f7f7;
+}
+#general p {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin-bottom: 0.5rem;
+}
+#general span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #004C22;
+}
+h1 {
+  color: #004C22;
+}
+
+.strips {
+  display: flex;
+  width: 79%;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+.strips>div {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 1rem;
+  /* width: 26%; */
+  min-width: 150px;
+  border: 1px solid black;
+  padding: 0.7rem 1.5rem 0.7rem 0.7rem;
+  background-color: #f7f7f7;
+}
+.strips span:last-child {
+  color: #004C22;
+  font-weight: bolder;
+}
+h3 {
+  padding-left: 1rem;
+}
