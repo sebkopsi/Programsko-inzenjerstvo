@@ -42,7 +42,7 @@ export async function action({ request }: Route.ActionArgs) {
     throw new Error(error);
   }
 
-  return redirect("/");
+  return redirect("/instructor/pending");
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
