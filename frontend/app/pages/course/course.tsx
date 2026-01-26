@@ -20,9 +20,10 @@ export function CoursePage() {
       {courseStats(courseInfo?.data)}
       {courseInfo?.data?.isUserInstructor &&
         <section className="section instructor-options">
-          <NavLink className="button" to={"new"} viewTransition>Add Module</NavLink>
+          <NavLink className="add-button" to={"new"} viewTransition>Add Module</NavLink>
         </section>
       }
+
       {allModules(modulesData?.data)}
     </section>
   );

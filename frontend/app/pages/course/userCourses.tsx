@@ -1,22 +1,46 @@
-import { Form, useActionData, useFetcher, useLoaderData } from "react-router";
+import { Form, NavLink, useActionData, useFetcher, useLoaderData } from "react-router";
 
 import "../styles/courses.css"
 import { Card } from "../components/card";
 
 
-export function listCourses(data: any[], empty: any, id: String) {
+export function listCourses(
+  data: any[],
+  empty: any,
+  id: string,
+  showAddButton = false
+) {
   return (
     <section id={id} className="cardList section">
       <ul>
-        {data.length > 0 ? data.map((course: any) =>
-          <Card link={"" + course['id']} name={course['name']} desc={course['desc']} tags={course['tags']} />
-        ) :
-          <div>No courses found. {empty}</div>
-        }
+        {data.length > 0 ? (
+          <div className="course-cards">
+            {data.map((course: any) => (
+              <Card
+                key={course.id}
+                link={"" + course.id}
+                name={course.name}
+                desc={course.desc}
+                tags={course.tags}
+              />
+            ))}
+
+            {showAddButton && (
+              <li className="add-card">
+                <NavLink to="new" className="add-button">
+                  +
+                </NavLink>
+              </li>
+            )}
+          </div>
+        ) : (
+          <li>No courses found. {empty}</li>
+        )}
       </ul>
     </section>
   );
 }
+
 
 
 export function UserCoursesPage() {
@@ -49,11 +73,14 @@ export function UserCoursesPage() {
           />
         </svg>Created Courses</h2>
       }
-      {userInfoData.isInstructor &&
-        listCourses(myCoursesData.data, 'Create course in instructor profile', "my-courses")
-      }
-
-
+    {userInfoData.isInstructor &&
+  listCourses(
+    myCoursesData.data,
+    "Create course in instructor profile",
+    "my-courses",
+    true
+  )
+}
     </section>
   );
 }
