@@ -31,7 +31,8 @@ export function NewInstructorPage() {
             type="file"
             name="pfp"
             accept="image/*"
-            onChange={onFileChange} />
+            onChange={onFileChange} 
+            required />
         </div>
         <hr/>
 
@@ -49,13 +50,13 @@ export function NewInstructorPage() {
 
         <div>
           <h3>Identification document</h3>
-          <input type="file" name="id" />
+          <input type="file" name="id" required/>
         </div>
         <hr/>
 
         <div>
           <h3>Diplomas/certificates</h3>
-          <input type="file" name="cert" multiple />
+          <input type="file" name="cert" multiple required />
         </div>
         <hr/>
 
