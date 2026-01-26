@@ -1,0 +1,32 @@
+.submit-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
+
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: white;
+
+    background-color: #004C22;
+    border: none;
+    cursor: pointer;
+
+}
+
+.submit-button:hover {
+    background-color: #004c2261;   
+    transform: translateY(-1px); 
+}
+
+.submit-button:active {
+    background-color: #8e8e8e;
+    transform: translateY(0);
+}

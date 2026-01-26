@@ -24,7 +24,7 @@ export function ModulePage() {
 
       { courseInfo?.data?.isUserInstructor && 
         <section className="section instructor-options">
-          <NavLink className="button" to={"new"} viewTransition>Add Lecture</NavLink>
+          <NavLink className="add-button" to={"new"} viewTransition>Add Lecture</NavLink>
         </section>
       }
       {allLectures(lecturesData?.data)}

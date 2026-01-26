@@ -19,11 +19,13 @@
     ul {
         list-style: none;
         display: flex;
+        flex-direction: row;
         position: relative;
-         flex-wrap: wrap;
+        flex-wrap: wrap;
         gap: 1rem;
         padding: 0;
         margin: 0;
+
 
 
         .card {
@@ -40,15 +42,16 @@
                 mask-size: 100% 100%;
             }
 
-
-            .banner {}
         }
 
     }
 }
 
-
-
+.course-cards{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem ;
+}
 .cardTable {
     ul {
         padding: 0;
@@ -62,21 +65,41 @@
     }
 }
 
-.instructor-options {
-    .button {
-        border-radius: 8px;
-        border: 1px solid #a0a0a0;
-        padding: 1rem;
-        background-color: #70d86e;
-        text-decoration: none;
-        color: white;
-        font-family: var(--big-font);
-        font-weight: bold;
-    }
+.add-button {
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 1rem;
+    width: 4rem;
+    height: 3rem;
+    margin-top: 1.25rem;
+
+    font-size: 20px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: white;
+
+    background-color: #004C22;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
+.add-button:hover {
+    background-color: #004c2293;   
+}
 
+.add-button:active {
+    background-color: #004c2249;
+}
 
-#content h2 {
-    color: #004C22; 
+.add-card {
+   
+  display: flex;
+  align-items: center;
 }

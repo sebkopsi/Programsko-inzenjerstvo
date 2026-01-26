@@ -1,4 +1,5 @@
 import { useFetcher } from "react-router";
+import styles from "../styles/forms.css";
 
 function renderSingleQuestion(question, options) {
   return (
@@ -122,7 +123,7 @@ export default function quiz(data: any, formLink?: string) {
       ))}
 
       <section className="section formOptions">
-        <button type="submit" disabled={fetcher.state !== "idle"}>Submit</button>
+        <button className="submit-button" type="submit" disabled={fetcher.state !== "idle"}>Submit</button>
       </section>
 
 {fetcher.data ? (
