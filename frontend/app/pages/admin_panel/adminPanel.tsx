@@ -22,7 +22,7 @@ export default function AdminPanelContent() {
           </button>
         </Link>
 
-        <Link to="/adminpanel/statistics">
+        <Link to="/adminpanel/adminStats">
           <button className='admin-options-button'>
             <div className="icon-wrapper">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">

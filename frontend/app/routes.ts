@@ -28,6 +28,6 @@ export default [
     route("instructor/new", "routes/instructor/new.tsx"),
     route("instructor/pending", "routes/instructor/pending.tsx"),
 
-    route("stats", "routes/stats.tsx")
+    route("adminpanel/adminstats", "routes/admin_panel/adminStats.tsx")
 
 ] satisfies RouteConfig;
