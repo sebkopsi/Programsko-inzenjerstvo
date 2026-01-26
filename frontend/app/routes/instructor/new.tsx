@@ -1,5 +1,5 @@
-import { NewInstructorPage } from "~/pages/instructor/newInstructor";
-import type { Route } from "./+types/newInstructor";
+import { NewInstructorPage } from "~/pages/instructor/new";
+import type { Route } from "./+types/new";
 import { redirect } from "react-router";
 import { GetJwtToken } from "~/util/cookie";
 
@@ -42,7 +42,7 @@ export async function action({ request }: Route.ActionArgs) {
     throw new Error(error);
   }
 
-  return redirect("/");
+  return redirect("/instructor/sent");
 }
 
 export default function NewInstructor() {

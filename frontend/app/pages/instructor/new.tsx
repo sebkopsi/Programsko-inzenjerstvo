@@ -1,4 +1,4 @@
-import './newInstructor.css';
+import './new.css';
 import pfp from './fame-media_no-prophile-picture-1-74336437.jpg';
 import { Form, useFetcher } from "react-router";
 import { useState } from "react";
