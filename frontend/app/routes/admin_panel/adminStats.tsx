@@ -1,7 +1,7 @@
-import { StatsPage } from "~/pages/stats/stats";
+import { StatsPage } from "~/pages/admin_panel/adminStats";
 import { redirect } from "react-router";
 import { GetJwtToken } from "~/util/cookie";
-import type { Route } from "./+types/request";
+import type { Route } from "../+types/request";
 
 export async function loader( { request }: Route.LoaderArgs) {
   const jwt = GetJwtToken(request);

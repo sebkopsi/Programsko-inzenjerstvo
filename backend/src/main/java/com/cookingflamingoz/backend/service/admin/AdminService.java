@@ -7,6 +7,7 @@ import com.cookingflamingoz.backend.repository.RequestRepository;
 import com.cookingflamingoz.backend.repository.TagRepository;
 import com.cookingflamingoz.backend.repository.UserRepository;
 import com.cookingflamingoz.backend.service.profile.ProfileResults;
+import com.cookingflamingoz.backend.service.admin.AdminResults;
 import com.cookingflamingoz.backend.util.GenericResult;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,8 @@ public class AdminService {
 
         List<AdminResults.AdminSummaryInfo> adminSummaryInfoList = requests.stream()
                 .map(ut -> { return new AdminResults.AdminSummaryInfo(
-                            user.getEmail(),
+                            (ut.getSentByUserId() != null && userRepository.findById(ut.getSentByUserId()).isPresent() ?
+                                    userRepository.findById(ut.getSentByUserId()).get().getEmail() : "Unknown"),
                             ut.getCreatedAt(),
                             ut.getSentByUserId(),
                             ut.getStatus(),
