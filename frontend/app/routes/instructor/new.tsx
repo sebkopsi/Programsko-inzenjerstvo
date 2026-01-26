@@ -42,7 +42,35 @@ export async function action({ request }: Route.ActionArgs) {
     throw new Error(error);
   }
 
-  return redirect("/instructor/sent");
+  return redirect("/");
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const jwt = GetJwtToken(request);
+  if (!jwt)
+    return redirect("/login");
+
+  const res = await fetch("http://localhost:8890/instructor/promoteRequest", {
+    headers: {
+      "Authorization": "Bearer " + jwt,
+    }
+  });
+  if (!res.ok)
+    throw new Error("Failed to fetch request");
+  const reqList = await res.json();
+  if (!reqList.success)
+    throw new Error("No requests found for user");
+
+  for (const req of reqList.data) {
+    if (req.type == "promotionRequest") {
+      if (req.status == "pending")
+        return redirect("/instructor/pending");
+      if (req.status == "approved")
+        return redirect("/instructor/profile");
+    }
+  }
+
+  return;
 }
 
 export default function NewInstructor() {
