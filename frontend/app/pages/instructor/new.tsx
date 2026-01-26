@@ -17,7 +17,7 @@ export function NewInstructorPage() {
     <section id="content">
       <h2>Instructor application</h2>
       <hr/>
-      <fetcher.Form method="POST" action="/newInstructor">
+      <fetcher.Form method="POST" action="/instructor/new">
 
         <div>
           <h3>Profile picture</h3>
