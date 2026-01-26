@@ -1,6 +1,9 @@
 import './stats.css';
+import { useLoaderData } from "react-router";
 
 export function StatsPage() {
+  const { stats } = useLoaderData();
+
   return (
     <section id="content">
       <div>
@@ -10,86 +13,44 @@ export function StatsPage() {
         <div id="general">
           <div>
             <p>Active users</p>
-            <span>567</span>
+            <span>{stats.numActiveUsers}</span>
           </div>
           <div>
             <p>Total users</p>
-            <span>888</span>
+            <span>{stats.numTotalUsers}</span>
           </div>
           <div>
             <p>Verified users</p>
-            <span>12</span>
+            <span>{stats.numVerifiedUsers}</span>
           </div>
         </div>
         <h3>By difficulty</h3>
         <div className="strips">
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivoreverylongtag</span>
-            <span>999</span>
-          </div>
+          {Object.entries(stats.numUsersByDifficulty).map(([diff, count]) => (
+            <div>
+              <span>{diff}</span>
+              <span>{count as number}</span>
+            </div>
+          ))}
         </div>
         <h3>By tag</h3>
         <div className="strips">
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>small</span>
-            <span>2</span>
-          </div>
+          {Object.entries(stats.numUsersByTag).map(([tag, count]) => (
+            <div>
+              <span>{tag}</span>
+              <span>{count as number}</span>
+            </div>
+          ))}
         </div>
         <hr/>
         <h2>Number of courses by tag</h2>
         <div className="strips">
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>Carnivore</span>
-            <span>999</span>
-          </div>
-          <div>
-            <span>small</span>
-            <span>2</span>
-          </div>
+          {Object.entries(stats.numCoursesByTag).map(([tag, count]) => (
+            <div>
+              <span>{tag}</span>
+              <span>{count as number}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
