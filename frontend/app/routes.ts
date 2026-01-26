@@ -25,6 +25,7 @@ export default [
     route("adminpanel/inbox", "routes/admin_panel/adminInbox.tsx"),
 
     route("request/:reqId", "routes/request.tsx"),
-    route("instructor/new", "routes/instructor/new.tsx")
+    route("instructor/new", "routes/instructor/new.tsx"),
+    route("instructor/pending", "routes/instructor/pending.tsx")
 
 ] satisfies RouteConfig;
