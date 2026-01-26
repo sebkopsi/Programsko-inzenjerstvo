@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 @Service
 public class CourseService {
@@ -101,34 +102,31 @@ public class CourseService {
         return new CourseResults.CreateResult(true, "", finalNewCourse);
     }
 
-    // User enrolling in a course
-    public GenericResult enroll(int courseId, int userId) {
-        // Find course
-        Optional<Course> courseOpt = courseRepository.findById(courseId);
-        if (courseOpt.isEmpty()) {
-            return new GenericResult(false, "Course not found.");
-        }
-
-        // Find user
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) {
-            return new GenericResult(false, "User does not exist.");
-        }
-
-        // Check if already enrolled using the @IdClass
-        EnrolledCourse.EnrolledCourseId enrollmentId = new EnrolledCourse.EnrolledCourseId(courseId, userId);
-        if (enrolledCourseRepository.existsById(enrollmentId)) {
-            return new GenericResult(false, "You are already enrolled in this course.");
-        }
-
-        // Create new enrollment
-        EnrolledCourse enrollment = new EnrolledCourse();
-        enrollment.setCourse(courseOpt.get());
-        enrollment.setUser(userOpt.get());
-        enrollment.setCompletionPercentage(0); // Default value
-
-        enrolledCourseRepository.save(enrollment);
-
-        return new GenericResult(true, "Successfully enrolled in the course.");
+public GenericResult enroll(int courseId, int userId) {
+    Optional<Course> courseOpt = courseRepository.findById(courseId);
+    if (courseOpt.isEmpty()) {
+        return new GenericResult(false, "Course not found.");
     }
+
+    Optional<User> userOpt = userRepository.findById(userId);
+    if (userOpt.isEmpty()) {
+        return new GenericResult(false, "User does not exist.");
+    }
+
+    EnrolledCourse.EnrolledCourseId enrollmentId = new EnrolledCourse.EnrolledCourseId(courseId, userId);
+    if (enrolledCourseRepository.existsById(enrollmentId)) {
+        return new GenericResult(false, "You are already enrolled in this course.");
+    }
+
+    EnrolledCourse enrollment = new EnrolledCourse();
+    enrollment.setCourse(courseOpt.get());
+    enrollment.setUser(userOpt.get());
+    enrollment.setCompletionPercentage(0);
+    enrollment.setEnrolledAt(new Date()); 
+    enrollment.setStatus("enrolled"); 
+
+    enrolledCourseRepository.save(enrollment);
+
+    return new GenericResult(true, "Successfully enrolled in the course.");
+}
 }

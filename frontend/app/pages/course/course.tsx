@@ -1,11 +1,12 @@
-import { Form, NavLink, useActionData, useFetcher, useLoaderData } from "react-router";
-
+import { Form, NavLink, useActionData, useFetcher, useLoaderData} from "react-router";
 import "../styles/courses.css"
 import { courseStats } from "../components/courseStats";
 import { allModules } from "./allModules";
 
 export function CoursePage() {
   const { courseInfo, modulesData } = useLoaderData();
+  const actionData = useActionData(); 
+  
   return (
     <section id="content">
       <section id="path">
@@ -16,6 +17,16 @@ export function CoursePage() {
         </svg>
           All Courses</h4>
         <h2>{courseInfo?.data?.name}</h2>
+        
+        <Form method="post">
+          <button type="submit" className="enroll-button">Enroll</button>
+        </Form>
+        
+        {actionData && (
+          <p className={actionData.success ? "success" : "error"}>
+            {actionData.message || (actionData.success ? "Successfully enrolled!" : "Enrollment failed")}
+          </p>
+        )}
       </section>
       {courseStats(courseInfo?.data)}
       {courseInfo?.data?.isUserInstructor &&
