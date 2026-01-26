@@ -26,104 +26,131 @@ export default function UserProfile({ user, jwt }: UserProfileProps) {
   const [skillLevel, setSkillLevel] = useState(user.skillLevel);
 
   const saveProfile = async () => {
-    setSaving(true);
+  console.log("SAVE CLICKED");
 
-    try {
-      const requests: Promise<Response>[] = [];
+  console.log("Current form values:", {
+    firstname,
+    surname,
+    email,
+    username,
+    skillLevel
+  });
 
-      if (firstname !== user.firstname || surname !== user.surname) {
-        requests.push(
-          fetch("http://localhost:8890/user/my/name", {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
-            body: JSON.stringify({ firstname, surname }),
-          })
-        );
-      }
+  console.log("Original user values:", user);
 
-      if (email !== user.email) {
-        requests.push(
-          fetch("http://localhost:8890/user/my/email", {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
-            body: JSON.stringify({ email }),
-          })
-        );
-      }
+  setSaving(true);
 
-      if (username !== user.username) {
-        requests.push(
-          fetch("http://localhost:8890/user/my/username", {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
-            body: JSON.stringify({ username }),
-          })
-        );
-      }
+  try {
+    const requests: Promise<Response>[] = [];
 
-      if (skillLevel !== user.skillLevel) {
-        requests.push(
-          fetch("http://localhost:8890/user/my/skill-level", {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
-            body: JSON.stringify(SKILL_LEVEL_MAP[skillLevel]),
-          })
-        );
-      }
+    if (firstname !== user.firstname || surname !== user.surname) {
+      console.log("Queue PATCH name:", { firstname, surname });
 
-      if (requests.length === 0) {
-        setEditing(false);
-        return;
-      }
-
-      const results = await Promise.all(
-      requests.map(async (req) => {
-      const r = await req;
-        if (!r.ok) {
-         const text = await r.text();
-          console.error("PATCH failed response:", text);
-      }
-        if(r.ok){
-          console.log("PATCH succeeded response");
-        }
-
-     return r;
-    })
-  );
-      const failed = results.filter((r) => !r.ok);
-
-      if (failed.length > 0) {
-        console.error("Failed PATCH responses:", failed);
-        alert("Some updates failed. Check console.");
-        return;
-      }
-
-      alert("Profile updated successfully!");
-      setEditing(false);
-    } catch (err) {
-      console.error("SAVE PROFILE ERROR:", err);
-      alert("Failed to save profile");
-    } finally {
-      setSaving(false);
+      requests.push(
+        fetch("http://localhost:8890/user/my/name", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify({ firstname, surname }),
+        })
+      );
     }
-  };
+
+    if (email !== user.email) {
+      console.log("Queue PATCH email:", email);
+
+      requests.push(
+        fetch("http://localhost:8890/user/my/email", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify({ email }),
+        })
+      );
+    }
+
+    if (username !== user.username) {
+      console.log("Queue PATCH username:", username);
+
+      requests.push(
+        fetch("http://localhost:8890/user/my/username", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify({ username }),
+        })
+      );
+    }
+
+    if (skillLevel !== user.skillLevel) {
+      console.log("Queue PATCH skill level:", skillLevel);
+
+      requests.push(
+        fetch("http://localhost:8890/user/my/skill-level", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify(SKILL_LEVEL_MAP[skillLevel]),
+        })
+      );
+    }
+
+    console.log("Total PATCH requests queued:", requests.length);
+
+    if (requests.length === 0) {
+      console.log("No changes detected, exiting save.");
+      setEditing(false);
+      return;
+    }
+
+    const results = await Promise.all(
+      requests.map(async (req, i) => {
+        const r = await req;
+
+        console.log(`PATCH #${i + 1} status:`, r.status);
+
+        const text = await r.text();
+        console.log(`PATCH #${i + 1} response body:`, text);
+
+        return r;
+      })
+    );
+
+    console.log("All PATCH responses:", results);
+
+    const failed = results.filter((r) => !r.ok);
+
+    if (failed.length > 0) {
+      console.error("FAILED PATCH REQUESTS:", failed);
+      alert("Some updates failed. Check console.");
+      return;
+    }
+
+    console.log("ALL PATCH SUCCEEDED");
+    alert("Profile updated successfully!");
+    setEditing(false);
+
+  } catch (err) {
+    console.error("SAVE PROFILE ERROR:", err);
+    alert("Failed to save profile");
+  } finally {
+    setSaving(false);
+  }
+};
+
 
   const cancelEdit = () => {
--  setFirstname(user.firstname);
-  setSurname(user.surname);
-  setEmail(user.email);
+    setFirstname(user.firstname);
+    setSurname(user.surname);
+    setEmail(user.email);
   setUsername(user.username);
   setSkillLevel(user.skillLevel);
 
